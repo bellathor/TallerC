@@ -1,0 +1,2 @@
+|Fecha: 10/02/23 || Hora: 10:00:53 am || Codigo: 42S22 || Mensaje: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.ID_Reporte' in 'field list' || Archivo: C:\xampp\htdocs\Proyecto_TallerC_Mexico\php\scripts\clases\class_reportes.php || Linea: 44|
+|Fecha: 10/02/23 || Hora: 10:01:47 am || Codigo: 42S22 || Mensaje: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.ID_Reporte' in 'field list' || Archivo: C:\xampp\htdocs\Proyecto_TallerC_Mexico\php\scripts\clases\class_reportes.php || Linea: 45|

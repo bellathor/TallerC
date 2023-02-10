@@ -1,0 +1,71 @@
+
+/* Color fondo HEX = #AB8A6B*/ 
+
+
+/* imports */
+@import url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/metropolis.min.css");
+
+body{
+    background-color: #A28E72;
+}
+
+body::-webkit-scrollbar {
+  width: 12px;         
+}
+
+body::-webkit-scrollbar-track {  
+  background: #ffff;   
+}
+
+body::-webkit-scrollbar-thumb {
+background-color: #786953;  
+border-radius: 20px;        
+border: 3px solid #ffff;
+}
+
+.container{
+  overflow: hidden;
+}
+
+.letra{
+    font-family: 'metropolis', sans-serif;
+}
+
+.titulologin{
+    font-size: 70px;
+    letter-spacing: 45px;
+    
+}
+
+
+.vertical-menu {
+  width: 200px; /* Set a width if you like */
+}
+
+.vertical-menu a {
+  background-color: #eee; /* Grey background color */
+  color: black; /* Black text color */
+  display: block; /* Make the links appear below each other */
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove underline from links */
+  
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc; /* Dark grey background on mouse-over */
+}
+
+.vertical-menu a.active {
+  background-color: gray; /* Add a green color to the "active/current" link */
+  color: white;
+}
+
+@media only screen and (max-width: 720px) {
+  .titulologin{
+      font-size: 30px;
+      text-align: center;
+      margin-left: 50px;
+      letter-spacing: 45px;
+      
+  }
+}

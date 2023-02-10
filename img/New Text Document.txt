@@ -1,0 +1,29 @@
+<div class="table-responsive border border-1 m-2 p-5">
+                                                <h3 class="letra text-center mt-5">Tabla Madera</h3>
+                                                <a class="btn btn-secondary">Exportar Excel</a>
+                                                <table id="tabla_madera_"
+                                                    class="table table-bordered table-wrapper-scroll-y my-custom-scrollbar">
+                                                    <thead style="position: sticky; top:0 margin:400px; ">
+                                                        <tr class="color_tienda text-white">
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Código</th>
+                                                            <th scope="col">Nombre Madera</th>
+                                                            <th scope="col">Entrada</th>
+                                                            <th scope="col">Salida</th>
+                                                            <th scope="col">Stock</th>
+                                                            <!--<th scope="col">Proveedor</th>
+                                                        <th scope="col">Tel Proveedor</th>-->
+                                                            <th scope="col">Eliminar</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tabla_madera">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+
+
+database:
+id20094688__bdc
+id20094688_jito
+60G#/@IsP&ijpH\1
