@@ -28,14 +28,14 @@ window.onload = () => {
         } else {
             sessionStorage.clear();
             window.location.replace('../login.php');
-        }*/
+        }
     }
     else {
         sessionStorage.clear();
         window.location.replace('../login.php');
         
     }
-
+*/
 };
 
 function Salir() {
