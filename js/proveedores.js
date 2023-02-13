@@ -12,10 +12,12 @@ window.onload = () => {
         if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
             setTimeout(Consultar_Departamentos, 1000);
         }else {
+            sessionStorage.clear();
             window.location.replace('../../login.php');
         }
     }
     else {
+        sessionStorage.clear();
         window.location.replace('../../login.php');
     }
 };

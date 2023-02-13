@@ -21,10 +21,12 @@ window.onload = () => {
             inv.remove();
             setTimeout(Consultar_Departamentos, 1000);
         } else {
+            sessionStorage.clear();
             window.location.replace('../login.php');
         }
     }
     else {
+        sessionStorage.clear();
         window.location.replace('../../login.php');
     }
 };

@@ -20,10 +20,12 @@ window.onload = () => {
             inv.remove();
             setTimeout(Cargar, 1000);
         }else {
+            sessionStorage.clear();
             window.location.replace('../../login.php');
         }
     }
     else {
+        sessionStorage.clear();
         window.location.replace('../../login.php');
     }
 };

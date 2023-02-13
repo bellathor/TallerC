@@ -26,11 +26,14 @@ window.onload = () => {
             co.remove();
             inv.remove();
         } else {
+            sessionStorage.clear();
             window.location.replace('../login.php');
         }
     }
     else {
+        sessionStorage.clear();
         window.location.replace('../login.php');
+        
     }
 
 };
