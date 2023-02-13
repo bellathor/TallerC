@@ -1,11 +1,41 @@
 window.onload = () => {
-    Cargar_Hilos()
+    Cargar_Hilos();
+    let em = document.getElementById('empleados');
+    let ti = document.getElementById('tiendas');
+    let pr = document.getElementById('produccion');
+    let bo = document.getElementById('bodegas');
+    let co = document.getElementById('compras');
+    let ad = document.getElementById('administracion');
+    let inv = document.getElementById('inventarios');
+    let usuario = JSON.parse(sessionStorage.getItem('Sesion'));
+    if (usuario !== null) {
+        document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
+        if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
+
+        } else if (usuario[0].ID_Puesto == 11) {
+            em.remove();
+            ti.remove();
+            pr.remove();
+            ad.remove();
+            co.remove();
+            inv.remove();
+        }else {
+            window.location.replace('../login.php');
+        }
+    }
+    else {
+        window.location.replace('../../login.php');
+    }
 };
+function Salir() {
+    sessionStorage.clear();
+    window.location.replace('../../login.php');
+}
 function Cargar_Hilos() {
     Fetch_GET(null, 'consultar_pinturas');
 }
 function Fetch_GET(id, opcion) {
-    var url = '../../php/scripts/api_pintura.php';
+    var url = '../../php/scripts/apis/bodega_taller/api_pintura.php';
 
     if (opcion == 'consultar_pinturas') {
         var urlEnvio = url + '/?' + opcion;
@@ -57,7 +87,7 @@ function Fetch_GET(id, opcion) {
                         setTimeout(DatosTablaReporte, 100 * i, reportes[i], i);
                     }
                 } else {
-                    alert('No hay reportes de hilos.!');
+                    alert('No hay reportes de pinturas.!');
                 }
             })
             .catch(error => console.error("Error encontrado: ", error));
@@ -116,6 +146,7 @@ function Limpiar_Formulario() {
         form[i].value = "0";
     }
     form[1].setAttribute('disabled', '');
+    form[0].value = form[0].options[0].text;
 }
 
 function Seleccion_Opcion(opcion) {
@@ -169,6 +200,8 @@ function filtrarCantidad(opcion) {
 
 function Validar_Formulario_Stocks() {
     var form = document.forms['formulario_stocks'];
+    let usuario = JSON.parse(sessionStorage.getItem('Sesion'));
+    var id_empleado = usuario[0].ID_Empleado;
     var id = form[0];
     var Total;
     var stock = form[3];
@@ -178,7 +211,7 @@ function Validar_Formulario_Stocks() {
     var date = new Date();
     var year = date.getFullYear();
     var mes = date.getMonth() + 1;
-    var dia = date.getDay();
+    var dia = date.getDate();
     var hora = date.getHours();
     var min = date.getMinutes();
     var seg = date.getSeconds();
@@ -187,9 +220,6 @@ function Validar_Formulario_Stocks() {
 
     if (mes.toString().length < 2) {
         mes = '0' + mes;
-    }
-    if (dia.toString().length < 2) {
-        dia = '0' + dia;
     }
 
     fecha = year + '/' + mes + '/' + dia;
@@ -211,6 +241,7 @@ function Validar_Formulario_Stocks() {
         if (confirmar_entrada == true) {
             var nuevo_stock = parseInt(stock.value) - parseInt(cantidad);
             json = {
+                'ID_Empleado': id_empleado,
                 'ID': id.value,
                 'Salida': cantidad,
                 'Stock': nuevo_stock,
@@ -231,7 +262,7 @@ function Validar_Formulario_Stocks() {
 }
 
 function Fetch_PUT(objeto, opcion) {
-    var url = '../../php/scripts/api_pintura.php';
+    var url = '../../php/scripts/apis/bodega_taller/api_pintura.php';
     if (opcion == 'actualizar_salida_material') { // PUT
         var urlEnvio = url + '/?' + opcion;
         fetch(urlEnvio, {
@@ -245,7 +276,8 @@ function Fetch_PUT(objeto, opcion) {
             .then(datos => {
                 if (datos.error == "false") {
                     Limpiar_Formulario();
-
+                    LimpiarTablaReporte();
+                    Cargar_Tabla_Reporte();
                 } else {
                     alert('Hubo un problema con la base de datos.!');
                 }
@@ -256,16 +288,13 @@ function Fetch_PUT(objeto, opcion) {
 
 function Mostrar_Tabla_Reportes(btn, activar) {
     if (btn.id == 'btn_mostrar_reporte') {
-        var tabla = document.getElementById('tabla_reporte_material');
         var btn = document.getElementById('btn_mostrar_reporte');
         if (activar === false) {
-            tabla.classList.remove('d-none');
             btn.innerHTML = "Ocultar Reportes";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', true)');
             Cargar_Tabla_Reporte()
         } else {
-            tabla.classList.add('d-none')
             btn.innerHTML = "Mostrar Reportes";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', false)');
@@ -313,8 +342,9 @@ function LimpiarTablaReporte() {
 $(function () {
     $("#exporttable_mat1").click(function (e) {
         var table = $("#tabla_reporte_material");
+        var tablebody = $("#tabla_reporte_material_body");
         $(table).toggleClass
-        if (table && table.length) {
+        if (table && tablebody.children().length > 0) {
             $(table).addClass('text-dark');
             $(table).table2excel({
                 exclude: ".noExl",
@@ -326,6 +356,8 @@ $(function () {
                 exclude_inputs: true,
                 preserveColors: true
             });
+        }else{
+            alert('No se puede descargar una tabla vacia.!');
         }
     });
 

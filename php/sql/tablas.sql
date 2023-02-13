@@ -19,7 +19,14 @@ CREATE TABLE IF NOT EXISTS puestos(
     PRIMARY KEY(ID_Puesto),
     FOREIGN KEY(ID_Departamento) REFERENCES departamentos(ID_Departamento)
 )Engine=InnoDB DEFAULT CHARSET=UTF8;
-
+CREATE TABLE IF NOT EXISTS Gastos_Generales(
+    ID_Gastos int not null auto_increment,
+    Fecha date not null,
+    Descripcion varchar(100) not null,
+    Monto float not null,
+    Comentario varchar(128) not null,
+    PRIMARY KEY(ID_Gastos)
+)Engine=InnoDB DEFAULT CHARSET=UTF8;
 
 CREATE TABLE IF NOT EXISTS asistencia(
     ID_Asistencia int not null auto_increment,
@@ -56,7 +63,7 @@ CREATE TABLE IF NOT EXISTS empleados (
     Direccion varchar(50) not null,
     Correo_Electronico varchar(40) not null,
     Telefono varchar(16) not null,
-    Contraseña varchar(20) not null,
+    Contraseña varchar(128) not null,
     ID_Puesto int not null,
     ID_Asistencia int,
     ID_Estatus int not null,
@@ -68,13 +75,15 @@ CREATE TABLE IF NOT EXISTS empleados (
 
 CREATE TABLE IF NOT EXISTS salarios(
     ID_Salario int not null auto_increment,
-    Salario_Semanal float null,
-    Prestamos float null,
-    Horas_Laborales datetime null,
-    Horas_Trabajadas datetime null,
-    Horas_No_Trabajadas datetime null,
-    Precio_Hora float,
-    Descuento float,
+    Salario_Semanal float not null,
+    Prestamos float  not null,
+    Horas_Laborales int not null,
+    Horas_Trabajadas int not null,
+    Horas_No_Trabajadas int not null,
+    Precio_Hora float not null,
+    Descuento float not null,
+    Total float not null,
+    Comentarios varchar(100) null,
     ID_Empleado int,
     PRIMARY KEY(ID_Salario),
     FOREIGN KEY(ID_Empleado) REFERENCES empleados(ID_Empleado)
@@ -92,6 +101,8 @@ CREATE TABLE IF NOT EXISTS proveedores(
     Ciudad varchar(100) not null,
     PRIMARY KEY(ID_Proveedor)
 )Engine=InnoDB DEFAULT CHARSET=UTF8;
+
+
 
 CREATE TABLE IF NOT EXISTS muebles(
     ID_Mueble int not null auto_increment,

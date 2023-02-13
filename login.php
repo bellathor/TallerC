@@ -11,12 +11,12 @@
     <meta http-equiv="Pragma" content="no-cache">
     <link rel="shortcut icon" href="./img/logo_tallerc.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../bootstrap-/css/bootstrap.min.css" rel="stylesheet"
+    <link href="./bootstrap-/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
         </script>-->
-    <script src="../bootstrap-/js/bootstrap.min.js"
+    <script src="./bootstrap-/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
         </script>
 
@@ -37,23 +37,27 @@
             </div>
         </div>
         <div class="d-flex justify-content-center mt-5 text-center">
-            <form>
+            <form name="login" onsubmit="return Verificar_Formulario();" method="POST">
                 <div class="letra mb-3 text-white h2 ">
                     <label for="username" class="form-label">Nombre de
                         usuario</label>
-                    <input class="form-control h3" type="text" name="username"
-                        placeholder="Escriba su nombre de usuario">
+                    <input class="form-control h3" type="text" required name="username"
+                        placeholder="Escriba su nombre de usuario"
+                        oninvalid="this.setCustomValidity('Debe ingresar su nombre de usuario.!')"
+                        oninput="this.setCustomValidity('');">
                     <label for="username" class="form-label">Contraseña</label>
-                    <input class="form-control h3" type="password" name="contraseña"
-                        placeholder="Escriba su contraseña">
+                    <input class="form-control h3" required type="password" name="contraseña"
+                        placeholder="Escriba su contraseña"
+                        oninvalid="this.setCustomValidity('Debe ingresar su contraseña.!')"
+                        oninput="this.setCustomValidity('');">
                 </div>
                 <div class="d-flex justify-content-center">
-                    <a class="btn btn-secondary" onclick="empleados()">ENTRAR</a>
+                    <button type="submit" class="btn btn-secondary">ENTRAR</button>
                 </div>
             </form>
         </div>
     </div>
-    <script src="js/funciones.js">
+    <script src="./js/Jito020login.js">
     </script>
 </body>
 

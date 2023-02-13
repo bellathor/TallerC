@@ -9,7 +9,7 @@
     <meta http-equiv="Last-Modified" content="0">
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
     <meta http-equiv="Pragma" content="no-cache">
-
+    <link rel="shortcut icon" href="../../img/logo_tallerc.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="../../bootstrap-/css/bootstrap.min.css" rel="stylesheet"
@@ -29,7 +29,7 @@
 <body>
     <div class="row" style="height: 100%;">
         <div class="col-3 p-0">
-            <div class="box-modulos " id="grupo">
+            <div class="box-modulos ">
                 <div class="vertical-menu letra titulo">
                     <div class="border-bottom border-1 border-white">
                         <div class="d-flex justify-content-center">
@@ -39,12 +39,12 @@
                     </div>
                     <ul class="list-unstyled ps-0 p-0">
                         <li class="p-1"><a href="../dashboard.php" class="link-white rounded">Dashboard</a></li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="empleados">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras">
                                 <a href="../empleados.php" class="link-white rounded">Empleados</a>
                             </button>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="tiendas">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#tiendas-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Tiendas</a>
@@ -57,7 +57,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="produccion">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#produccion-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Produccion</a>
@@ -70,7 +70,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="bodegas">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#bodega-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded" id="btn-bodega">Bodega Taller</a>
@@ -78,20 +78,21 @@
 
                             <div class="collapse" id="bodega-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
-                                    <li><a href="../Bodega_Taller/Categoria_Hilos.php" class="link-white rounded"
+                                    <li><a href="Categoria_Hilos.php" class="link-white rounded"
                                             id="btn-hilos">Categoria Hilos</a></li>
-                                    <li><a href="../Bodega_Taller/Categoria_Tapiceria.php"
-                                            class="link-white rounded">Categoria Tapiceria</a></li>
-                                    <li><a href="../Bodega_Taller/Categoria_Trupper.php"
-                                            class="link-white rounded">Categoria Trupper</a></li>
-                                    <li><a href="../Bodega_Taller/Categoria_Pintura.php"
-                                            class="link-white rounded">Categoria Pintura</a></li>
-                                    <li><a href="../Bodega_Taller/Categoria_Maquinas.php"
-                                            class="link-white rounded">Categoria Maquinas</a></li>
+                                    <li><a href="Categoria_Tapiceria.php" class="link-white rounded">Categoria
+                                            Tapiceria</a></li>
+                                    <li><a href="Categoria_Trupper.php" class="link-white rounded">Categoria
+                                            Ferretaria</a>
+                                    </li>
+                                    <li><a href="Categoria_Pintura.php" class="link-white rounded">Categoria Pintura</a>
+                                    </li>
+                                    <li><a href="Categoria_Maquinas.php" class="link-white rounded">Categoria
+                                            Maquinas</a></li>
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="compras">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#compras-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Compras</a>
@@ -106,7 +107,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="administracion">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#admin_nominas-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Admin y Nominas</a>
@@ -114,14 +115,14 @@
                             <div class="collapse" id="admin_nominas-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
                                     <li><a href="../Admin_Nominas/Lista_Nominas.php" class="link-white rounded">Lista de
-                                            nominas</a>
-                                    </li>
-                                    <li><a href="#" class="link-white rounded">Gastos generales</a></li>
+                                            nominas</a></li>
+                                    <li><a href="../Admin_Nominas/Gastos_Generales.php"
+                                            class="link-white rounded">Gastos generales</a></li>
 
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="inventarios">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#inventarios-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Inventarios</a>
@@ -135,15 +136,15 @@
                                         <a href="../inventario/materiales.php" class="link-white rounded">Materiales</a>
                                     </li>
                                     <li>
-                                        <a href="../inventario/muebles.php"
-                                            class="link-white rounded">Muebles</a></button>
+                                        <a href="../inventario/muebles.php" class="link-white rounded">Muebles ( En
+                                            construccion )</a></button>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="mb-1">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras">
-                                <a class="link-white rounded" href="../../login.php">Salir</a>
+                                <a class="link-white rounded" onclick="Salir();">Salir</a>
                             </button>
                         </li>
                     </ul>
@@ -156,7 +157,7 @@
             <div class="row">
                 <div class="col-12 p-0">
                     <div class="box-nav letra titulo">
-                        <span class="cargo-txt">Alberto - Administrador</span>
+                        <span class="cargo-txt" id="nombre_empleado">Alberto - Administrador</span>
                         <span class="config-txt">Editar Perfil</span>
                     </div>
                 </div>
@@ -165,7 +166,7 @@
                         <div class="tab-pane fade show active" id="admin" role="tabpanel" aria-labelledby="admin-tab">
                             <div class="container p-1">
                                 <h3 class="letra titulo text-center">Control de Empleados</h3>
-                                <div class="grid letra m-2">
+                                <!--<div class="grid letra m-2">
                                     <div class="grid-item text-center p-3">
                                         <h3 class="letra border-bottom border-1 border-white w-100">Empleados</h3>
                                         <span id="empleados_total" class="mt-5">0</span>
@@ -180,18 +181,20 @@
                                         </h3>
                                         <span id="empleados_nominas" class="mt-5">0</span>
                                     </div>
-                                </div>
+                                </div>-->
                                 <ul class="nav nav-tabs p-1" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link active" id="registro_nominas-tab" data-bs-toggle="tab"
                                             data-bs-target="#registro_nominas" type="button" role="tab"
-                                            aria-controls="registro_nominas" aria-selected="true">Formulario
+                                            aria-controls="registro_nominas" aria-selected="true"
+                                            onclick="Cargar_Nominas();">Formulario
                                             Nominas</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link " id="gestion_nominas-tab" data-bs-toggle="tab"
                                             data-bs-target="#gestion_nominas" type="button" role="tab"
-                                            aria-controls="gestion_nominas" aria-selected="false">Gestion
+                                            aria-controls="gestion_nominas" aria-selected="false"
+                                            onclick="Cargar_Gestion();">Gestion
                                             Nominas</button>
                                     </li>
 
@@ -234,10 +237,11 @@
                                                     <div class="col-6">
                                                         <label class="form-label mt-2" for="salario">
                                                             Salario Semanal Actual:</label>
-                                                        <input class="form-control" name="salario" type="number"
+                                                        <input class="form-control" name="salario" type="number" min="0"
                                                             placeholder="$0.00" required step="0.01" disabled
-                                                            oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity('');filtrarTextos(this);">
+                                                            oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
+                                                            oninput="this.setCustomValidity('');"
+                                                            onclick='filtrarTextos(this);'>
                                                         <div id="error_letra_apellidos" class="d-none invalid-feedback">
                                                             Solo se permiten letras y
                                                             sin espacios.</div>
@@ -249,9 +253,10 @@
                                                         <label class="form-label mt-2" for="horas_laborales">Horas
                                                             Laborales:</label>
                                                         <input class="form-control" name="horas_laborales" type="number"
-                                                            placeholder="0" required disabled
-                                                            oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity('');filtrarTextos(this);">
+                                                            min="0" placeholder="0" required disabled
+                                                            oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
+                                                            oninput="this.setCustomValidity('');"
+                                                            onclick="filtrarTextos(this);">
                                                         <div id="error_letra_direccion" class="d-none invalid-feedback">
                                                             Solo se permiten letras y sin espacios.</div>
                                                         <div id="error_maxletras_direccion"
@@ -259,12 +264,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-6">
-                                                        <label class="form-label mt-2" for="Pago_Hora">Pago por
+                                                        <label class="form-label mt-2" for="pago_hora">Pago por
                                                             Hora:</label>
-                                                        <input class="form-control" name="Pago_Hora" type="number"
-                                                            placeholder="$0.00" required step=0.01 disabled
-                                                            oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity('');filtrarTextos(this);">
+                                                        <input class="form-control" name="pago_hora" type="number"
+                                                            min="0" placeholder="$0.00" required step=0.01 disabled
+                                                            oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
+                                                            oninput="this.setCustomValidity('');"
+                                                            onclick="filtrarTextos(this);">
                                                         <div id="error_letra_direccion" class="d-none invalid-feedback">
                                                             Solo se permiten letras y sin espacios.</div>
                                                         <div id="error_maxletras_direccion"
@@ -279,8 +285,8 @@
 
                                         </div>
                                         <h3 class="letra text-center mt-3">Nominas de Empleados</h3>
-                                        <a class="btn btn-secondary m-3 float-end" id='exporttable'
-                                            disabled>Exportar Excel</a>
+                                        <a class="btn btn-secondary m-3 float-end" id='exporttable' disabled>Exportar
+                                            Excel</a>
                                         <span class="text-start mt-3">Mostrar por departamento:</span>
                                         <select class="form-select w-25 mb-3" name="select_dep" required
                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
@@ -316,7 +322,7 @@
                                         aria-labelledby="gestion_nominas-tab">
                                         <div class="form-hilos p-1 m-2 border border-1">
                                             <form method="POST" name="formulario_gestion_nominas"
-                                                onsubmit="return Validar_Formulario();">
+                                                onsubmit="return Validar_Formulario_Gest();">
                                                 <h3 class="letra titulo text-center">Gestion de Nominas</h3>
                                                 <div class="row">
                                                     <div class="col-6">
@@ -327,10 +333,11 @@
                                                                 disabled name="opcion_nominas"
                                                                 oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                                 oninput="this.setCustomValidity('')"
-                                                                onchange="Seleccion_Opcion(this)" required>
-                                                                <option selected value="">Seleccionar</option>
-                                                                <option value="1">Prestamos</option>
-                                                                <option value="2">Horas</option>
+                                                                onchange="Seleccion_Opcion_Gest(this)" required>
+                                                                <option selected value="100">Seleccionar</option>
+                                                                <option value="2">Prestamos</option>
+                                                                <option value="3">Hora Trabajadas</option>
+                                                                <option value="4">Horas No Trabajadas</option>
                                                             </select>
                                                             <div id="error_letra_opcion_nominas"
                                                                 class="d-none invalid-feedback">Solo se permiten letras
@@ -374,8 +381,9 @@
                                                             Prestamo:</label>
                                                         <input class="form-control" name="prestamo" type="number"
                                                             placeholder="0.00" required step="0.01" disabled
-                                                            oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity('');filtrarTextos(this);">
+                                                            oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
+                                                            oninput="this.setCustomValidity('');"
+                                                            onclick="filtrarTextosGest(this);">
                                                         <div id="error_letra_apellidos" class="d-none invalid-feedback">
                                                             Solo se permiten letras y
                                                             sin espacios.</div>
@@ -389,8 +397,9 @@
                                                             Trabajadas:</label>
                                                         <input class="form-control" name="horas_trabajo" type="number"
                                                             placeholder="0.00" required step=0.01 disabled
-                                                            oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity('');filtrarTextos(this);">
+                                                            oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
+                                                            oninput="this.setCustomValidity('');"
+                                                            onclick="filtrarTextosGest(this);">
                                                         <div id="error_letra_direccion" class="d-none invalid-feedback">
                                                             Solo se permiten letras y sin espacios.</div>
                                                         <div id="error_maxletras_direccion"
@@ -404,8 +413,9 @@
                                                             Trabajadas:</label>
                                                         <input class="form-control" name="horas_no_trabajadas"
                                                             type="number" placeholder="0.00" required step=0.01 disabled
-                                                            oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity('');filtrarTextos(this);">
+                                                            oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
+                                                            oninput="this.setCustomValidity('');"
+                                                            onclick="filtrarTextosGest(this);">
                                                         <div id="error_letra_direccion" class="d-none invalid-feedback">
                                                             Solo se permiten letras y sin espacios.</div>
                                                         <div id="error_maxletras_direccion"
@@ -413,26 +423,108 @@
                                                             Llegaste maximo de letras.
                                                         </div>
                                                     </div>
+                                                    <div class="col-6">
+                                                        <label class="form-label mt-2" for="salario">
+                                                            Salario Semanal Actual:</label>
+                                                        <input class="form-control" name="salario" type="number"
+                                                            placeholder="$0.00" required step="0.01" disabled
+                                                            oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
+                                                            oninput="this.setCustomValidity('');"
+                                                            onclick='filtrarTextos(this);'>
+                                                        <div id="error_letra_apellidos" class="d-none invalid-feedback">
+                                                            Solo se permiten letras y
+                                                            sin espacios.</div>
+                                                        <div id="error_maxletras_apellidos"
+                                                            class="d-none invalid-feedback">Llegaste maximo de letras.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label class="form-label mt-2" for="horas_laborales">Horas
+                                                            Laborales:</label>
+                                                        <input class="form-control" name="horas_laborales" type="number"
+                                                            placeholder="0" required disabled
+                                                            oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
+                                                            oninput="this.setCustomValidity('');"
+                                                            onclick="filtrarTextos(this);">
+                                                        <div id="error_letra_direccion" class="d-none invalid-feedback">
+                                                            Solo se permiten letras y sin espacios.</div>
+                                                        <div id="error_maxletras_direccion"
+                                                            class="d-none invalid-feedback">Llegaste maximo de letras.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label class="form-label mt-2" for="pago_hora">Pago por
+                                                            Hora:</label>
+                                                        <input class="form-control" name="pago_hora" type="number"
+                                                            placeholder="$0.00" required step=0.01 disabled
+                                                            oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
+                                                            oninput="this.setCustomValidity('');"
+                                                            onclick="filtrarTextos(this);">
+                                                        <div id="error_letra_direccion" class="d-none invalid-feedback">
+                                                            Solo se permiten letras y sin espacios.</div>
+                                                        <div id="error_maxletras_direccion"
+                                                            class="d-none invalid-feedback">Llegaste maximo de letras.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label class="form-label mt-2" for="descuento">
+                                                            Descuento:</label>
+                                                        <input class="form-control" name="descuento" type="number"
+                                                            placeholder="$0.00" required disabled step=0.01
+                                                            oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
+                                                            oninput="this.setCustomValidity('');"
+                                                            onclick="filtrarTextos(this);">
+                                                        <div id="error_letra_direccion" class="d-none invalid-feedback">
+                                                            Solo se permiten letras y sin espacios.</div>
+                                                        <div id="error_maxletras_direccion"
+                                                            class="d-none invalid-feedback">Llegaste maximo de letras.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label class="form-label mt-2" for="total">Total:</label>
+                                                        <input class="form-control" name="total" type="number"
+                                                            placeholder="$0.00" required step=0.01 disabled
+                                                            oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
+                                                            oninput="this.setCustomValidity('');"
+                                                            onclick="filtrarTextos(this);">
+                                                        <div id="error_letra_direccion" class="d-none invalid-feedback">
+                                                            Solo se permiten letras y sin espacios.</div>
+                                                        <div id="error_maxletras_direccion"
+                                                            class="d-none invalid-feedback">Llegaste maximo de letras.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label class="form-label mt-2" for="coment">Comentarios:</label>
+                                                        <input class="form-control" name="coment" type="text"
+                                                            placeholder="Ingrese comentario" required disabled
+                                                            oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
+                                                            oninput="this.setCustomValidity('');"
+                                                            onclick="filtrarTextosGest(this)">
+                                                        <div id="error_letra_direccion" class="d-none invalid-feedback">
+                                                            Solo se permiten letras y sin espacios.</div>
+                                                        <div id="error_maxletras_direccion"
+                                                            class="d-none invalid-feedback">Llegaste maximo de letras.
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <button class="btn btn-success mt-2" type="submit">Guardar</button>
-                                                <button class="btn btn-danger mt-2"
-                                                    onclick="limpiarFormEmpleado()">Limpiar</button>
+                                                <a class="btn btn-danger mt-2"
+                                                    onclick="Limpiar_Formulario_Gest();">Limpiar</a>
                                             </form>
 
                                         </div>
                                         <h3 class="letra text-center mt-3 mb-4">Nominas de Empleados</h3>
-                                        <a class="btn btn-primary m-1 mt-4 float-end" onclick=''>Realizar Cierre</a>
-                                        <select class="form-select text-start mt-5 w-25 mb-3" name="select_puesto"
-                                            required oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                            oninput="this.setCustomValidity('')" id='Seleccion_Puestos'>
-                                            <option selected value="">
-                                                Mostrar por departamento</option>
-                                            <option value="">
-                                                Registrar Salario Semanal</option>
-                                            <option value="">
-                                                Registrar Prestamo</option>
-                                            <option value="">
-                                                Registrar Prestamo</option>
+                                        <a class="btn btn-primary m-1 mt-4 float-end"
+                                            onclick='Realizar_Cierre();'>Realizar Cierre</a>
+                                        <span class="text-start mt-3">Mostrar por departamento:</span>
+                                        <select class="form-select w-25 mb-3" name="select_dep" required
+                                            oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
+                                            oninput="this.setCustomValidity(''); Mostrar_Empleados_Dep_Ges(this);"
+                                            id='Seleccion_Departamento2'>
+                                            <option selected value="100">
+                                                Seleccionar</option>
+                                            <option value="0">
+                                                Todos</option>
                                         </select>
                                         <div class="table-responsive">
                                             <table id="tabla_empleados_gestion_"
@@ -441,20 +533,23 @@
                                                     <tr class="color_tienda text-white">
                                                         <th scope="col">#</th>
                                                         <th scope="col">Nombres</th>
+                                                        <th scope="col">Apellidos</th>
                                                         <th scope="col">Departamento</th>
                                                         <th scope="col">Puesto</th>
                                                         <th scope="col">Salario Semanal</th>
                                                         <th scope="col">Prestamos</th>
                                                         <th scope="col">Horas Laborales</th>
                                                         <th scope="col">Horas Trabajadas</th>
+                                                        <th scope="col">Horas No Trabajadas</th>
                                                         <th scope="col">Precio por Hora</th>
                                                         <th scope="col">Descuento</th>
                                                         <th scope="col">Total</th>
+                                                        <th scope="col">Comentarios</th>
                                                         <th scope="col">Acción</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tabla_empleados_gestion">
-                                                    
+
                                                 </tbody>
                                             </table>
                                         </div>

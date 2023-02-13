@@ -8,6 +8,7 @@
     <meta http-equiv="Expires" content="0">
     <meta http-equiv="Last-Modified" content="0">
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <link rel="shortcut icon" href="./img/logo_tallerc.ico">
     <meta http-equiv="Pragma" content="no-cache">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -78,7 +79,7 @@
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
                                     <li><a href="../Bodega_Taller/Categoria_Hilos.php" class="link-white rounded" id="btn-hilos">Categoria Hilos</a></li>
                                     <li><a href="../Bodega_Taller/Categoria_Tapiceria.php" class="link-white rounded">Categoria Tapiceria</a></li>
-                                    <li><a href="../Bodega_Taller/Categoria_Trupper.php" class="link-white rounded">Categoria Trupper</a></li>
+                                    <li><a href="../Bodega_Taller/Categoria_Trupper.php" class="link-white rounded">Categoria Ferretaria</a></li>
                                     <li><a href="../Bodega_Taller/Categoria_Pintura.php" class="link-white rounded">Categoria Pintura</a></li>
                                     <li><a href="../Bodega_Taller/Categoria_Maquinas.php" class="link-white rounded">Categoria Maquinas</a></li>
                                 </ul>
@@ -107,7 +108,7 @@
                             <div class="collapse" id="admin_nominas-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
                                     <li><a href="../Admin y Nominas./Admin y Nominas/Lista_Nominas.php" class="link-white rounded">Lista de nominas</a></li>
-                                    <li><a href="#" class="link-white rounded">Gastos generales</a></li>
+                                    <li><a href="../Admin_Nominas/Gastos_Generales.php" class="link-white rounded">Gastos generales</a></li>
 
                                 </ul>
                             </div>
@@ -126,14 +127,14 @@
                                         <a href="materiales.php" class="link-white rounded">Materiales</a>
                                     </li>
                                     <li>
-                                        <a href="muebles.php" class="link-white rounded">Muebles</a></button>
+                                        <a href="muebles.php" class="link-white rounded">Muebles ( En construccion )</a></button>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="mb-1">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras">
-                                <a class="link-white rounded" href="../index.php">Salir</a>
+                            <a class="link-white rounded" onclick="Salir();">Salir</a>
                             </button>
                         </li>
                     </ul>
@@ -146,7 +147,7 @@
             <div class="row">
                 <div class="col-12 p-0">
                     <div class="box-nav letra titulo">
-                        <span class="cargo-txt">Alberto - Administrador</span>
+                        <span class="cargo-txt" id="nombre_empleado">Alberto - Administrador</span>
                         <span class="config-txt">Editar Perfil</span>
                     </div>
                 </div>

@@ -72,18 +72,22 @@ switch ($_SERVER['REQUEST_METHOD']) {
             echo json_encode(['stock' => $maderas]);
         } else if (isset($_GET['consultar_reportes_madera'])) { //  consulta reportes madera
             $columnas = 'r.ID_Reporte, mad.ID_Madera, mad.Codigo, mad.Nombre_Madera, 
-                         r.Stock, r.Fecha, r.Hora, r.Cantidad, r.Gasto_Entrada, r.Accion';
-            $inner = ' LEFT JOIN maderas mad on r.ID_Madera = mad.ID_Madera GROUP BY r.Accion;';
+                         r.Stock, r.Fecha, r.Hora, r.Cantidad, r.Gasto_Entrada, r.Accion,
+                         em.Nombres, em.Apellidos, p.Nombre_Puesto, d.Departamento';
+            $inner = ' LEFT JOIN maderas mad on r.ID_Madera = mad.ID_Madera LEFT JOIN empleados em on r.ID_Empleado = em.ID_Empleado 
+            LEFT JOIN Puestos p on em.ID_Puesto = p.ID_Puesto LEFT JOIN Departamentos d on p.ID_Departamento = d.ID_Departamento';
             $reportes_maderas = $opcion->Select($columnas, 'reportes r', $inner, null);
             echo json_encode(['reportes' => $reportes_maderas]);
         } else if (isset($_GET['consultar_reportes_materiales'])) { //  consulta reportes madera
             $columnas = 'r.ID_Reporte, mat.ID_Material, mat.Codigo, mat.Nombre_Material, 
-                         r.Stock, r.Fecha, r.Hora, r.Cantidad, r.Gasto_Entrada, r.Accion';
-            $inner = ' LEFT JOIN materiales mat on r.ID_Material = mat.ID_Material';
+                         r.Stock, r.Fecha, r.Hora, r.Cantidad, r.Gasto_Entrada, r.Accion,
+                         em.Nombres, em.Apellidos, p.Nombre_Puesto, d.Departamento ';
+            $inner = ' LEFT JOIN materiales mat on r.ID_Material = mat.ID_Material LEFT JOIN empleados em on r.ID_Empleado = em.ID_Empleado 
+                       LEFT JOIN Puestos p on em.ID_Puesto = p.ID_Puesto LEFT JOIN Departamentos d on p.ID_Departamento = d.ID_Departamento';
             $reportes_materiales = $opcion->Select($columnas, 'reportes r', $inner, null);
             echo json_encode(['reportes' => $reportes_materiales]);
         } else if (isset($_GET['consultar_materiales'])) { // consulta maderas
-            $materiales = $opcion->Select(null, 'materiales', null, null);
+            $materiales = $opcion->Select(null, 'materiales', null, null, null);
             echo json_encode(['materiales' => $materiales]);
         } else if (isset($_GET['consultar_material'])) {
             $id = $_GET['id'];
@@ -95,42 +99,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         break;
     case 'POST':
-        if (isset($_GET['insertar_empleados'])) { // insertar empleados
-            $json = file_get_contents('php://input');
-            $jsonObj = json_decode($json, true);
-            $NombreUsuario = $opcion->Select(null, 'empleados', null, $jsonObj['NombreUsuario'], ' WHERE Nombre_Usuario = :us');
-            print_r($NombreUsuario);
-            /*if ($empleados !== null) {
-                for ($i = 0; $i < count($empleados); $i++) {
-                    if ($empleados[$i]['Nombre_Usuario'] === $jsonObj['NombreUsuario']) {
-                        echo 'El nombre de usuario ya existe.!';
-                        break;
-                    }
-                }
-                $columnas = 'Nombre_Usuario, Nombres, Apellidos,
-                        Direccion, Correo_Electronico, Telefono,
-                        Contraseña, ID_Puesto, ID_Asistencia, ID_Estatus';
-                $lastid = $opcion->Insert('empleados', $columnas, $jsonObj);
-                echo $lastid;
-                if ($idlast !== null || $idlast > 0) {
-                    $columnas_salario = 'Salario_Semanal, Prestamos, Horas_Laborales, 
-                Horas_Trabajadas, Horas_No_Trabajadas, 
-                Precio_Hora, Descuento, ID_Empleado';
-                    $opcion->Insert('salarios', $columnas_salario, $lastid);
-                }
-            }*/
-        } else if (isset($_GET['insertar_maderas'])) { // insertar maderas
-            $json = file_get_contents('php://input');
-            $jsonObj = json_decode($json, true);
-            $maderas = $opcion->Select(null, 'maderas', null, $jsonObj['Codigo']);
-            if ($maderas == 0) {
-                $columnas = 'Codigo, Nombre_Madera, Precio_Unidad';
-                $opcion->Insert('maderas', $columnas, $jsonObj);
-                echo '{"error":"false"}';
-            } else {
-                echo '{"error":"true"}';
-            }
-        } else if (isset($_GET['insertar_material'])) {
+       if (isset($_GET['insertar_material'])) {
             $json = file_get_contents('php://input');
             $jsonObj = json_decode($json, true);
             $materiales = $opcion->Select(null, 'materiales', null, $jsonObj['Codigo']);
@@ -146,27 +115,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         break;
     case 'PUT':
-        if (isset($_GET['actualizar_empleados'])) { // actualizar empleados
-            $json = file_get_contents('php://input');
-            $jsonObj = json_decode($json, true);
-            $empleados = $opcion->Select(null, 'empleados', null, null);
-            $columnas = 'Nombre_Usuario = :us, Nombres = :nombres, Apellidos = :apellidos,
-                         Direccion = :direccion, Correo_Electronico = :correo, Telefono = :tel,
-                         Contraseña = :pass, ID_Puesto = :idpuesto, ID_Prestamo = :idprestamo,
-                         ID_Asistencia = :idasistencia, ID_Estatus = :idestatus';
-            $opcion->Actualizar('empleados', $columnas, $jsonObj);
-        } else if (isset($_GET['actualizar_madera'])) { // actualizar madera
-            $json = file_get_contents('php://input');
-            $jsonObj = json_decode($json, true);
-            $buscarmadera = $opcion->Select(null, 'maderas', null, $jsonObj['ID']);
-            if ($buscarmadera != 0) {
-                $columnas = 'Codigo = :cod, Nombre_Madera = :mad, Precio_Unidad = :prec';
-                $opcion->Actualizar('maderas', $columnas, $jsonObj);
-                echo '{"error":"false"}';
-            } else {
-                echo '{"error":"false"}';
-            }
-        } else if (isset($_GET['actualizar_materiales'])) { // actualizar madera
+         if (isset($_GET['actualizar_materiales'])) { // actualizar madera
             $json = file_get_contents('php://input');
             $jsonObj = json_decode($json, true);
             $buscarmateriales = $opcion->Select(null, 'materiales', null, $jsonObj['ID']);

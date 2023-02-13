@@ -9,7 +9,7 @@
     <meta http-equiv="Last-Modified" content="0">
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
     <meta http-equiv="Pragma" content="no-cache">
-
+    <link rel="shortcut icon" href="../../img/logo_tallerc.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../bootstrap-/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -19,10 +19,8 @@
     <script src="../../bootstrap-/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
         </script>
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
-
     <link href="../../css/dashboard_estilo.css?v1.0.0.15" rel="stylesheet">
     <!--<link href="../css/admin.css?v1.0.0.1" rel="stylesheet">-->
 </head>
@@ -30,7 +28,7 @@
 <body>
     <div class="row" style="height: 100%;">
         <div class="col-3 p-0">
-            <div class="box-modulos " id="grupo">
+        <div class="box-modulos ">
                 <div class="vertical-menu letra titulo">
                     <div class="border-bottom border-1 border-white">
                         <div class="d-flex justify-content-center">
@@ -40,12 +38,12 @@
                     </div>
                     <ul class="list-unstyled ps-0 p-0">
                         <li class="p-1"><a href="../dashboard.php" class="link-white rounded">Dashboard</a></li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="empleados">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras">
                                 <a href="../empleados.php" class="link-white rounded">Empleados</a>
                             </button>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="tiendas">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#tiendas-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Tiendas</a>
@@ -58,7 +56,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="produccion">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#produccion-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Produccion</a>
@@ -71,7 +69,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="bodegas">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#bodega-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded" id="btn-bodega">Bodega Taller</a>
@@ -83,7 +81,7 @@
                                             id="btn-hilos">Categoria Hilos</a></li>
                                     <li><a href="Categoria_Tapiceria.php" class="link-white rounded">Categoria
                                             Tapiceria</a></li>
-                                    <li><a href="Categoria_Trupper.php" class="link-white rounded">Categoria Trupper</a>
+                                    <li><a href="Categoria_Trupper.php" class="link-white rounded">Categoria Ferretaria</a>
                                     </li>
                                     <li><a href="Categoria_Pintura.php" class="link-white rounded">Categoria Pintura</a>
                                     </li>
@@ -92,7 +90,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="compras">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#compras-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Compras</a>
@@ -107,7 +105,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="administracion">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#admin_nominas-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Admin y Nominas</a>
@@ -115,12 +113,12 @@
                             <div class="collapse" id="admin_nominas-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
                                     <li><a href="../Admin_Nominas/Lista_Nominas.php" class="link-white rounded">Lista de nominas</a></li>
-                                    <li><a href="#" class="link-white rounded">Gastos generales</a></li>
+                                    <li><a href="../Admin_Nominas/Gastos_Generales.php" class="link-white rounded">Gastos generales</a></li>
 
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1"  id="inventarios">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#inventarios-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Inventarios</a>
@@ -135,14 +133,14 @@
                                     </li>
                                     <li>
                                         <a href="../inventario/muebles.php"
-                                            class="link-white rounded">Muebles</a></button>
+                                            class="link-white rounded">Muebles ( En construccion )</a></button>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="mb-1">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras">
-                                <a class="link-white rounded" href="../index.php">Salir</a>
+                                <a class="link-white rounded" onclick="Salir();">Salir</a>
                             </button>
                         </li>
                     </ul>
@@ -155,7 +153,7 @@
             <div class="row">
                 <div class="col-12 p-0">
                     <div class="box-nav letra titulo">
-                        <span class="cargo-txt">Alberto - Administrador</span>
+                        <span class="cargo-txt" id='nombre_empleado'>Alberto - Administrador</span>
                         <span class="config-txt">Editar Perfil</span>
                     </div>
                 </div>
@@ -163,7 +161,7 @@
                     <div class="container" id="maderas">
                         <div class="tab-pane fade show active" id="admin" role="tabpanel" aria-labelledby="admin-tab">
                             <div class="container p-1" id="madera">
-                                <h3 class="letra titulo text-center">Categoria Trupper</h3>
+                                <h3 class="letra titulo text-center">Categoria Ferretaria</h3>
                                <!--<div class="grid letra m-2">
                                     <div class="grid-item color_tienda">
                                         <h3 class="letra border-bottom border-1 border-white w-100">Tapiceria</h3>
@@ -198,7 +196,7 @@
                                     <div class="form-hilos p-1 m-2 border border-1">
                                         <form method="POST" name="formulario_stocks"
                                             onsubmit="return  Validar_Formulario_Stocks();">
-                                            <h3 class="letra titulo text-center">Salida Trupper</h3>
+                                            <h3 class="letra titulo text-center">Salida Ferreteria</h3>
                                             <div class="row">
                                                 <div class="col-6">
                                                     <label class="form-label mt-1" for="selec_material">Seleccione
@@ -267,13 +265,13 @@
                                                 </div>
                                             </div>
                                             <button class="btn btn-success mt-2" type="submit">Guardar</button>
-                                            <button class="btn btn-danger mt-2"
-                                                onclick="Limpiar_Formulario();">Limpiar</button>
+                                            <a class="btn btn-danger mt-2"
+                                                onclick="Limpiar_Formulario();">Limpiar</a>
                                         </form>
                                     </div>
 
                                     <h3 class="letra text-center mt-3" style="position: sticky; top:0">Reporte
-                                        Trupper</h3>
+                                        Ferreteria</h3>
 
                                     <a class="btn btn-primary mb-1" style="position: sticky; top:0"
                                         id="btn_mostrar_reporte" onclick="Mostrar_Tabla_Reportes(this, false)">Mostrar
@@ -282,7 +280,7 @@
                                         id="exporttable_mat1">Exportar Excel</a>
                                     <div class="table-responsive table-custom">
                                         <table id="tabla_reporte_material"
-                                            class="table table-striped table-bordered table-sm my-custom-scrollbar d-none">
+                                            class="table table-striped table-bordered table-sm my-custom-scrollbar">
                                             <thead style="position: sticky; top:0">
                                                 <tr class="color_tienda text-white">
                                                     <th scope="col">N°</th>

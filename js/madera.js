@@ -1,7 +1,3 @@
-window.onload = () => {
-
-};
-
 function CargarDatos() {
     LimpiarTabla();
     EnviarDatos('', 'consultar_maderas');
@@ -78,7 +74,7 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
             })
             .catch(error => console.error("Error encontrado: ", error));
     }
-    else if (opcion == 'consultar_madera') { // GET
+    else if (opcion == 'consultar_madera_stock') { // GET
         var urlEnvio = url + '/?' + opcion + "&id=" + objeto;
         fetch(urlEnvio, {
             method: 'GET'
@@ -91,6 +87,7 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
                 } else {
                     DatosTabla(datos);
                 }
+                console.log(datos);
 
             })
             .catch(error => console.error("Error encontrado: ", error));
@@ -111,7 +108,6 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
                 } else {
                     alert('No hay reportes de salida ni de entrada');
                 }
-                console.log(reportes);
             })
             .catch(error => console.error("Error encontrado: ", error));
     }
@@ -138,7 +134,7 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
             })
             .catch(error => console.error("Error encontrado: ", error));
     }
-    else if (opcion == 'actualizar_entrada') { // PUT
+    else if (opcion == 'actualizar_entrada_salida') { // PUT
         var urlEnvio = url + '/?' + opcion;
         fetch(urlEnvio, {
             method: 'PUT',
@@ -149,28 +145,8 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
         })
             .then(response => response.json())
             .then(datos => {
-                if (datos.error == 'true') {
-                    alert('Ocurrio un error con la actualizacion.!');
-                }
-                else {
-                    alert('Se actualizaron los datos correctamente.!');
-                    Cargar_Stock();
-                }
-            })
-            .catch(error => console.error("Error encontrado: ", error));
-    }
-    else if (opcion == 'actualizar_salida') { // PUT
-        var urlEnvio = url + '/?' + opcion;
-        fetch(urlEnvio, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(objeto)
-        })
-            .then(response => response.json())
-            .then(datos => {
-                if (datos.error == 'true') {
+                var maderas = datos.maderas;
+                if (maderas !== 'exitoso') {
                     alert('Ocurrio un error con la actualizacion.!');
                 }
                 else {
@@ -200,7 +176,10 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
             .catch(error => console.error("Error encontrado: ", error));
     }
 }
-
+/*function Filtrar_Tabla(select){
+    
+    if(tabla);
+}*/
 function Filtrar_Textos(input) {
     var formato = /^[A-z0-9]+$/;
     if (input.name == 'cod') {
@@ -255,37 +234,39 @@ function DatosTabla(datos, stock, cantidad) {
 function DatosTablaReporte(datos, cantidad) {
 
     if (datos.Accion == 'Entrada') {
-        var json = {
-            'ID': datos.ID_Madera,
-            'Codigo': datos.Codigo,
-            'Nombre_Madera': datos.Nombre_Madera,
-            'Empleado': 'Ninguno',
-            'Dep': 'Ninguno',
-            'Puesto': 'Ninguno',
-            'Entrada': datos.Cantidad,
-            'Salida': 0,
-            'Stock': datos.Stock,
-            'Gasto': datos.Gasto_Entrada,
-            'Fecha_Registro': datos.Fecha,
-            'Hora_Registro': datos.Hora
-        };
-
+        if(datos.ID_Madera != null){
+            var json = {
+                'ID': datos.ID_Madera,
+                'Codigo': datos.Codigo,
+                'Nombre_Madera': datos.Nombre_Madera,
+                'Empleado': datos.Nombres + " " + datos.Apellidos,
+                'Dep': datos.Departamento,
+                'Puesto': datos.Nombre_Puesto,
+                'Entrada': datos.Cantidad,
+                'Salida': 0,
+                'Stock': datos.Stock,
+                'Gasto': datos.Gasto_Entrada,
+                'Fecha_Registro': datos.Fecha,
+                'Hora_Registro': datos.Hora
+            };
+        }
     } else {
-        var json = {
-            'ID': datos.ID_Madera,
-            'Codigo': datos.Codigo,
-            'Nombre_Madera': datos.Nombre_Madera,
-            'Empleado': 'Ninguno',
-            'Dep': 'Ninguno',
-            'Puesto': 'Ninguno',
-            'Entrada': 0,
-            'Salida': datos.Cantidad,
-            'Stock': datos.Stock,
-            'Gasto': datos.Gasto_Entrada,
-            'Fecha_Registro': datos.Fecha,
-            'Hora_Registro': datos.Hora
-        };
-
+        if(datos.ID_Madera != null){
+            var json = {
+                'ID': datos.ID_Madera,
+                'Codigo': datos.Codigo,
+                'Nombre_Madera': datos.Nombre_Madera,
+                'Empleado': datos.Nombres + " " + datos.Apellidos,
+                'Dep': datos.Departamento,
+                'Puesto': datos.Nombre_Puesto,
+                'Entrada': 0,
+                'Salida': datos.Cantidad,
+                'Stock': datos.Stock,
+                'Gasto': datos.Gasto_Entrada,
+                'Fecha_Registro': datos.Fecha,
+                'Hora_Registro': datos.Hora
+            };
+        }
     }
     var arreglo = [cantidad + 1, json.Codigo, json.Nombre_Madera, json.Empleado, json.Dep, json.Puesto, json.Entrada, json.Salida, json.Stock, '$' + json.Gasto, json.Fecha_Registro, json.Hora_Registro];
     var tr = document.createElement('tr');
@@ -294,7 +275,7 @@ function DatosTablaReporte(datos, cantidad) {
         td.setAttribute('scope', 'col');
         td.innerHTML = arreglo[i];
         tr.appendChild(td);
-        document.getElementById('tabla_reporte_madera').appendChild(tr);
+        document.getElementById('tabla_reporte_madera_body').appendChild(tr);
     }
 }
 function Modificar(datos) {
@@ -361,7 +342,6 @@ function LimpiarSelect() {
 function Cargar_Stock() {
     LimpiarSelect();
     LimpiarFormularioStock();
-    EnviarDatos('', 'consultar_reportes_madera');
 }
 function Eliminar(id) {
     if (confirm('¿Seguro quiere eliminar esta madera?') == true) {
@@ -376,7 +356,7 @@ $(function () {
         var table = $("#tabla_madera_");
         var tbody = $("#tabla_madera");
         $(table).toggleClass
-        if (table && table.length && tbody.children().length > 0) {
+        if (table && tbody.children().length > 0) {
             $(table).addClass('text-dark');
             $(table).table2excel({
                 exclude: ".noExl",
@@ -398,8 +378,9 @@ $(function () {
 $(function () {
     $("#exporttable_madera2").click(function (e) {
         var table = $("#tabla_reporte_madera");
+        var tbody = $("#tabla_reporte_madera_body");
         $(table).toggleClass
-        if (table && table.length) {
+        if (table && tbody.children().length > 0)  {
             $(table).addClass('text-dark');
             $(table).table2excel({
                 exclude: ".noExl",
@@ -411,6 +392,8 @@ $(function () {
                 exclude_inputs: true,
                 preserveColors: true
             });
+        }else {
+            alert('No se puede descargar una tabla vacia.!');
         }
     });
 
@@ -436,19 +419,21 @@ function Mostrar_Tabla(btn, activar) {
     }
 }
 function Mostrar_Tabla_Reportes(btn, activar) {
+    // var filtrado = document.getElementById('seleccion_tabla_reporte');
     if (btn.id == 'btn_mostrar_reporte') {
-        var tabla = document.getElementById('tabla_reporte_madera');
         var btn = document.getElementById('btn_mostrar_reporte');
         if (activar === false) {
             btn.innerHTML = "Ocultar Reportes";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', true)');
-            Cargar_Stock();
+            // filtrado.removeAttribute('disabled');
+            EnviarDatos('', 'consultar_reportes_madera');
         } else {
             btn.innerHTML = "Mostrar Reportes";
             btn.removeAttribute('onclick');
-            btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', false)');
             LimpiarTablaReporte();
+            btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', false)');
+            //  filtrado.setAttribute('disabled', true);
         }
     }
 }
@@ -481,10 +466,12 @@ function Seleccion_Opcion(opcion) {
     }
 }
 function Seleccion_Madera(seleccion) {
-    EnviarDatos(seleccion.value, 'consultar_madera', true);
+    EnviarDatos(seleccion.value, 'consultar_madera_stock', true);
 }
 function Validar_Formulario_Stocks(opcion) { // formulario stock
     var form = document.forms['formulario_madera_stocks'];
+    let usuario = JSON.parse(sessionStorage.getItem('Sesion'));
+    var id_empleado = usuario[0].ID_Empleado;
     var id = form[1];
     var Precio = form[4];
     var Total;
@@ -495,22 +482,16 @@ function Validar_Formulario_Stocks(opcion) { // formulario stock
     var date = new Date();
     var year = date.getFullYear();
     var mes = date.getMonth() + 1;
-    var dia = date.getDay();
+    var dia = date.getDate();
     var hora = date.getHours();
     var min = date.getMinutes();
     var seg = date.getSeconds();
     var hora;
     var fecha;
-
     if (mes.toString().length < 2) {
         mes = '0' + mes;
     }
-    if (dia.toString().length < 2) {
-        dia = '0' + dia;
-    }
-
-    fecha = year + '/' + mes + '/' + dia;
-
+    fecha = year + '-' + mes + '-' + dia;
     if (hora.toString().length < 2) {
         hora = '0' + hora;
     }
@@ -528,19 +509,19 @@ function Validar_Formulario_Stocks(opcion) { // formulario stock
             confirmar_entrada = confirm('¿Desea registrar de entrada ' + cantidad + ' al stock?');
             if (confirmar_entrada == true) {
                 var nuevo_stock = parseInt(stock.value) + parseInt(cantidad);
-                var total = parseFloat(cantidad) * parseFloat(Precio.value);
+                var total = cantidad * Precio.value;
                 json = {
+                    'ID_Empleado': id_empleado,
                     'ID': id.value,
                     'Entrada': cantidad,
-                    'Stock': nuevo_stock,
+                    'Stock': parseInt(nuevo_stock),
                     'Fecha_Registro': fecha,
                     'Hora_Registro': hora,
                     'Accion': 'Entrada',
                     'Cantidad': cantidad,
-                    'Gasto_Entrada': total,
+                    'Gasto_Entrada': parseFloat(total),
 
                 };
-                EnviarDatos(json, 'actualizar_entrada');
             }
         } else if (opcion == 'salida') {
             cantidad = form[3].value;
@@ -557,9 +538,10 @@ function Validar_Formulario_Stocks(opcion) { // formulario stock
                     'Cantidad': cantidad,
                     'Gasto_Entrada': 'Ninguno'
                 };
-                EnviarDatos(json, 'actualizar_salida');;
+
             }
         }
+        EnviarDatos(json, 'actualizar_entrada_salida');
     } else {
         alert('Debe seleccionar un tipo de madera primero.!');
     }
@@ -595,4 +577,30 @@ function filtrarCantidad(opcion) {
             alert('Solo numeros positivos');
         }
     }
+}
+
+window.onload = () => {
+    let em = document.getElementById('empleados');
+    let ti = document.getElementById('tiendas');
+    let pr = document.getElementById('produccion');
+    let bo = document.getElementById('bodegas');
+    let co = document.getElementById('compras');
+    let ad = document.getElementById('administracion');
+    let inv = document.getElementById('inventarios');
+    let usuario = JSON.parse(sessionStorage.getItem('Sesion'));
+    if (usuario !== null) {
+        document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
+        if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
+            setTimeout(Consultar_Departamentos, 1000);
+        }else {
+            window.location.replace('../login.php');
+        }
+    }
+    else {
+        window.location.replace('../login.php');
+    }
+};
+function Salir() {
+    sessionStorage.clear();
+    window.location.replace('../login.php');
 }

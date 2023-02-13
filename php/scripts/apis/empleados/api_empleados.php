@@ -12,45 +12,50 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         if (isset($_GET['consultar_empleados'])) {
             $empleados = $funcion->Obtener_Empleados(true);
-            if($empleados === 0){
+            if ($empleados === 0) {
                 echo '{"empleados":"null"}';
-            }else{
+            } else {
                 echo json_encode(['empleados' => $empleados]);
             }
         }
         if (isset($_GET['consultar_empleado'])) {
             $id = $_GET['id'];
             $empleado = $funcion->Obtener_Empleado_Especifico($id, 'id_empleado');
-            
-            if($empleado === 0 || $empleado === null){
+
+            if ($empleado === 0 || $empleado === null) {
                 echo '{"empleado":null}';
-            }else{
+            } else {
                 echo json_encode(['empleado' => $empleado]);
             }
         }
         break;
     case 'POST':
-        if(isset($_GET['insertar_empleados'])){
+        if (isset($_GET['insertar_empleados'])) {
             $json = file_get_contents('php://input');
             $jsonObj = json_decode($json, true);
             $NombreUsuario = $funcion->Obtener_Empleado_Especifico($jsonObj['NombreUsuario'], 'Usuario');
-            if($NombreUsuario === null){
-                $pass = $jsonObj['Contraseña'];
+            if ($NombreUsuario === null) { 
+                $pass = "";
+                if ($jsonObj['Contraseña']=="") {//4521F85?/002023*
+                    $pass = "4521F85?/002023*";
+                } else {
+                    $pass = $jsonObj['Contraseña'];
+                }
                 $hash = $funcion->guardarPass($pass);
                 $jsonObj['Contraseña'] = $hash;
                 $lastid = $funcion->Registrar_Empleado($jsonObj);
-                if($lastid !== 0 || $lastid !== null){
+                if ($lastid !== 0 || $lastid !== null) {
                     $verificar_registro = $funcion->Registrar_Salario($lastid);
-                    if($verificar_registro !== 0){
+                    if ($verificar_registro !== 0) {
                         echo '{"empleados":"registrado"}';
-                    }else{
+                    } else {
                         echo '{"empleados":"Error registro salario"}';
                     }
-                }else{
+                } else {
                     echo '{"empleados":"Error registro empleado"}';
                 }
-                
-            }else{
+
+            } else {
                 echo '{"empleados":"Existe"}';
             }
         }
@@ -59,10 +64,18 @@ switch ($_SERVER['REQUEST_METHOD']) {
         if (isset($_GET['actualizar_empleados'])) { // actualizar empleados
             $json = file_get_contents('php://input');
             $jsonObj = json_decode($json, true);
+            $pass = "";
+            if ($jsonObj['Contraseña']=="") { //4521F85?/002023*
+                $pass = "4521F85?/002023*";
+            } else {
+                $pass = $jsonObj['Contraseña'];
+            }
+            $hash = $funcion->guardarPass($pass);
+            $jsonObj['Contraseña'] = $hash;
             $empleado = $funcion->Actualizar_Empleado($jsonObj);
-            if($empleado === 0 || $empleado === null){
+            if ($empleado === 0 || $empleado === null) {
                 echo '{"empleados":"Error actualizacion"}';
-            }else{
+            } else {
                 echo '{"empleados":"Actualizado"}';
             }
         }
@@ -73,7 +86,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $jsonObj = json_decode($json, true);
             $id = $jsonObj['IDEmpleado'];
             $funcion->Eliminar_Empleado($id);
-        } 
+        }
         break;
     default:
         echo '<script>alert(' . '"Solicitud no encontrada.!!"' . ')</script>';

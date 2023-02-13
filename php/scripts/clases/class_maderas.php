@@ -22,6 +22,9 @@ class Maderas
             self::Select(null, null, ' WHERE ID_Madera = :id', $id);
         } else if ($opcion == "cod") {
             self::Select(null, null, ' WHERE Codigo = :cod', $id);
+        }else if($opcion == "stock"){
+            $column = 'Stock, Precio_Unidad ';
+            self::Select($column, null, ' WHERE ID_Madera = :id', $id);
         }
         return $this->json;
     }
@@ -31,10 +34,17 @@ class Maderas
         return $this->json;
     }
 
-    public function Actualizar_Madera($json)
+    public function Actualizar_Madera($json, $opcion = null)
     {
-        $columnas = 'Codigo = :cod, Nombre_Madera = :mad, Precio_Unidad = :prec';
-        self::Update($columnas, $json);
+        if ($opcion == "entradas_salidas") {
+            $columnas = ' Stock = :st';
+            $columnas_reporte = 'ID_Madera, ID_Material, ID_Mueble, ID_Empleado, Fecha, Hora, Accion, Cantidad, Stock, Gasto_Entrada';
+            self::Insertar_Reporte('maderas', $columnas_reporte, $json, 'entradas');
+        }
+         else {
+            $columnas = 'Codigo = :cod, Nombre_Madera = :mad, Precio_Unidad = :prec';
+        }
+        self::Update($columnas, $json, $opcion);
     }
 
     public function Eliminar_Madera($json)
@@ -88,31 +98,48 @@ class Maderas
         }
     }
 
-    private function Update($columns, $values)
+    private function Update($columns, $values, $opcion = null)
     {
         $tabla = "maderas";
-        $SQL = 'UPDATE ' . $tabla . ' SET ' . $columns . ' WHERE ID_Madera = :id;';
-        try {
-            $this->conexion = new Conexion();
-            $cx = $this->conexion->conectar();
-            $query = $cx->prepare($SQL);
-            
-            $query->bindParam(':id', $values['ID'], PDO::PARAM_INT);
-            $query->bindParam(':cod', $values['Codigo'], PDO::PARAM_STR, 25);
-            $query->bindParam(':mad', $values['Madera'], PDO::PARAM_STR, 128);
-            $query->bindParam(':prec', $values['Precio'], PDO::PARAM_STR);
-
-            if($columns == ' Stock = :st'){
-                
+        if ($opcion == 'entradas_salidas') {
+            $this->SQL = 'UPDATE ' . $tabla . ' SET ' . $columns . ' WHERE ID_Madera = :id;';
+            try {
+                $this->conexion = new Conexion();
+                $cx = $this->conexion->conectar();
+                $query = $cx->prepare($this->SQL);
+                $query->bindParam(':id', $values['ID'], PDO::PARAM_INT);
+                $query->bindParam(':st', $values['Stock'], PDO::PARAM_INT);
+                $query->execute();
+                $cx = null;
+                $this->conexion->desconectar();
+            } catch (PDOException $err) {
+                echo "¡Ocurrió un error! - Código: " . $err->getCode() . " chequear log de errores.!";
+                self::error_($err->getCode(), $err->getMessage(), $err->getFile(), $err->getLine()); //$err->getCode(), $err->getMessage(), $err->getFile(), $err->getLine()
             }
-
-            $query->execute();
-            $cx = null;
-            $this->conexion->desconectar();
-        } catch (PDOException $err) {
-            echo "¡Ocurrió un error! - Código: " . $err->getCode() . " chequear log de errores.!";
-            self::error_($err->getCode(), $err->getMessage(), $err->getFile(), $err->getLine()); //$err->getCode(), $err->getMessage(), $err->getFile(), $err->getLine()
+        } else {
+            $SQL = 'UPDATE ' . $tabla . ' SET ' . $columns . ' WHERE ID_Madera = :id;';
+            try {
+                $this->conexion = new Conexion();
+                $cx = $this->conexion->conectar();
+                $query = $cx->prepare($SQL);
+                if ($columns == ' Stock = :st') {
+                    $query->bindParam(':id', $values['ID'], PDO::PARAM_INT);
+                    $query->bindParam(':st', $values['Stock'], PDO::PARAM_INT);
+                } else {
+                    $query->bindParam(':id', $values['ID'], PDO::PARAM_INT);
+                    $query->bindParam(':cod', $values['Codigo'], PDO::PARAM_STR, 25);
+                    $query->bindParam(':mad', $values['Madera'], PDO::PARAM_STR, 128);
+                    $query->bindParam(':prec', $values['Precio'], PDO::PARAM_STR);
+                }
+                $query->execute();
+                $cx = null;
+                $this->conexion->desconectar();
+            } catch (PDOException $err) {
+                echo "¡Ocurrió un error! - Código: " . $err->getCode() . " chequear log de errores.!";
+                self::error_($err->getCode(), $err->getMessage(), $err->getFile(), $err->getLine()); //$err->getCode(), $err->getMessage(), $err->getFile(), $err->getLine()
+            }
         }
+
     }
 
     private function Delete($id)

@@ -1,11 +1,41 @@
 window.onload = () => {
-    Cargar_Hilos()
+    Cargar_Hilos();
+    let em = document.getElementById('empleados');
+    let ti = document.getElementById('tiendas');
+    let pr = document.getElementById('produccion');
+    let bo = document.getElementById('bodegas');
+    let co = document.getElementById('compras');
+    let ad = document.getElementById('administracion');
+    let inv = document.getElementById('inventarios');
+    let usuario = JSON.parse(sessionStorage.getItem('Sesion'));
+    if (usuario !== null) {
+        document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
+        if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
+
+        }  else if (usuario[0].ID_Puesto == 11) {
+            em.remove();
+            ti.remove();
+            pr.remove();
+            ad.remove();
+            co.remove();
+            inv.remove();
+        }else {
+            window.location.replace('../login.php');
+        }
+    }
+    else {
+        window.location.replace('../../login.php');
+    }
 };
+function Salir() {
+    sessionStorage.clear();
+    window.location.replace('../../login.php');
+}
 function Cargar_Hilos() {
     Fetch_GET(null, 'consultar_hilos');
 }
 function Fetch_GET(id, opcion) {
-    var url = '../../php/scripts/api_hilos.php';
+    var url = '../../php/scripts/apis/bodega_taller/api_hilos.php';
 
     if (opcion == 'consultar_hilos') {
         var urlEnvio = url + '/?' + opcion;
@@ -73,8 +103,6 @@ function Llenar_Formulario(datos, cantidad) {
     form[2].value = json.Precio;
     form[3].value = json.Stock;
 }
-
-
 function Llenar_Lista(datos, cantidad) {
     let json = {
         'ID': datos.ID_Material,
@@ -91,7 +119,7 @@ function Llenar_Lista(datos, cantidad) {
         if (i === 0) {
             option.value = arreglo[i];
         } else {
-            option.innerText = arreglo[i] + "["+json.Codigo+"]";
+            option.innerText = arreglo[i] + "[" + json.Codigo + "]";
         }
 
     }
@@ -101,6 +129,7 @@ function Llenar_Lista(datos, cantidad) {
 function Seleccion_Materiales(seleccion) {
     var form = document.forms['formulario_stocks'];
 
+
     if (seleccion.value != "Seleccionar") {
         Fetch_GET(seleccion.value, 'consultar_hilo');
         form[1].removeAttribute('disabled');
@@ -108,15 +137,17 @@ function Seleccion_Materiales(seleccion) {
     } else {
         Limpiar_Formulario();
         form[1].setAttribute('disabled', '');
+        var e = form[0];
     }
 }
 
 function Limpiar_Formulario() {
     var form = document.forms['formulario_stocks'];
-    for (let i = 1; i < form.length; i++) {
+    for (let i = 0; i < form.length; i++) {
         form[i].value = "0";
     }
     form[1].setAttribute('disabled', '');
+    form[0].value = form[0].options[0].text;
 }
 
 function Seleccion_Opcion(opcion) {
@@ -170,6 +201,8 @@ function filtrarCantidad(opcion) {
 
 function Validar_Formulario_Stocks() {
     var form = document.forms['formulario_stocks'];
+    let usuario = JSON.parse(sessionStorage.getItem('Sesion'));
+    var id_empleado = usuario[0].ID_Empleado;
     var id = form[0];
     var Total;
     var stock = form[3];
@@ -179,7 +212,7 @@ function Validar_Formulario_Stocks() {
     var date = new Date();
     var year = date.getFullYear();
     var mes = date.getMonth() + 1;
-    var dia = date.getDay();
+    var dia = date.getDate();
     var hora = date.getHours();
     var min = date.getMinutes();
     var seg = date.getSeconds();
@@ -188,9 +221,6 @@ function Validar_Formulario_Stocks() {
 
     if (mes.toString().length < 2) {
         mes = '0' + mes;
-    }
-    if (dia.toString().length < 2) {
-        dia = '0' + dia;
     }
 
     fecha = year + '/' + mes + '/' + dia;
@@ -212,6 +242,7 @@ function Validar_Formulario_Stocks() {
         if (confirmar_entrada == true) {
             var nuevo_stock = parseInt(stock.value) - parseInt(cantidad);
             json = {
+                'ID_Empleado': id_empleado,
                 'ID': id.value,
                 'Salida': cantidad,
                 'Stock': nuevo_stock,
@@ -232,7 +263,7 @@ function Validar_Formulario_Stocks() {
 }
 
 function Fetch_PUT(objeto, opcion) {
-    var url = '../../php/scripts/api_hilos.php';
+    url = '../../php/scripts/apis/bodega_taller/api_hilos.php';
     if (opcion == 'actualizar_salida_material') { // PUT
         var urlEnvio = url + '/?' + opcion;
         fetch(urlEnvio, {
@@ -246,7 +277,8 @@ function Fetch_PUT(objeto, opcion) {
             .then(datos => {
                 if (datos.error == "false") {
                     Limpiar_Formulario();
-
+                    LimpiarTablaReporte();
+                    Cargar_Tabla_Reporte();
                 } else {
                     alert('Hubo un problema con la base de datos.!');
                 }
@@ -257,16 +289,16 @@ function Fetch_PUT(objeto, opcion) {
 
 function Mostrar_Tabla_Reportes(btn, activar) {
     if (btn.id == 'btn_mostrar_reporte') {
-        var tabla = document.getElementById('tabla_reporte_material');
+        var tabla = document.getElementById('tabla_reporte_material_body');
         var btn = document.getElementById('btn_mostrar_reporte');
         if (activar === false) {
-            tabla.classList.remove('d-none');
+
             btn.innerHTML = "Ocultar Reportes";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', true)');
             Cargar_Tabla_Reporte()
         } else {
-            tabla.classList.add('d-none')
+
             btn.innerHTML = "Mostrar Reportes";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', false)');
@@ -314,8 +346,9 @@ function LimpiarTablaReporte() {
 $(function () {
     $("#exporttable_mat1").click(function (e) {
         var table = $("#tabla_reporte_material");
+        var tablebody = $("#tabla_reporte_material_body");
         $(table).toggleClass
-        if (table && table.length) {
+        if (table && tablebody.children().length > 0) {
             $(table).addClass('text-dark');
             $(table).table2excel({
                 exclude: ".noExl",
@@ -327,8 +360,9 @@ $(function () {
                 exclude_inputs: true,
                 preserveColors: true
             });
+        } else {
+            alert('No se puede descargar una tabla vacia.!');
         }
     });
 
 });
-

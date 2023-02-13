@@ -1,6 +1,11 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-require(dirname(__DIR__) . '/scripts/bd.php');
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: GET,POST,PUT,DELETE");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+header('Content-Type: text/html; charset=UTF-8');
+require(dirname(dirname(dirname(__DIR__))) . '\scripts\bd.php');
 
 $opcion = new BaseDatos;
 
@@ -10,8 +15,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
         if (isset($_GET['consultar_truppers'])) { // consulta todos los hilos
             //$inner = ' LEFT JOIN reportes r on hilos.ID_Material = r.ID_Material ';
             //$where = 'WHERE hilos.Categoria = ' . '"' . 'Hilos' . '"'; 
-            $categoria = 'WHERE Categoria = '. '"' . 'Trupper' . '"';
-            $hilos = $opcion->Select(null, 'materiales', null, $categoria);
+            $categoria = 'WHERE Categoria = '. '"' . 'Ferreteria' . '"';
+            $hilos = $opcion->Select(null, 'materiales', null, null, $categoria);
             if($hilos != 0){
                 //array_push($hilos[0], $hilos['error'] = 'false');
                 echo json_encode(['hilos'=>$hilos]);
@@ -22,12 +27,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
         } else if (isset($_GET['consultar_trupper'])) {  // consultar hilo en especifico
             $id = $_GET['id'];
             $column = 'Stock, Precio_Unitario';
-            $materiales = $opcion->Select($column, 'materiales', null, $id);
+            $materiales = $opcion->Select($column, 'materiales', null, $id, null);
             echo json_encode(['hilo' => $materiales]);
         }else if (isset($_GET['consultar_reportes_materiales'])) { //  consulta reportes madera
             $columnas = 'r.ID_Reporte, mat.ID_Material, mat.Codigo, mat.Nombre_Material, 
                          r.Stock, r.Fecha, r.Hora, r.Cantidad, r.Gasto_Entrada, r.Accion';
-            $inner = ' LEFT JOIN materiales mat on r.ID_Material = mat.ID_Material WHERE mat.Categoria = "Trupper"';
+            $inner = ' LEFT JOIN materiales mat on r.ID_Material = mat.ID_Material WHERE mat.Categoria = "Ferreteria"';
             $reportes_materiales = $opcion->Select($columnas, 'reportes r', $inner, null);
             echo json_encode(['reportes' => $reportes_materiales]);
         } 

@@ -14,28 +14,7 @@ class BaseDatos
 
     public function Select($columns = null, $tabla, $inner = null, $id = null, $where = null)
     {
-        if ($tabla == 'maderas') {
-            if (is_numeric($id)) {
-                if ($columns == null and $inner == null) {
-                    $SQL = 'SELECT * FROM ' . $tabla . ' WHERE ID_Madera = :id;';
-                } else if ($columns != null and $inner == null) {
-                    $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' WHERE ID_Madera = :id;';
-                } else if ($columns != null and $inner != null) {
-                    $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' ' . $inner . ' WHERE ID_Madera = :id;';
-                }
-            } else if ($where === ' WHERE Codigo = :cod') {
-                if ($columns == null and $inner == null) {
-                    $SQL = 'SELECT * FROM ' . $tabla . ' WHERE Codigo = :cod;';
-                } else if ($columns != null and $inner == null) {
-                    $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' WHERE Codigo = :cod;';
-                } else if ($columns != null and $inner != null) {
-                    $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' ' . $inner . ' WHERE Codigo = :cod;';
-                }
-            }else{
-                $SQL = 'SELECT * FROM ' . $tabla . ';';
-            }
-           
-        } else if ($tabla == 'materiales') {
+        if ($tabla == 'materiales') {
             if (is_numeric($id)) {
                 if ($columns == null and $inner == null) {
                     $SQL = 'SELECT * FROM ' . $tabla . ' WHERE ID_Material = :id;';
@@ -44,42 +23,43 @@ class BaseDatos
                 } else if ($columns != null and $inner != null) {
                     $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' ' . $inner . ' WHERE ID_Material = :id;';
                 }
-            } else {
-                if ($id == 'WHERE Categoria = ' . '"' . 'Hilos' . '"') {
-                    if ($columns == null and $inner == null) {
-                        $SQL = 'SELECT * FROM ' . $tabla . " " . $id;
-                    }
-                } else if ($id == 'WHERE Categoria = ' . '"' . 'Tapiceria' . '"') {
-                    if ($columns == null and $inner == null) {
-                        $SQL = 'SELECT * FROM ' . $tabla . " " . $id;
-                    }
-                } else if ($id == 'WHERE Categoria = ' . '"' . 'Trupper' . '"') {
-                    if ($columns == null and $inner == null) {
-                        $SQL = 'SELECT * FROM ' . $tabla . " " . $id;
-                    }
-                } else if ($id == 'WHERE Categoria = ' . '"' . 'Pintura' . '"') {
-                    if ($columns == null and $inner == null) {
-                        $SQL = 'SELECT * FROM ' . $tabla . " " . $id;
-                    }
-                } else if ($id == 'WHERE Categoria = ' . '"' . 'Maquinas' . '"') {
-                    if ($columns == null and $inner == null) {
-                        $SQL = 'SELECT * FROM ' . $tabla . " " . $id;
-                    }
-                } else if ($columns == null and $inner == null) {
-                    $SQL = 'SELECT * FROM ' . $tabla . ' WHERE Codigo = :cod;';
-                } else if ($columns != null and $inner == null) {
-                    $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' WHERE Codigo = :cod;';
-                } else if ($columns != null and $inner != null) {
-                    $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' ' . $inner . ' WHERE Codigo = :cod;';
-                } else if ($columns == null and $inner == null) {
+            } else if (is_string($id)) {
+                if ($columns == null and $inner == null) {
                     $SQL = 'SELECT * FROM ' . $tabla . ' WHERE Codigo = :cod;';
                 } else if ($columns != null and $inner == null) {
                     $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' WHERE Codigo = :cod;';
                 } else if ($columns != null and $inner != null) {
                     $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' ' . $inner . ' WHERE Codigo = :cod;';
                 }
+            } else if ( $where == 'WHERE Categoria = ' . '"' . 'Hilos' . '"') {
+                if ($columns == null and $inner == null) {
+                    $SQL = 'SELECT * FROM ' . $tabla . " " .  $where ;
+                }
+            } else if ( $where  == 'WHERE Categoria = ' . '"' . 'Tapiceria' . '"') {
+                if ($columns == null and $inner == null) {
+                    $SQL = 'SELECT * FROM ' . $tabla . " " .  $where ;
+                }
+            } else if ( $where  == 'WHERE Categoria = ' . '"' . 'Ferreteria' . '"') {
+                if ($columns == null and $inner == null) {
+                    $SQL = 'SELECT * FROM ' . $tabla . " " .  $where ;
+                }
+            } else if ( $where  == 'WHERE Categoria = ' . '"' . 'Pintura' . '"') {
+                if ($columns == null and $inner == null) {
+                    $SQL = 'SELECT * FROM ' . $tabla . " " .  $where ;
+                }
+            } else if ( $where  == 'WHERE Categoria = ' . '"' . 'Maquinas' . '"') {
+                if ($columns == null and $inner == null) {
+                    $SQL = 'SELECT * FROM ' . $tabla . " " .  $where ;
+                }
+            } else {
+                if ($columns == null and $inner == null) {
+                    $SQL = 'SELECT * FROM ' . $tabla;
+                } else if ($columns != null and $inner == null) {
+                    $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla;
+                } else if ($columns != null and $inner != null) {
+                    $SQL = 'SELECT ' . $columns . ' FROM ' . $inner . $tabla;
+                }
             }
-
         } else if ($tabla == 'materiales hilos') {
             if ($columns == null and $inner == null) {
                 $SQL = 'SELECT * FROM ' . $tabla . ' WHERE ID_Material = :id;';
@@ -91,37 +71,17 @@ class BaseDatos
                 $SQL = 'SELECT * ' . $columns . ' FROM ' . $tabla . ' ' . $inner . $id;
                 $id = 'cate_hilos';
             }
-        } else if ($tabla == 'maderas m') {
-            if ($columns == null and $inner == null) {
-                $SQL = 'SELECT * FROM ' . $tabla . ' WHERE ID_Madera = :id;';
-            } else if ($columns != null and $inner == null and $id) {
-                $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' WHERE ID_Madera = :id;';
-            } else if ($columns != null and $inner != null) {
-                $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' ' . $inner . ' WHERE ID_Madera = :id;';
-            } else {
-                if ($columns != null and $inner == null and $id == null) {
-                    $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ';';
-                } else if ($columns != null and $inner != null and $id == null) {
-                    $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . $inner . ';';
-                } else {
-                    $SQL = 'SELECT * FROM ' . $tabla . ';';
-                }
-            }
-        } else if ($tabla == 'maderas reportes') {
-            if ($columns == null and $inner == null) {
-                $SQL = 'SELECT * FROM ' . $tabla . ' WHERE ID_Madera = :id;';
-            } else if ($columns != null and $inner == null) {
-                $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' WHERE ID_Madera = :id;';
-            } else if ($columns != null and $inner != null) {
-                $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' ' . $inner . ' WHERE ID_Madera = :id;';
-            }
         } else if ($tabla == 'reportes r') {
-            if ($columns == null and $inner == null) {
-                $SQL = 'SELECT * FROM ' . $tabla . ' WHERE ID_Madera = :id;';
-            } else if ($columns != null and $inner == null) {
-                $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' WHERE ID_Madera = :id;';
-            } else if ($columns != null and $inner != null) {
-                $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' ' . $inner . ' WHERE ID_Madera = :id;';
+            if ($id != null) {
+
+            } else {
+                if ($columns == null and $inner == null) {
+                    $SQL = 'SELECT * FROM ' . $tabla;
+                } else if ($columns != null and $inner == null) {
+                    $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla;
+                } else if ($columns != null and $inner != null) {
+                    $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' ' . $inner;
+                }
             }
         } else {
             if ($columns != null and $inner == null and $id == null) {
@@ -132,23 +92,22 @@ class BaseDatos
 
             } else {
                 $SQL = 'SELECT * FROM ' . $tabla . ';';
-
             }
         }
         try {
-
             $this->conexion = new Conexion();
             $cx = $this->conexion->conectar();
             $query = $cx->prepare($SQL);
-            if ($id != null && is_numeric($id)) {
+            if (is_numeric($id)) {
                 $query->bindParam(':id', $id, PDO::PARAM_INT);
-            } else if ($id != null and is_string($id)) {
+            } else if (is_string($id)) {
                 $query->bindParam(':cod', $id, PDO::PARAM_STR);
             }
 
             if ($id == 'cate_hilos') {
                 $query = $cx->prepare($SQL);
             }
+
             if ($id == 'WHERE Categoria = ' . '"' . 'Hilos' . '"') {
                 $query = $cx->prepare($SQL);
             } else if ($id == 'WHERE Categoria = ' . '"' . 'Tapiceria' . '"') {
@@ -159,7 +118,7 @@ class BaseDatos
                 $query = $cx->prepare($SQL);
             } else if ($id == 'WHERE Categoria = ' . '"' . 'Maquinas' . '"') {
                 $query = $cx->prepare($SQL);
-            }else if($id == null and $where == null){
+            } else if ($id == null and $where == null) {
                 $query = $cx->prepare($SQL);
             }
             $query->execute();
@@ -238,7 +197,7 @@ class BaseDatos
                     $query->bindParam(':id_mad', $values['ID'], PDO::PARAM_INT);
                     $query->bindParam(':id_mat', $null, PDO::PARAM_NULL);
                     $query->bindParam(':id_mueb', $null, PDO::PARAM_NULL);
-                    $query->bindParam(':id_emp', $null, PDO::PARAM_NULL);
+                    $query->bindParam(':id_emp', $values['ID_Empleado'], PDO::PARAM_INT);
                     $query->bindParam(':fech', $values['Fecha_Registro'], PDO::PARAM_STR);
                     $query->bindParam(':hor', $values['Hora_Registro'], PDO::PARAM_STR);
                     $query->bindParam(':hor', $values['Hora_Registro'], PDO::PARAM_STR);
@@ -253,7 +212,7 @@ class BaseDatos
                     $query->bindParam(':id_mad', $null, PDO::PARAM_NULL);
                     $query->bindParam(':id_mat', $values['ID'], PDO::PARAM_INT);
                     $query->bindParam(':id_mueb', $null, PDO::PARAM_NULL);
-                    $query->bindParam(':id_emp', $null, PDO::PARAM_NULL);
+                    $query->bindParam(':id_emp', $values['ID_Empleado'], PDO::PARAM_INT);
                     $query->bindParam(':fech', $values['Fecha_Registro'], PDO::PARAM_STR);
                     $query->bindParam(':hor', $values['Hora_Registro'], PDO::PARAM_STR);
                     $query->bindParam(':hor', $values['Hora_Registro'], PDO::PARAM_STR);
@@ -261,9 +220,9 @@ class BaseDatos
                     $query->bindParam(':cant', $values['Cantidad'], PDO::PARAM_INT);
                     $query->bindParam(':stoc', $values['Stock'], PDO::PARAM_INT);
                     $query->bindParam(':gasto', $values['Gasto_Entrada'], PDO::PARAM_STR);
+                    
                 }
             }
-
             $query->execute();
             $lastid = $cx->lastInsertId();
             $cx = null;

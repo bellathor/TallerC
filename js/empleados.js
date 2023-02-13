@@ -15,11 +15,12 @@ function Validar_Formulario(id) {
 
     if (pass.value == rpass.value) {
         if (confirm('¿Deseá registrar a ' + nombres.value + " " + apellidos.value + "?")) {
-            if(pass.value.length >= 7){
+            /*if(pass.value.length >= 7){
                 Registrar_Empleados(id, usnombre.value, nombres.value, apellidos.value, direccion.value, correo.value, telefono.value, pass.value, selp.value);
             }else{
                 alert('La contraseña debe ser mayor a 7 letras, que incluya numeros y signos');
-            }
+            }*/
+            Registrar_Empleados(id, usnombre.value, nombres.value, apellidos.value, direccion.value, correo.value, telefono.value, pass.value, selp.value);
         }
         else {
             return false;
@@ -211,6 +212,7 @@ function Consultar_Empleados() { // todos los empleados
             var empleados = data.empleados;
             if (empleados !== "null") {
                 for (let i = 0; i < empleados.length; i++) {
+                    Eliminar_Tabla();
                     setTimeout(Crear_Tabla_Empleados, 100 * i, empleados[i], i);
                 }
                 document.getElementById('empleado_total').innerHTML = empleados.length;
@@ -359,7 +361,7 @@ function Crear_Select_Puestos(p) {
 
 
 
-function  Modificar_Empleado(em) {
+function Modificar_Empleado(em) {
     Limpiar_Formulario();
     let form = document.forms.namedItem('formulario_empleados');
     form.setAttribute('onsubmit', 'return Validar_Formulario_Modificacion(' + em.ID_Empleado + ');');
@@ -375,7 +377,7 @@ function  Modificar_Empleado(em) {
     sel_dep.value = em.ID_Departamento;
     Mostrar_Puestos_Por_Departamento();
     setTimeout(() => {
-       sel_puesto.value = em.ID_Puesto; 
+        sel_puesto.value = em.ID_Puesto;
     }, 500);
     usnombre.value = em.Nombre_Usuario;
     usnombre.setAttribute('disabled', true);
@@ -448,9 +450,9 @@ function Actualizar_Empleado(id, us, nombres, apellidos, dir, corr, tel, pass, p
         .then(response => response.json())
         .then(data => {
             var empleados = data.empleados;
-            if(empleados === 'Error actualizacion'){
+            if (empleados === 'Error actualizacion') {
                 alert('Error: Ocurrió un error al actualizar el empleado.!');
-            }else if(empleados === 'Actualizado'){
+            } else if (empleados === 'Actualizado') {
                 Eliminar_Tabla();
                 Limpiar_Formulario();
                 Consultar_Empleados();
@@ -556,7 +558,7 @@ $(function () {
         var table = $("#tabla_empleados_");
         var tablebody = $("#tabla_empleados");
         $(table).toggleClass
-        if (table && table.length && tablebody.children().length > 0) {
+        if (table && tablebody.children().length > 0) {
             $(table).addClass('text-dark');
             $(table).table2excel({
                 exclude: ".noExl",
@@ -568,7 +570,7 @@ $(function () {
                 exclude_inputs: true,
                 preserveColors: true
             });
-        }else{
+        } else {
             alert('No se puede descargar una tabla vacia.!');
         }
     });
@@ -597,8 +599,27 @@ function Mostrar_Tabla(btn, activar) {
 //+ ".xlsx"
 
 window.onload = () => {
-    var form = document.forms['formulario_empleados'];
-    form[8].value = "4521F85?/002023*"; //4521F85?/002023*
-    form[9].value = "4521F85?/002023*"; //4521F85?/002023*
-    Consultar_Departamentos();
+    let em = document.getElementById('empleados');
+    let ti = document.getElementById('tiendas');
+    let pr = document.getElementById('produccion');
+    let bo = document.getElementById('bodegas');
+    let co = document.getElementById('compras');
+    let ad = document.getElementById('administracion');
+    let inv = document.getElementById('inventarios');
+    let usuario = JSON.parse(sessionStorage.getItem('Sesion'));
+    if (usuario !== null) {
+        document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
+        if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
+            setTimeout(Consultar_Departamentos, 1000);
+        }else {
+            window.location.replace('../login.php');
+        }
+    }
+    else {
+        window.location.replace('../login.php');
+    }
 };
+function Salir() {
+    sessionStorage.clear();
+    window.location.replace('../login.php');
+}

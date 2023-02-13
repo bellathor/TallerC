@@ -1,8 +1,8 @@
 <?php
 class Conexion{
-    private $rutabd = "mysql:host=localhost;dbname=_bdc";
-    private $usuario = "root";// nombre del usuario base de datos
-    private $password = "";// contraseña de la base de datos
+    private $rutabd = "mysql:host=localhost;dbname=u483380267__bd";
+    private $usuario = "u483380267_jit";// nombre del usuario base de datos
+    private $password = "#P]qi8gwPZk2";// contraseña de la base de datos
     private $conx; // variable para guardar la conexion
 
     public function __construct(){

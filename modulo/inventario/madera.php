@@ -8,6 +8,7 @@
     <meta http-equiv="Expires" content="0">
     <meta http-equiv="Last-Modified" content="0">
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <link rel="shortcut icon" href="../../img/logo_tallerc.ico">
     <meta http-equiv="Pragma" content="no-cache">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,7 +84,7 @@
                                     <li><a href="../Bodega_Taller/Categoria_Tapiceria.php"
                                             class="link-white rounded">Categoria Tapiceria</a></li>
                                     <li><a href="../Bodega_Taller/Categoria_Trupper.php"
-                                            class="link-white rounded">Categoria Trupper</a></li>
+                                            class="link-white rounded">Categoria Ferretaria</a></li>
                                     <li><a href="../Bodega_Taller/Categoria_Pintura.php"
                                             class="link-white rounded">Categoria Pintura</a></li>
                                     <li><a href="../Bodega_Taller/Categoria_Maquinas.php"
@@ -116,7 +117,7 @@
                                     <li><a href="../Admin_Nominas/Lista_Nominas.php" class="link-white rounded">Lista de
                                             nominas</a>
                                     </li>
-                                    <li><a href="#" class="link-white rounded">Gastos generales</a></li>
+                                    <li><a href="../Admin_Nominas/Gastos_Generales.php" class="link-white rounded">Gastos generales</a></li>
 
                                 </ul>
                             </div>
@@ -135,14 +136,14 @@
                                         <a href="materiales.php" class="link-white rounded">Materiales</a>
                                     </li>
                                     <li>
-                                        <a href="muebles.php" class="link-white rounded">Muebles</a></button>
+                                        <a href="muebles.php" class="link-white rounded">Muebles ( En construccion )</a></button>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="mb-1">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras">
-                                <a class="link-white rounded" href="../index.php">Salir</a>
+                            <a class="link-white rounded" onclick="Salir();">Salir</a>
                             </button>
                         </li>
                     </ul>
@@ -155,7 +156,7 @@
             <div class="row">
                 <div class="col-12 p-0">
                     <div class="box-nav letra titulo">
-                        <span class="cargo-txt">Alberto - Administrador</span>
+                        <span class="cargo-txt" id="nombre_empleado">Alberto - Administrador</span>
                         <span class="config-txt">Editar Perfil</span>
                     </div>
                 </div>
@@ -195,8 +196,8 @@
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="inventario_madera-tab" data-bs-toggle="tab"
                                             data-bs-target="#inventario_madera" type="button" role="tab"
-                                            aria-controls="inventario_madera" aria-selected="false"
-                                            onclick="Cargar_Stock();">Entradas/Salidas</button>
+                                            aria-controls="inventario_madera"
+                                            aria-selected="false" onclick="Cargar_Stock();">Entradas/Salidas</button>
                                     </li>
 
                                 </ul>
@@ -264,8 +265,8 @@
                                                 </div>
                                                 <button class="btn btn-success mt-2" type="submit"
                                                     id="btn_submit">Registrar</button>
-                                                <button class="btn btn-danger mt-2" type="reset"
-                                                    onclick="LimpiarFormulario()">Limpiar</button>
+                                                <a class="btn btn-danger mt-2" type="reset"
+                                                    onclick="LimpiarFormulario()">Limpiar</a>
                                             </form>
                                         </div>
 
@@ -407,8 +408,8 @@
                                                     </div>
                                                 </div>
                                                 <button class="btn btn-success mt-2" type="submit">Guardar</button>
-                                                <button class="btn btn-danger mt-2"
-                                                    onclick="LimpiarFormularioStock();">Limpiar</button>
+                                                <a class="btn btn-danger mt-2"
+                                                    onclick="LimpiarFormularioStock();">Limpiar</a>
                                             </form>
                                         </div>
 
@@ -421,6 +422,18 @@
                                             Reportes</a>
                                         <a class="btn btn-secondary mb-1" style="position: sticky; top:0"
                                             id="exporttable_madera2">Exportar Excel</a>
+                                        <!--<div class="w-50">
+                                            <label class="form-label mt-3" for="cod">Mostrar:</label>
+                                            <select class="form-select w-50 mb-3" id="seleccion_tabla_reporte"
+                                                name="opcionMadera" disabled
+                                                oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
+                                                oninput="this.setCustomValidity('')" onchange="Filtrar_Tabla(this);"
+                                                required>
+                                                <option selected value="">Seleccionar</option>
+                                                <option value="1">Entradas</option>
+                                                <option value="2">Salidas</option>
+                                            </select>
+                                        </div>-->
                                         <div class="table-responsive table-custom">
                                             <table id="tabla_reporte_madera"
                                                 class="table table-striped table-bordered table-sm my-custom-scrollbar">

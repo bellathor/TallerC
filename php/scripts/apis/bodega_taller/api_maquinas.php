@@ -1,6 +1,11 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-require(dirname(__DIR__) . '/scripts/bd.php');
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: GET,POST,PUT,DELETE");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+header('Content-Type: text/html; charset=UTF-8');
+require(dirname(dirname(dirname(__DIR__))) . '\scripts\bd.php');
 
 $opcion = new BaseDatos;
 
@@ -11,7 +16,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             //$inner = ' LEFT JOIN reportes r on hilos.ID_Material = r.ID_Material ';
             //$where = 'WHERE hilos.Categoria = ' . '"' . 'Hilos' . '"'; 
             $categoria = 'WHERE Categoria = '. '"' . 'Maquinas' . '"';
-            $hilos = $opcion->Select(null, 'materiales', null, $categoria);
+            $hilos = $opcion->Select(null, 'materiales', null, null, $categoria);
             if($hilos != 0){
                 //array_push($hilos[0], $hilos['error'] = 'false');
                 echo json_encode(['hilos'=>$hilos]);
@@ -44,7 +49,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $jsonObj = json_decode($json, true);
             $tabla = 'materiales';
             $columnas = ' Stock = :st';
-            $opcion->Actualizar($tabla, $columnas, $jsonObj, 'actualizar_salida_material');
+           // $opcion->Actualizar($tabla, $columnas, $jsonObj, 'actualizar_salida_material');
             $columns = 'ID_Madera, ID_Material, ID_Mueble, ID_Empleado, Fecha, Hora, Accion, Cantidad, Stock, Gasto_Entrada';
             $tabla = 'reportes';
             $opcion->Insert($tabla, $columns, $jsonObj, 'materiales');

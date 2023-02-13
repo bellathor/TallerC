@@ -1,70 +1,34 @@
-function consultaEmpleados() { // todos los empleados
-    const url = '../php/scripts/solicitudesEmpleados_bd.php?controlempleados';
-    fetch(url, {
-        method: 'GET'
-    })
-        .then(response => response.json())
-        .then(data => {
-            var empleados = data.empleados;
-            document.getElementById('empleado_total').innerHTML = empleados.length;
-        }
-        )
-        .catch(error => console.error("Error encontrado: ", error));
-}
-
-function consultaMaderas() { // todos los empleados
-    const url = '../php/scripts/solicitudesMaderas_bd.php?consultarMaderas';
-    fetch(url, {
-        method: 'GET'
-    })
-        .then(response => response.json())
-        .then(data => {
-            var maderas = data.maderas;
-            document.getElementById('maderas_total').innerHTML = maderas.length;
-        }
-        )
-        .catch(error => console.error("Error encontrado: ", error));
-}
-
-/*function consultaEmpleados() { // todos los empleados
-    const url = '/Proyecto_TallerC_Mexico/php/scripts/solicitudesEmpleados_bd.php?controlempleados';
-    fetch(url, {
-        method: 'GET'
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.empleados != null) {
-                var empleados = data.empleados;
-                for (let i = 0; i < empleados.length; i++) {
-                    setTimeout(CrearTablaEmpleados, 100 * i, empleados[i], i);
-                }
-                document.getElementById('empleado_total').innerHTML = empleados.length;
-            }
-        })
-        .catch(error => console.error("Error encontrado: ", error));
-}*/
-
-function consultarMuebles() { // todos las maderas
-    const url = '../php/scripts/solicitudesMuebles_bd.php?consultarMuebles';
-    fetch(url, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'image/jpeg',
-        }
-
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.muebles != null) {
-                var mueble = data.muebles;
-                document.getElementById('muebles_total').innerHTML = mueble.length;
-            }
-        })
-        .catch(error => console.error("Error encontrado: ", error));
-}
-
 window.onload = () => {
-    consultaEmpleados();
-    consultaMaderas();
-    consultarMuebles();
+    let em = document.getElementById('empleados');
+    let ti = document.getElementById('tiendas');
+    let pr = document.getElementById('produccion');
+    let bo = document.getElementById('bodegas');
+    let co = document.getElementById('compras');
+    let ad = document.getElementById('administracion');
+    let inv = document.getElementById('inventarios');
+    let usuario = JSON.parse(sessionStorage.getItem('Sesion'));
+    if (usuario !== null) {
+        document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
+        if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
+
+        } else if (usuario[0].ID_Puesto == 10) {
+            em.remove();
+            ti.remove();
+            pr.remove();
+            bo.remove();
+            co.remove();
+            inv.remove();
+        } else {
+            window.location.replace('../login.php');
+        }
+    }
+    else {
+        window.location.replace('../login.php');
+    }
+
 };
+
+function Salir() {
+    sessionStorage.clear();
+    window.location.replace('../login.php');
+}

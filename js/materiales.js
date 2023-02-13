@@ -35,7 +35,7 @@ function Validar_Formulario(opcion, id, entrada_salida, cantidad) { // formulari
     var precio = form[3].value;
 
     var json = {
-        'ID':id,
+        'ID': id,
         'Categoria': select.children[categoria].innerHTML,
         'Codigo': codigo,
         'Material': material,
@@ -93,7 +93,7 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
                     for (let i = 0; i < materiales.length; i++) {
                         document.getElementById('conteo_materiales').innerText = materiales.length;
                         setTimeout(DatosTabla, 100 * i, materiales[i], false, i);
-                        
+
                         //LimpiarFormularioStock();
 
                     }
@@ -147,9 +147,8 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
             .then(response => response.json())
             .then(datos => {
                 if (datos != null) {
-
                     var reportes = datos.reportes;
-                    for (let i = 0; i < reportes.length; i++) {
+                    for (let i = 0; i < reportes.length; ++i) {
                         LimpiarTabla();
                         setTimeout(DatosTablaReporte, 100 * i, reportes[i], i);
                     }
@@ -175,6 +174,7 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
                 }
                 else {
                     alert('Se actualizaron los datos correctamente.!');
+                    LimpiarFormulario();
                     LimpiarTabla();
                     EnviarDatos('', 'consultar_materiales');
                 }
@@ -198,7 +198,8 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
                 else {
                     alert('Se actualizaron los datos correctamente.!');
                     LimpiarFormularioStock();
-                    Cargar_Stock();
+                    LimpiarTablaReporte();
+                    Cargar_Tabla_Reporte();
                 }
             })
             .catch(error => console.error("Error encontrado: ", error));
@@ -216,12 +217,13 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
             .then(datos => {
                 if (datos.error == 'true') {
                     alert('Ocurrio un error con la actualizacion.!');
-                   
+
                 }
                 else {
                     alert('Se actualizaron los datos correctamente.!');
                     LimpiarFormularioStock();
-                    Cargar_Stock();
+                    LimpiarTablaReporte();
+                    Cargar_Tabla_Reporte();
                 }
             })
             .catch(error => console.error("Error encontrado: ", error));
@@ -241,7 +243,7 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
                 if (datos.error == 'false') {
                     LimpiarTabla();
                     EnviarDatos('', 'consultar_materiales');
-                    
+
                 }
             })
             .catch(error => console.error("Error encontrado: ", error));
@@ -267,11 +269,11 @@ function filtrarCantidad(opcion) {
     var form = document.forms['formulario_materiales_stocks'];
     var stock = form[5];
     if (opcion.name === 'entrada') {
-        if(form[1].value == "Seleccionar"){
+        if (form[1].value == "Seleccionar") {
             alert('Debe seleccionar un material para agregar entrada o salida.!');
             opcion.value = opcion.value.substring(0, opcion.value.length - 1);
         }
-        else{
+        else {
             if (opcion.value < 0) {
                 opcion.value = opcion.value.substring(0, opcion.value.length - 1);
                 opcion.value = "";
@@ -279,10 +281,10 @@ function filtrarCantidad(opcion) {
             }
         }
     } else if (opcion.name === 'salida') {
-        if(form[1].value == "Seleccionar"){
+        if (form[1].value == "Seleccionar") {
             alert('Debe seleccionar un material para agregar entrada o salida.!');
             opcion.value = opcion.value.substring(0, opcion.value.length - 1);
-        }else{
+        } else {
             if (opcion.value < 0) {
                 opcion.value = opcion.value.substring(0, opcion.value.length - 1);
                 opcion.value = "";
@@ -309,13 +311,11 @@ function Mostrar_Tabla(btn, activar) {
         var tabla = document.getElementById('tabla_material_');
         var btn = document.getElementById('btn_mostrar');
         if (activar === false) {
-            tabla.classList.remove('d-none');
             btn.innerHTML = "Ocultar Tabla";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla(' + 'this' + ', true)');
             CargarDatos();
         } else {
-            tabla.classList.add('d-none')
             btn.innerHTML = "Mostrar Tabla";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla(' + 'this' + ', false)');
@@ -345,13 +345,14 @@ function DatosTabla(datos, stock, cantidad) {
             'Material': datos.Nombre_Material,
             'Precio': datos.Precio_Unitario,
             'Categoria': datos.Categoria
+            
         };
 
         var arreglojson = [cantidad + 1, json.Codigo, json.Material, json.Precio, json.Categoria];
         var arreglo = [arreglojson[0], arreglojson[1], arreglojson[2], arreglojson[3], arreglojson[4], "<a class='btn btn-primary' onclick='Modificar(" + JSON.stringify(json) + ")'>Modificar</a>", "<a class='btn btn-danger' onclick='Eliminar(" + json.ID + ")'>Eliminar</a>"];
         var tr = document.createElement('tr');
         var select = document.getElementById('sel_materiales');
-    
+
         var opcion = document.createElement('option');
         for (let i = 0; i < arreglo.length; ++i) {
             var td = document.createElement('td');
@@ -374,6 +375,7 @@ function DatosTabla(datos, stock, cantidad) {
     }
 }
 function Modificar(datos) {
+    LimpiarFormulario();
     var form = document.forms['formulario_material'];
     var select = document.getElementById('seleccion_categoria');
     form[1].value = datos.Codigo;
@@ -382,6 +384,8 @@ function Modificar(datos) {
 
     form[1].removeAttribute('disabled');
     form[2].removeAttribute('disabled');
+    form[3].removeAttribute('disabled');
+    form[4].removeAttribute('disabled');
 
     for (let x = 1; x < select.childElementCount; x++) {
         if (select.children[x].innerText == datos.Categoria) {
@@ -398,7 +402,10 @@ function LimpiarFormulario() {
     var form = document.forms['formulario_material'];
     document.getElementById('btn_submit').innerHTML = 'Registrar';
     document.getElementById('btn_submit').classList.replace('btn-primary', 'btn-success');
-    form.setAttribute('onsubmit', "return Validar_Formulario();");
+    form[1].setAttribute('disabled', '');
+    form[3].setAttribute('disabled', '');
+    form[2].setAttribute('disabled', '');
+    form.setAttribute('onsubmit', "return Validar_Formulario(false);");
     for (let x = 0; x < form.length; x++) {
         form[x].value = "";
     }
@@ -435,10 +442,10 @@ function Seleccion_Opcion(opcion) {
 
 function Cargar_Stock() {
     LimpiarSelectMaterial();
-    EnviarDatos('', 'consultar_materiales');
+
 }
 
-function LimpiarSelectMaterial(){
+function LimpiarSelectMaterial() {
     var select = document.getElementById('sel_materiales');
     var ultima_opcion = select.lastElementChild;
     while (ultima_opcion) {
@@ -451,24 +458,24 @@ function LimpiarSelectMaterial(){
     select.appendChild(opcion);
     EnviarDatos('', 'consultar_maderas');
 }
-
 function Seleccion_Opcion_stock(opcion) {
     var form = document.forms['formulario_materiales_stocks'];
-
+    LimpiarSelectMaterial();
     if (opcion.value == 1) {
         document.getElementById('sel_materiales').removeAttribute('disabled');
         form[2].removeAttribute('disabled');
         form[3].setAttribute('disabled', '');
         form[3].value = "";
         form.setAttribute('onsubmit', 'return Validar_Formulario_Stocks(' + '"' + 'entrada' + '"' + ')');
-
+        EnviarDatos('', 'consultar_materiales');
     } else if (opcion.value == 2) {
         document.getElementById('sel_materiales').removeAttribute('disabled');
         form[3].removeAttribute('disabled');
         form[2].setAttribute('disabled', '');
         form[2].value = "";
         form.setAttribute('onsubmit', 'return Validar_Formulario_Stocks(' + '"' + 'salida' + '"' + ')');
-    }else if(opcion.value == ""){
+        EnviarDatos('', 'consultar_materiales');
+    } else if (opcion.value == "") {
         document.getElementById('sel_materiales').setAttribute('disabled', true);
         form[0].removeAttribute('disabled');
         form[2].setAttribute('disabled', '');
@@ -478,12 +485,10 @@ function Seleccion_Opcion_stock(opcion) {
         form.setAttribute('onsubmit', 'return Validar_Formulario_Stocks()');
     }
 }
-
 function Seleccion_Materiales(seleccion) {
     EnviarDatos(seleccion.value, 'consultar_material', true);
     var form = document.forms['formulario_materiales_stocks'];
 }
-
 function Validar_Formulario_Stocks(opcion) { // formulario stock
     var form = document.forms['formulario_materiales_stocks'];
     var id = form[1];
@@ -496,18 +501,14 @@ function Validar_Formulario_Stocks(opcion) { // formulario stock
     var date = new Date();
     var year = date.getFullYear();
     var mes = date.getMonth() + 1;
-    var dia = date.getDay();
+    var dia = date.getDate();
     var hora = date.getHours();
     var min = date.getMinutes();
     var seg = date.getSeconds();
     var hora;
     var fecha;
-
     if (mes.toString().length < 2) {
         mes = '0' + mes;
-    }
-    if (dia.toString().length < 2) {
-        dia = '0' + dia;
     }
     fecha = year + '/' + mes + '/' + dia;
 
@@ -521,8 +522,7 @@ function Validar_Formulario_Stocks(opcion) { // formulario stock
         seg = '0' + seg;
     }
     hora = hora + ":" + min + ":" + seg;
-
-    if(id.value != "Seleccionar"){ // esto era ""
+    if (id.value != "Seleccionar") { // esto era ""
         if (opcion == 'entrada') {
             cantidad = form[2].value;
             confirmar_entrada = confirm('¿Desea registrar de entrada ' + cantidad + ' al stock?');
@@ -538,7 +538,7 @@ function Validar_Formulario_Stocks(opcion) { // formulario stock
                     'Accion': 'Entrada',
                     'Cantidad': cantidad,
                     'Gasto_Entrada': total,
-                     
+
                 };
                 EnviarDatos(json, 'actualizar_entrada_material');
             }
@@ -560,12 +560,11 @@ function Validar_Formulario_Stocks(opcion) { // formulario stock
                 EnviarDatos(json, 'actualizar_salida_material');;
             }
         }
-    }else{
+    } else {
         alert('Debe seleccionar un tipo de madera primero.!');
     }
     return false;
 }
-
 function LimpiarFormularioStock() {
     var form = document.forms['formulario_materiales_stocks'];
     document.getElementById('btn_submit').innerHTML = 'Registrar';
@@ -582,81 +581,69 @@ function LimpiarFormularioStock() {
 
 function Mostrar_Tabla_Reportes(btn, activar) {
     if (btn.id == 'btn_mostrar_reporte') {
-        var tabla = document.getElementById('tabla_reporte_material');
         var btn = document.getElementById('btn_mostrar_reporte');
         if (activar === false) {
-            tabla.classList.remove('d-none');
             btn.innerHTML = "Ocultar Reportes";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', true)');
-            Cargar_Tabla_Reporte()
+            Cargar_Tabla_Reporte();
         } else {
-            tabla.classList.add('d-none')
             btn.innerHTML = "Mostrar Reportes";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', false)');
             LimpiarTablaReporte();
-        
         }
     }
 }
-
-function Cargar_Tabla_Reporte(){
+function Cargar_Tabla_Reporte() {
     EnviarDatos('', 'consultar_reportes_materiales');
 }
-
 function DatosTablaReporte(datos, cantidad) {
     if (datos.Accion == 'Entrada') {
-        var json = {
-            'ID': datos.ID_Material,
-            'Codigo': datos.Codigo,
-            'Nombre_Material': datos.Nombre_Material,
-            'Empleado': 'Ninguno',
-            'Dep': 'Ninguno',
-            'Puesto': 'Ninguno',
-            'Entrada': datos.Cantidad,
-            'Salida': 0,
-            'Stock': datos.Stock,
-            'Gasto': datos.Gasto_Entrada,
-            'Fecha_Registro': datos.Fecha,
-            'Hora_Registro': datos.Hora
-        };
-        var arreglo = [cantidad+1, json.Codigo, json.Nombre_Material, json.Empleado, json.Dep, json.Puesto, json.Entrada, json.Salida, json.Stock, '$'+json.Gasto, json.Fecha_Registro, json.Hora_Registro];
-        var tr = document.createElement('tr');
-        for (let i = 0; i < arreglo.length; ++i) {
-            var td = document.createElement('td');
-            td.setAttribute('scope', 'col');
-            td.innerHTML = arreglo[i];
-           
-            tr.appendChild(td);
-            document.getElementById('tabla_reporte_material_body').appendChild(tr);
+        if (datos.ID_Material != null) {
+            var json = {
+                'ID': datos.ID_Material,
+                'Codigo': datos.Codigo,
+                'Nombre_Material': datos.Nombre_Material,
+                'Empleado': datos.Nombres + " " + datos.Apellidos,
+                'Dep': datos.Departamento,
+                'Puesto': datos.Nombre_Puesto,
+                'Entrada': datos.Cantidad,
+                'Salida': 0,
+                'Stock': datos.Stock,
+                'Gasto': datos.Gasto_Entrada,
+                'Fecha_Registro': datos.Fecha,
+                'Hora_Registro': datos.Hora
+            };
         }
     }
-     else if(datos.Accion=="Salida"){
-        var json = {
-            'ID': datos.ID_Madera,
-            'Codigo': datos.Codigo,
-            'Nombre_Madera': datos.Nombre_Madera,
-            'Empleado': 'Ninguno',
-            'Dep': 'Ninguno',
-            'Puesto': 'Ninguno',
-            'Entrada': 0,
-            'Salida': datos.Cantidad,
-            'Stock': datos.Stock,
-            'Gasto': datos.Gasto_Entrada,
-            'Fecha_Registro': datos.Fecha,
-            'Hora_Registro': datos.Hora
-        };
-        var arreglo = [cantidad+1, json.Codigo, json.Nombre_Madera, json.Empleado, json.Dep, json.Puesto, json.Entrada, json.Salida, json.Stock, '$'+json.Gasto, json.Fecha_Registro, json.Hora_Registro];
-        var tr = document.createElement('tr');
-        for (let i = 0; i < arreglo.length; ++i) {
-            var td = document.createElement('td');
-            td.setAttribute('scope', 'col');
-            td.innerHTML = arreglo[i];
-           
-            tr.appendChild(td);
-            document.getElementById('tabla_reporte_material_body').appendChild(tr);
+    else if (datos.Accion == "Salida") {
+        if (datos.ID_Material != null) {
+            var json = {
+                'ID': datos.ID_Material,
+                'Codigo': datos.Codigo,
+                'Nombre_Material': datos.Nombre_Material,
+                'Empleado': datos.Nombres + " " + datos.Apellidos,
+                'Dep': datos.Departamento,
+                'Puesto': datos.Nombre_Puesto,
+                'Entrada': 0,
+                'Salida': datos.Cantidad,
+                'Stock': datos.Stock,
+                'Gasto': datos.Gasto_Entrada,
+                'Fecha_Registro': datos.Fecha,
+                'Hora_Registro': datos.Hora
+            };
         }
+    }
+    var arreglo = [cantidad + 1, json.Codigo, json.Nombre_Material, json.Empleado, json.Dep, json.Puesto, json.Entrada, json.Salida, json.Stock, '$' + json.Gasto, json.Fecha_Registro, json.Hora_Registro];
+    var tr = document.createElement('tr');
+    for (let i = 0; i < arreglo.length; ++i) {
+        var td = document.createElement('td');
+        td.setAttribute('scope', 'col');
+        td.innerHTML = arreglo[i];
+
+        tr.appendChild(td);
+        document.getElementById('tabla_reporte_material_body').appendChild(tr);
     }
 }
 
@@ -672,8 +659,9 @@ function LimpiarTablaReporte() {
 $(function () {
     $("#exporttable_mat1").click(function (e) {
         var table = $("#tabla_material_");
+        var tabody = $("#tabla_material")
         $(table).toggleClass
-        if (table && table.length) {
+        if (table && tabody.children().length > 0) {
             $(table).addClass('text-dark');
             $(table).table2excel({
                 exclude: ".noExl",
@@ -685,6 +673,8 @@ $(function () {
                 exclude_inputs: true,
                 preserveColors: true
             });
+        } else {
+            alert('No se puede descargar una tabla vacia.!');
         }
     });
 
@@ -693,8 +683,9 @@ $(function () {
 $(function () {
     $("#exporttable_mat2").click(function (e) {
         var table = $("#tabla_reporte_material");
+        var tabody = $("#tabla_reporte_material_body");
         $(table).toggleClass
-        if (table && table.length) {
+        if (table && tabody.children().length > 0) {
             $(table).addClass('text-dark');
             $(table).table2excel({
                 exclude: ".noExl",
@@ -706,7 +697,35 @@ $(function () {
                 exclude_inputs: true,
                 preserveColors: true
             });
+        } else {
+            alert('No se puede descargar una tabla vacia.!');
         }
     });
 
 });
+
+window.onload = () => {
+    let em = document.getElementById('empleados');
+    let ti = document.getElementById('tiendas');
+    let pr = document.getElementById('produccion');
+    let bo = document.getElementById('bodegas');
+    let co = document.getElementById('compras');
+    let ad = document.getElementById('administracion');
+    let inv = document.getElementById('inventarios');
+    let usuario = JSON.parse(sessionStorage.getItem('Sesion'));
+    if (usuario !== null) {
+        document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
+        if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
+            setTimeout(Consultar_Departamentos, 1000);
+        }else {
+            window.location.replace('../login.php');
+        }
+    }
+    else {
+        window.location.replace('../login.php');
+    }
+};
+function Salir() {
+    sessionStorage.clear();
+    window.location.replace('../login.php');
+}

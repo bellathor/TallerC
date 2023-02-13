@@ -9,7 +9,7 @@
     <meta http-equiv="Last-Modified" content="0">
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
     <meta http-equiv="Pragma" content="no-cache">
-
+    <link rel="shortcut icon" href="../img/logo_tallerc.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="../bootstrap-/css/bootstrap.min.css" rel="stylesheet"
@@ -83,7 +83,7 @@
                                     <li><a href="./Bodega_Taller/Categoria_Tapiceria.php"
                                             class="link-white rounded">Categoria Tapiceria</a></li>
                                     <li><a href="./Bodega_Taller/Categoria_Trupper.php"
-                                            class="link-white rounded">Categoria Trupper</a></li>
+                                            class="link-white rounded">Categoria Ferretaria</a></li>
                                     <li><a href="./Bodega_Taller/Categoria_Pintura.php"
                                             class="link-white rounded">Categoria Pintura</a></li>
                                     <li><a href="./Bodega_Taller/Categoria_Maquinas.php"
@@ -116,7 +116,7 @@
                                     <li><a href="./Admin_Nominas/Lista_Nominas.php" class="link-white rounded">Lista de
                                             nominas</a>
                                     </li>
-                                    <li><a href="#" class="link-white rounded">Gastos generales</a></li>
+                                    <li><a href="./Admin_Nominas/Gastos_Generales.php" class="link-white rounded">Gastos generales</a></li>
 
                                 </ul>
                             </div>
@@ -136,14 +136,14 @@
                                     </li>
                                     <li>
                                         <a href="./inventario/muebles.php"
-                                            class="link-white rounded">Muebles</a></button>
+                                            class="link-white rounded">Muebles ( En construccion )</a></button>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="mb-1">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras">
-                                <a class="link-white rounded" href="../index.php">Salir</a>
+                                <a class="link-white rounded" onclick="Salir();">Salir</a>
                             </button>
                         </li>
                     </ul>
@@ -289,9 +289,8 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <label class="form-label mt-2" for="telefono">Telefono:</label>
-                                                        <input class="form-control" name="telefono" type="text"
+                                                        <input class="form-control" name="telefono" type="text" required
                                                             autocomplete="telefono" placeholder="+52 1 551133664"
-                                                            required
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                             oninput="this.setCustomValidity('');">
                                                         <div id="error_letra_telefono" class="d-none invalid-feedback">
@@ -305,7 +304,6 @@
                                                             for="password">Contraseña:</label>
                                                         <input class="form-control" name="password" type="password"
                                                             autocomplete="new-password" placeholder="**********"
-                                                            required
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                             oninput="this.setCustomValidity('');">
                                                         <div id="error_letra_password" class="d-none invalid-feedback">
@@ -319,7 +317,7 @@
                                                             Contraseña:</label>
                                                         <input class="form-control" name="rpassword" type="password"
                                                             autocomplete="new-password" placeholder="***********"
-                                                            required
+                                                            
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                             oninput="this.setCustomValidity('');">
                                                         <div id="error_letra_rpassword" class="d-none invalid-feedback">
@@ -331,8 +329,8 @@
 
                                                 </div>
                                                 <button class="btn btn-success mt-2" type="submit">Guardar</button>
-                                                <button class="btn btn-danger mt-2"
-                                                    onclick=" Limpiar_Formulario()">Limpiar</button>
+                                                <a class="btn btn-danger mt-2"
+                                                    onclick=" Limpiar_Formulario()">Limpiar</a>
                                             </form>
 
                                         </div>

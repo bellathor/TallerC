@@ -16,10 +16,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
             } else {
                 echo '{"maderas": "Sin registro"}';
             }
+        } else if (isset($_GET['consultar_madera_stock'])) {
+            $id = $_GET['id'];
+            $maderas = $funcion->Obtener_Madera_Especifico($id, 'stock');
+            echo json_encode(['stock' => $maderas]);
         } else if (isset($_GET['consultar_reportes_madera'])) { //  consulta reportes madera
-            $columnas = 'r.ID_Reporte, mad.ID_Madera, mad.Codigo, mad.Nombre_Madera, 
-                         r.Stock, r.Fecha, r.Hora, r.Cantidad, r.Gasto_Entrada, r.Accion';
-            $inner = ' LEFT JOIN maderas mad on r.ID_Madera = mad.ID_Madera GROUP BY r.Accion;';
             $reportes_maderas = $funcion->Obtener_Reportes('maderas', 'r');
             if ($reportes_maderas !== null) {
                 echo json_encode(['reportes' => $reportes_maderas]);
@@ -56,6 +57,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
             } else {
                 echo '{"error":"true"}';
             }
+        } else if (isset($_GET['actualizar_entrada_salida'])) {
+            $json = file_get_contents('php://input');
+            $jsonObj = json_decode($json, true);
+            $funcion->Actualizar_Madera($jsonObj, 'entradas_salidas');
+            echo '{"maderas":"exitoso"}';
         }
         break;
     case 'DELETE':

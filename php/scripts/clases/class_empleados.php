@@ -1,9 +1,9 @@
 <?php
-require(dirname(dirname(__DIR__)) . '\config\conexion.php');
 require(dirname(__DIR__) . '\clases\class_adminnominas.php');
 class Empleados extends Admin_Nominas
 {
-    const hash_ = PASSWORD_DEFAULT, cost_ = 12;
+    const hash_ = PASSWORD_DEFAULT;
+    const cost_ = 12;
     private $json, $SQL, $conexion, $hashPass;
     private $id, $usuario, $nombres, $apellidos, $direccion,
     $correo, $telefono, $password, $id_puesto, $id_asistencia,

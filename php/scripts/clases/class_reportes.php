@@ -7,8 +7,10 @@ trait Reportes
     {
         if ($tabla == 'maderas') {
             $columnas = 'r.ID_Reporte, mad.ID_Madera, mad.Codigo, mad.Nombre_Madera, 
-                         r.Stock, r.Fecha, r.Hora, r.Cantidad, r.Gasto_Entrada, r.Accion';
-            $inner = ' r LEFT JOIN maderas mad on r.ID_Madera = mad.ID_Madera GROUP BY r.Accion;';
+                         r.Stock, r.Fecha, r.Hora, r.Cantidad, r.Gasto_Entrada, r.Accion,
+                         em.Nombres, em.Apellidos, p.Nombre_Puesto, d.Departamento ';
+            $inner = ' r LEFT JOIN maderas mad on r.ID_Madera = mad.ID_Madera LEFT JOIN empleados em on r.ID_Empleado = em.ID_Empleado 
+            LEFT JOIN Puestos p on em.ID_Puesto = p.ID_Puesto LEFT JOIN Departamentos d on p.ID_Departamento = d.ID_Departamento';
             if ($opcion == null) {
 
             } else if ($opcion == 'r') {
@@ -59,6 +61,44 @@ trait Reportes
         }
 
         return $this->json;
+    }
+
+    function Insertar_Reporte($tabla, $columna, $values, $opcion)
+    {
+        if ($tabla == 'maderas') {
+            
+            $this->conexion = new Conexion();
+            $cx = $this->conexion->conectar();
+            if ($opcion == 'entradas') {
+                try {
+                    $null = null;
+                    $tabla = 'reportes';
+                    $this->SQL = 'INSERT INTO ' . $tabla . ' (' . $columna . ') ' . ' VALUES ' . ' (' . ':id_mad, :id_mat, :id_mueb, :id_emp, :fech, :hor, :acc, :cant, :stoc, :gasto' . ');';
+                    $query = $cx->prepare($this->SQL);
+                    $query->bindParam(':id_mad', $values['ID'], PDO::PARAM_INT);
+                    $query->bindParam(':id_mat', $null, PDO::PARAM_NULL);
+                    $query->bindParam(':id_mueb', $null, PDO::PARAM_NULL);
+                    $query->bindParam(':id_emp', $values['ID_Empleado'], PDO::PARAM_INT);
+                    $query->bindParam(':fech', $values['Fecha_Registro'], PDO::PARAM_STR);
+                    $query->bindParam(':hor', $values['Hora_Registro'], PDO::PARAM_STR);
+                    $query->bindParam(':hor', $values['Hora_Registro'], PDO::PARAM_STR);
+                    $query->bindParam(':acc', $values['Accion'], PDO::PARAM_STR);
+                    $query->bindParam(':cant', $values['Cantidad'], PDO::PARAM_INT);
+                    $query->bindParam(':stoc', $values['Stock'], PDO::PARAM_INT);
+                    $query->bindParam(':gasto', $values['Gasto_Entrada'], PDO::PARAM_STR);
+                    $query->execute();
+                    $lastid = $cx->lastInsertId();
+                    $cx = null;
+                    $this->conexion->desconectar();
+                    return $lastid;
+                } catch (PDOException $err) {
+                    echo "¡Ocurrió un error! - Código: " . $err->getCode() . " chequear log de errores.!";
+                    self::error_($err->getCode(), $err->getMessage(), $err->getFile(), $err->getLine()); //$err->getCode(), $err->getMessage(), $err->getFile(), $err->getLine()
+                }
+            } else if ($opcion == 'salidas') {
+
+            }
+        }
     }
 }
 ?>
