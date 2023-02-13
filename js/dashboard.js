@@ -11,14 +11,14 @@ window.onload = () => {
         document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
         if (usuario[0].ID_Puesto == 1 && usuario[0].ID_Puesto == 9) {
 
-        } /*else if (usuario[0].ID_Puesto == 10) {
+        } else if (usuario[0].ID_Puesto == 10) {
             em.remove();
             ti.remove();
             pr.remove();
             bo.remove();
             co.remove();
             inv.remove();
-        } */else if (usuario[0].ID_Puesto == 11) {
+        } else if (usuario[0].ID_Puesto == 11) {
             em.remove();
             ti.remove();
             pr.remove();
