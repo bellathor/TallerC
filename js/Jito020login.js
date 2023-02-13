@@ -31,7 +31,6 @@ function Comprobar_Usuario(json) {
 
 function Dirigir(datos) {
     sessionStorage.setItem('Sesion', JSON.stringify(datos));
-    let usuario = JSON.parse(sessionStorage.getItem('Sesion'));
     window.location.replace('./modulo/dashboard.php');
 }
 

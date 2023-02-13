@@ -18,6 +18,13 @@ window.onload = () => {
             bo.remove();
             co.remove();
             inv.remove();
+        } else if (usuario[0].ID_Puesto == 11) {
+            em.remove();
+            ti.remove();
+            pr.remove();
+            ad.remove();
+            co.remove();
+            inv.remove();
         } else {
             window.location.replace('../login.php');
         }
