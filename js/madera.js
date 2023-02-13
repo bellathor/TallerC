@@ -529,6 +529,7 @@ function Validar_Formulario_Stocks(opcion) { // formulario stock
             if (confirmar_entrada == true) {
                 var nuevo_stock = parseInt(stock.value) - parseInt(cantidad);
                 json = {
+                    'ID_Empleado': id_empleado,
                     'ID': id.value,
                     'Salida': cantidad,
                     'Stock': nuevo_stock,

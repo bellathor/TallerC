@@ -491,6 +491,8 @@ function Seleccion_Materiales(seleccion) {
 }
 function Validar_Formulario_Stocks(opcion) { // formulario stock
     var form = document.forms['formulario_materiales_stocks'];
+    let usuario = JSON.parse(sessionStorage.getItem('Sesion'));
+    var id_empleado = usuario[0].ID_Empleado;
     var id = form[1];
     var Precio = form[4];
     var Total;
@@ -530,6 +532,7 @@ function Validar_Formulario_Stocks(opcion) { // formulario stock
                 var nuevo_stock = parseInt(stock.value) + parseInt(cantidad);
                 var total = parseFloat(cantidad) * parseFloat(Precio.value);
                 json = {
+                    'ID_Empleado': id_empleado,
                     'ID': id.value,
                     'Entrada': cantidad,
                     'Stock': parseInt(nuevo_stock),
@@ -548,6 +551,7 @@ function Validar_Formulario_Stocks(opcion) { // formulario stock
             if (confirmar_entrada == true) {
                 var nuevo_stock = parseInt(stock.value) - parseInt(cantidad);
                 json = {
+                    'ID_Empleado': id_empleado,
                     'ID': id.value,
                     'Salida': cantidad,
                     'Stock': nuevo_stock,
