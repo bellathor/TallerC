@@ -20,7 +20,7 @@ window.onload = () => {
             inv.remove();
             setTimeout(Cargar, 1000);
         }else {
-            window.location.replace('../login.php');
+            window.location.replace('../../login.php');
         }
     }
     else {

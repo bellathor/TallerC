@@ -20,7 +20,7 @@ window.onload = () => {
             co.remove();
             inv.remove();
         }else {
-            window.location.replace('../login.php');
+            window.location.replace('../../login.php');
         }
     }
     else {
