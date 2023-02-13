@@ -156,7 +156,7 @@
             <div class="row">
                 <div class="col-12 p-0">
                     <div class="box-nav letra titulo">
-                        <span class="cargo-txt">Alberto - Administrador</span>
+                        <span class="cargo-txt" id="nombre_empleado">Alberto - Administrador</span>
                         <span class="config-txt">Editar Perfil</span>
                     </div>
                 </div>
