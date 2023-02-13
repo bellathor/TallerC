@@ -1,5 +1,4 @@
 window.onload = () => {
-    Cargar_Hilos();
     let em = document.getElementById('empleados');
     let ti = document.getElementById('tiendas');
     let pr = document.getElementById('produccion');
@@ -19,6 +18,7 @@ window.onload = () => {
             ad.remove();
             co.remove();
             inv.remove();
+            setTimeout(Cargar_Hilos, 1000);
         }else {
             sessionStorage.clear();
             window.location.replace('../../login.php');
