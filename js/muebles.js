@@ -109,14 +109,14 @@ window.onload = () => {
         if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
             setTimeout(Consultar_Departamentos, 1000);
         }else {
-            window.location.replace('../login.php');
+            window.location.replace('../..login.php');
         }
     }
     else {
-        window.location.replace('../login.php');
+        window.location.replace('../..login.php');
     }
 };
 function Salir() {
     sessionStorage.clear();
-    window.location.replace('../login.php');
+    window.location.replace('../..login.php');
 }
