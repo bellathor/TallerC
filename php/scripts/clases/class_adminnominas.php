@@ -14,16 +14,16 @@ class Admin_Nominas
             $columnas_inner = 'em.ID_Empleado, Nombres, Apellidos, d.Departamento, p.Nombre_Puesto,
             s.Salario_Semanal, s.Horas_Laborales, s.Prestamos, s.Horas_No_Trabajadas, s.Horas_Trabajadas, s.Precio_Hora, s.Descuento, s.Total, s.Comentarios';
             $inner = ' em LEFT JOIN salarios s on s.ID_Empleado = em.ID_Empleado 
-                     LEFT JOIN Puestos p on em.ID_Puesto = p.ID_Puesto
-                     LEFT JOIN Departamentos d on d.ID_Departamento = p.ID_Departamento';
+                     LEFT JOIN puestos p on em.ID_Puesto = p.ID_Puesto
+                     LEFT JOIN departamentos d on d.ID_Departamento = p.ID_Departamento';
             $where = ' where d.ID_Departamento = :id_departamento';
             self::Select($columnas_inner, $inner, $where, $id);
         } else if ($opcion == 'inner' and $id == null) {
             $columnas_inner = 'em.ID_Empleado, Nombres, Apellidos, d.Departamento, p.Nombre_Puesto,
             s.Salario_Semanal, s.Horas_Laborales, s.Prestamos, s.Horas_No_Trabajadas, s.Horas_Trabajadas, s.Precio_Hora,s.Descuento, s.Total, s.Comentarios';
             $inner = ' em LEFT JOIN salarios s on s.ID_Empleado = em.ID_Empleado 
-                     LEFT JOIN Puestos p on em.ID_Puesto = p.ID_Puesto
-                     LEFT JOIN Departamentos d on d.ID_Departamento = p.ID_Departamento';
+                     LEFT JOIN puestos p on em.ID_Puesto = p.ID_Puesto
+                     LEFT JOIN departamentos d on d.ID_Departamento = p.ID_Departamento';
             self::Select($columnas_inner, $inner, null, null);
         }
         return $this->json;
