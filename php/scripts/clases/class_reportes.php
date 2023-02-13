@@ -10,7 +10,7 @@ trait Reportes
                          r.Stock, r.Fecha, r.Hora, r.Cantidad, r.Gasto_Entrada, r.Accion,
                          em.Nombres, em.Apellidos, p.Nombre_Puesto, d.Departamento ';
             $inner = ' r LEFT JOIN maderas mad on r.ID_Madera = mad.ID_Madera LEFT JOIN empleados em on r.ID_Empleado = em.ID_Empleado 
-            LEFT JOIN Puestos p on em.ID_Puesto = p.ID_Puesto LEFT JOIN Departamentos d on p.ID_Departamento = d.ID_Departamento';
+            LEFT JOIN puestos p on em.ID_Puesto = p.ID_Puesto LEFT JOIN departamentos d on p.ID_Departamento = d.ID_Departamento';
             if ($opcion == null) {
 
             } else if ($opcion == 'r') {
