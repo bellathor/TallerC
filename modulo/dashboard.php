@@ -10,7 +10,6 @@
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
     <link rel="shortcut icon" href="../img/logo_tallerc.ico">
     <meta http-equiv="Pragma" content="no-cache">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../bootstrap-/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">

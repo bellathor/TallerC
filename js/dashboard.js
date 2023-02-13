@@ -1,5 +1,5 @@
 window.onload = () => {
-    /*let em = document.getElementById('empleados');
+    let em = document.getElementById('empleados');
     let ti = document.getElementById('tiendas');
     let pr = document.getElementById('produccion');
     let bo = document.getElementById('bodegas');
@@ -35,7 +35,6 @@ window.onload = () => {
         window.location.replace('../login.php');
         
     }
-*/
 };
 
 function Salir() {
