@@ -11,7 +11,7 @@ window.onload = () => {
     if (usuario !== null) {
         document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
         if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
-
+            setTimeout(Consultar_Departamentos, 1000);
         } else if (usuario[0].ID_Puesto == 10) {
             em.remove();
             ti.remove();
@@ -20,7 +20,7 @@ window.onload = () => {
             co.remove();
             inv.remove();
             setTimeout(Consultar_Departamentos, 1000);
-        }else {
+        } else {
             window.location.replace('../login.php');
         }
     }
