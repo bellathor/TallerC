@@ -81,11 +81,37 @@ function Cargar_Select_Dep(dep) {
     document.getElementById('Seleccion_Departamento').appendChild(opcion);
 }
 function Mostrar_Empleados_Dep(option) {
-    if (option.value === "") {
+    console.log(option)
+    if (option.value == 0) {
+        console.log('0h');
+        Consultar_Empleados_Departamentos_Todos();
+        
+    } 
+    else if (option.value === "") {
         Limpiar_Tabla_Nominas_Registro()
     } else {
         Consultar_Empleados_Departamentos(option.value);
     }
+}
+function Consultar_Empleados_Departamentos_Todos() {
+    const url = '../../php/scripts/apis/admin_nominas/api_nominas.php?consultar_empleados_departamentos_todos';
+    fetch(url, {
+        method: 'GET'
+    })
+        .then(response => response.json())
+        .then(data => {
+            var empleado = data.empleados;
+
+            if (empleado !== 'no existe') {
+                for (let x = 0; x < empleado.length; ++x) {
+                    Limpiar_Tabla_Nominas_Registro();
+                    setTimeout(Cargar_Tabla_Nominas_Registro, 100 * x, empleado[x], x);
+                }
+            } else {
+                alert('No hay empleados en ese departamento.!');
+            }
+        })
+        .catch(error => console.error("Error encontrado: ", error));
 }
 function Consultar_Empleados_Departamentos(dep) {
     const url = '../../php/scripts/apis/admin_nominas/api_nominas.php?consultar_empleados_departamentos&id=' + dep;
@@ -332,7 +358,7 @@ function Cargar_Select_Dep_Gestion(dep) {
 }
 function Mostrar_Empleados_Dep_Ges(option) {
     if (option.value == 0) {
-        Consultar_Empleados_Departamentos_Gest_Todos();
+        Consultar_Empleados_Departamentos_Gest();
     } else if (option.value == "100") {
         Limpiar_Tabla_Nominas_Registro_Gest();
     }
@@ -368,6 +394,7 @@ function Consultar_Empleados_Departamentos_Gest_Todos() {
         })
         .catch(error => console.error("Error encontrado: ", error));
 }
+
 function Consultar_Empleados_Departamentos_Gest(dep) {
     const url = '../../php/scripts/apis/admin_nominas/api_nominas.php?consultar_empleados_departamentos&id=' + dep;
     fetch(url, {

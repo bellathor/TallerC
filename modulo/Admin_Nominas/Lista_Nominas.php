@@ -78,16 +78,16 @@
 
                             <div class="collapse" id="bodega-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
-                                    <li><a href="Categoria_Hilos.php" class="link-white rounded"
+                                    <li><a href="../Bodega_Taller/Categoria_Hilos.php" class="link-white rounded"
                                             id="btn-hilos">Categoria Hilos</a></li>
-                                    <li><a href="Categoria_Tapiceria.php" class="link-white rounded">Categoria
+                                    <li><a href="../Bodega_Taller/Categoria_Tapiceria.php" class="link-white rounded">Categoria
                                             Tapiceria</a></li>
-                                    <li><a href="Categoria_Trupper.php" class="link-white rounded">Categoria
+                                    <li><a href="../Bodega_Taller/Categoria_Trupper.php" class="link-white rounded">Categoria
                                             Ferretaria</a>
                                     </li>
-                                    <li><a href="Categoria_Pintura.php" class="link-white rounded">Categoria Pintura</a>
+                                    <li><a href="../Bodega_Taller/Categoria_Pintura.php" class="link-white rounded">Categoria Pintura</a>
                                     </li>
-                                    <li><a href="Categoria_Maquinas.php" class="link-white rounded">Categoria
+                                    <li><a href="../Bodega_Taller/Categoria_Maquinas.php" class="link-white rounded">Categoria
                                             Maquinas</a></li>
                                 </ul>
                             </div>
@@ -294,6 +294,8 @@
                                             id='Seleccion_Departamento'>
                                             <option selected value="">
                                                 Seleccionar</option>
+                                                <option value="0">
+                                                Todos</option>
                                         </select>
                                         <div class="table-responsive">
                                             <table id="tabla_empleados_"
@@ -336,7 +338,6 @@
                                                                 onchange="Seleccion_Opcion_Gest(this)" required>
                                                                 <option selected value="100">Seleccionar</option>
                                                                 <option value="2">Prestamos</option>
-                                                                <option value="3">Hora Trabajadas</option>
                                                                 <option value="4">Horas No Trabajadas</option>
                                                             </select>
                                                             <div id="error_letra_opcion_nominas"
@@ -392,21 +393,7 @@
                                                             Llegaste maximo de letras.
                                                         </div>
                                                     </div>
-                                                    <div class="col-6">
-                                                        <label class="form-label mt-2" for="horas_trabajo">Horas
-                                                            Trabajadas:</label>
-                                                        <input class="form-control" name="horas_trabajo" type="number"
-                                                            placeholder="0.00" required step=0.01 disabled
-                                                            oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
-                                                            oninput="this.setCustomValidity('');"
-                                                            onclick="filtrarTextosGest(this);">
-                                                        <div id="error_letra_direccion" class="d-none invalid-feedback">
-                                                            Solo se permiten letras y sin espacios.</div>
-                                                        <div id="error_maxletras_direccion"
-                                                            class="d-none invalid-feedback">
-                                                            Llegaste maximo de letras.
-                                                        </div>
-                                                    </div>
+                                                    
                                                     <div class="col-6">
                                                         <label class="form-label mt-2" for="horas_no_trabajadas">Horas
                                                             no

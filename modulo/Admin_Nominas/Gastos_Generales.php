@@ -75,17 +75,17 @@
                             </button>
 
                             <div class="collapse" id="bodega-collapse">
-                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
-                                    <li><a href="../Categoria_Hilos.php" class="link-white rounded"
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
+                                    <li><a href="../Bodega_Taller/Categoria_Hilos.php" class="link-white rounded"
                                             id="btn-hilos">Categoria Hilos</a></li>
-                                    <li><a href="../Categoria_Hilos.php" class="link-white rounded">Categoria
+                                    <li><a href="../Bodega_Taller/Categoria_Tapiceria.php" class="link-white rounded">Categoria
                                             Tapiceria</a></li>
-                                    <li><a href="../Categoria_Hilos.php" class="link-white rounded">Categoria
+                                    <li><a href="../Bodega_Taller/Categoria_Trupper.php" class="link-white rounded">Categoria
                                             Ferretaria</a>
                                     </li>
-                                    <li><a href="../Categoria_Hilos.php" class="link-white rounded">Categoria Pintura</a>
+                                    <li><a href="../Bodega_Taller/Categoria_Pintura.php" class="link-white rounded">Categoria Pintura</a>
                                     </li>
-                                    <li><a href="../Categoria_Hilos.php" class="link-white rounded">Categoria
+                                    <li><a href="../Bodega_Taller/Categoria_Maquinas.php" class="link-white rounded">Categoria
                                             Maquinas</a></li>
                                 </ul>
                             </div>
