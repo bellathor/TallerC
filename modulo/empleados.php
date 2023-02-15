@@ -78,6 +78,8 @@
 
                             <div class="collapse" id="bodega-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
+                                    <li><a href="./Bodega_Taller/Categoria_Maderas.php" class="link-white rounded"
+                                            id="btn-hilos">Categoria Maderas</a></li>
                                     <li><a href="./Bodega_Taller/Categoria_Hilos.php" class="link-white rounded"
                                             id="btn-hilos">Categoria Hilos</a></li>
                                     <li><a href="./Bodega_Taller/Categoria_Tapiceria.php"
@@ -116,7 +118,8 @@
                                     <li><a href="./Admin_Nominas/Lista_Nominas.php" class="link-white rounded">Lista de
                                             nominas</a>
                                     </li>
-                                    <li><a href="./Admin_Nominas/Gastos_Generales.php" class="link-white rounded">Gastos generales</a></li>
+                                    <li><a href="./Admin_Nominas/Gastos_Generales.php" class="link-white rounded">Gastos
+                                            generales</a></li>
 
                                 </ul>
                             </div>
@@ -135,8 +138,8 @@
                                         <a href="./inventario/materiales.php" class="link-white rounded">Materiales</a>
                                     </li>
                                     <li>
-                                        <a href="./inventario/muebles.php"
-                                            class="link-white rounded">Muebles ( En construccion )</a></button>
+                                        <a href="./inventario/muebles.php" class="link-white rounded">Muebles ( En
+                                            construccion )</a></button>
                                     </li>
                                 </ul>
                             </div>
@@ -317,7 +320,6 @@
                                                             Contraseña:</label>
                                                         <input class="form-control" name="rpassword" type="password"
                                                             autocomplete="new-password" placeholder="***********"
-                                                            
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                             oninput="this.setCustomValidity('');">
                                                         <div id="error_letra_rpassword" class="d-none invalid-feedback">

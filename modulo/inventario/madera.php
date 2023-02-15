@@ -79,6 +79,8 @@
 
                             <div class="collapse" id="bodega-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
+                                    <li><a href="../Bodega_Taller/Categoria_Maderas.php" class="link-white rounded"
+                                            id="btn-hilos">Categoria Maderas</a></li>
                                     <li><a href="../Bodega_Taller/Categoria_Hilos.php" class="link-white rounded"
                                             id="btn-hilos">Categoria Hilos</a></li>
                                     <li><a href="../Bodega_Taller/Categoria_Tapiceria.php"
@@ -117,7 +119,8 @@
                                     <li><a href="../Admin_Nominas/Lista_Nominas.php" class="link-white rounded">Lista de
                                             nominas</a>
                                     </li>
-                                    <li><a href="../Admin_Nominas/Gastos_Generales.php" class="link-white rounded">Gastos generales</a></li>
+                                    <li><a href="../Admin_Nominas/Gastos_Generales.php"
+                                            class="link-white rounded">Gastos generales</a></li>
 
                                 </ul>
                             </div>
@@ -136,14 +139,15 @@
                                         <a href="materiales.php" class="link-white rounded">Materiales</a>
                                     </li>
                                     <li>
-                                        <a href="muebles.php" class="link-white rounded">Muebles ( En construccion )</a></button>
+                                        <a href="muebles.php" class="link-white rounded">Muebles ( En construccion
+                                            )</a></button>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="mb-1">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras">
-                            <a class="link-white rounded" onclick="Salir();">Salir</a>
+                                <a class="link-white rounded" onclick="Salir();">Salir</a>
                             </button>
                         </li>
                     </ul>
@@ -196,8 +200,8 @@
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="inventario_madera-tab" data-bs-toggle="tab"
                                             data-bs-target="#inventario_madera" type="button" role="tab"
-                                            aria-controls="inventario_madera"
-                                            aria-selected="false" onclick="Cargar_Stock();">Entradas/Salidas</button>
+                                            aria-controls="inventario_madera" aria-selected="false"
+                                            onclick="Cargar_Stock();">Entradas/Salidas</button>
                                     </li>
 
                                 </ul>

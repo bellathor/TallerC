@@ -78,16 +78,22 @@
 
                             <div class="collapse" id="bodega-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
+                                    <li><a href="../Bodega_Taller/Categoria_Maderas.php" class="link-white rounded"
+                                            id="btn-hilos">Categoria Maderas</a></li>
                                     <li><a href="../Bodega_Taller/Categoria_Hilos.php" class="link-white rounded"
                                             id="btn-hilos">Categoria Hilos</a></li>
-                                    <li><a href="../Bodega_Taller/Categoria_Tapiceria.php" class="link-white rounded">Categoria
+                                    <li><a href="../Bodega_Taller/Categoria_Tapiceria.php"
+                                            class="link-white rounded">Categoria
                                             Tapiceria</a></li>
-                                    <li><a href="../Bodega_Taller/Categoria_Trupper.php" class="link-white rounded">Categoria
+                                    <li><a href="../Bodega_Taller/Categoria_Trupper.php"
+                                            class="link-white rounded">Categoria
                                             Ferretaria</a>
                                     </li>
-                                    <li><a href="../Bodega_Taller/Categoria_Pintura.php" class="link-white rounded">Categoria Pintura</a>
+                                    <li><a href="../Bodega_Taller/Categoria_Pintura.php"
+                                            class="link-white rounded">Categoria Pintura</a>
                                     </li>
-                                    <li><a href="../Bodega_Taller/Categoria_Maquinas.php" class="link-white rounded">Categoria
+                                    <li><a href="../Bodega_Taller/Categoria_Maquinas.php"
+                                            class="link-white rounded">Categoria
                                             Maquinas</a></li>
                                 </ul>
                             </div>
@@ -294,7 +300,7 @@
                                             id='Seleccion_Departamento'>
                                             <option selected value="">
                                                 Seleccionar</option>
-                                                <option value="0">
+                                            <option value="0">
                                                 Todos</option>
                                         </select>
                                         <div class="table-responsive">
@@ -393,7 +399,7 @@
                                                             Llegaste maximo de letras.
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="col-6">
                                                         <label class="form-label mt-2" for="horas_no_trabajadas">Horas
                                                             no
@@ -550,6 +556,6 @@
         </div>
     </div>
 </body>
-<script src="../../js/admin_nominas.js"></script>
+<script src="../../js/admin_nominasV1.js"></script>
 
 </html>

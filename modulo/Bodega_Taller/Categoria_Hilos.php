@@ -77,6 +77,8 @@
 
                             <div class="collapse" id="bodega-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
+                                    <li><a href="Categoria_Maderas.php" class="link-white rounded"
+                                            id="btn-hilos">Categoria Maderas</a></li>
                                     <li><a href="Categoria_Hilos.php" class="link-white rounded"
                                             id="btn-hilos">Categoria Hilos</a></li>
                                     <li><a href="Categoria_Tapiceria.php" class="link-white rounded">Categoria
@@ -156,7 +158,7 @@
             <div class="row">
                 <div class="col-12 p-0">
                     <div class="box-nav letra titulo">
-                        <span class="cargo-txt"id='nombre_empleado'>Alberto - Administrador</span>
+                        <span class="cargo-txt" id='nombre_empleado'>Alberto - Administrador</span>
 
                     </div>
                 </div>
@@ -311,6 +313,6 @@
     </div>
     </div>
 </body>
-<script src="../../js/categoria_hilos.js"></script>
+<script src="../../js/categoria_hilosV1.js"></script>
 
 </html>

@@ -76,12 +76,19 @@
                             </button>
 
                             <div class="collapse" id="bodega-collapse">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
-                                    <li><a href="../Bodega_Taller/Categoria_Hilos.php" class="link-white rounded" id="btn-hilos">Categoria Hilos</a></li>
-                                    <li><a href="../Bodega_Taller/Categoria_Tapiceria.php" class="link-white rounded">Categoria Tapiceria</a></li>
-                                    <li><a href="../Bodega_Taller/Categoria_Trupper.php" class="link-white rounded">Categoria Ferretaria</a></li>
-                                    <li><a href="../Bodega_Taller/Categoria_Pintura.php" class="link-white rounded">Categoria Pintura</a></li>
-                                    <li><a href="../Bodega_Taller/Categoria_Maquinas.php" class="link-white rounded">Categoria Maquinas</a></li>
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
+                                    <li><a href="../Bodega_Taller/Categoria_Maderas.php" class="link-white rounded"
+                                            id="btn-hilos">Categoria Maderas</a></li>
+                                    <li><a href="../Bodega_Taller/Categoria_Hilos.php" class="link-white rounded"
+                                            id="btn-hilos">Categoria Hilos</a></li>
+                                    <li><a href="../Bodega_Taller/Categoria_Tapiceria.php"
+                                            class="link-white rounded">Categoria Tapiceria</a></li>
+                                    <li><a href="../Bodega_Taller/Categoria_Trupper.php"
+                                            class="link-white rounded">Categoria Ferretaria</a></li>
+                                    <li><a href="../Bodega_Taller/Categoria_Pintura.php"
+                                            class="link-white rounded">Categoria Pintura</a></li>
+                                    <li><a href="../Bodega_Taller/Categoria_Maquinas.php"
+                                            class="link-white rounded">Categoria Maquinas</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -107,8 +114,10 @@
                             </button>
                             <div class="collapse" id="admin_nominas-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
-                                    <li><a href="../Admin y Nominas./Admin y Nominas/Lista_Nominas.php" class="link-white rounded">Lista de nominas</a></li>
-                                    <li><a href="../Admin_Nominas/Gastos_Generales.php" class="link-white rounded">Gastos generales</a></li>
+                                    <li><a href="../Admin y Nominas./Admin y Nominas/Lista_Nominas.php"
+                                            class="link-white rounded">Lista de nominas</a></li>
+                                    <li><a href="../Admin_Nominas/Gastos_Generales.php"
+                                            class="link-white rounded">Gastos generales</a></li>
 
                                 </ul>
                             </div>
@@ -127,14 +136,15 @@
                                         <a href="materiales.php" class="link-white rounded">Materiales</a>
                                     </li>
                                     <li>
-                                        <a href="muebles.php" class="link-white rounded">Muebles ( En construccion )</a></button>
+                                        <a href="muebles.php" class="link-white rounded">Muebles ( En construccion
+                                            )</a></button>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="mb-1">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras">
-                            <a class="link-white rounded" onclick="Salir();">Salir</a>
+                                <a class="link-white rounded" onclick="Salir();">Salir</a>
                             </button>
                         </li>
                     </ul>
@@ -194,11 +204,10 @@
                                         aria-labelledby="inventario_muebles-tab">
                                         <div class="form-hilos p-1 m-2 border border-1">
                                             <form method="POST" name="formulario_muebles"
-                                                onsubmit="return Validar_Formulario();"
-                                                enctype="multipart/form-data">
+                                                onsubmit="return Validar_Formulario();" enctype="multipart/form-data">
                                                 <h3 class="letra titulo text-center">Formulario de Muebles</h3>
                                                 <div class="row">
-                                    
+
                                                     <div class="col-6">
                                                         <label class="form-label mt-2" for="cod">Código:</label>
                                                         <input class="form-control" name="cod" type="text"
@@ -214,7 +223,7 @@
                                                         <label class="form-label mt-2" for="mueble">Nombre
                                                             Mueble:</label>
                                                         <input class="form-control" name="mueble" type="text"
-                                                            placeholder="Ejem. Mesa Liz"  required
+                                                            placeholder="Ejem. Mesa Liz" required
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                             oninput="this.setCustomValidity('');Filtrar_Textos(this);">
                                                         <div id="error_letra_mueble" class="d-none invalid-feedback">
@@ -244,7 +253,7 @@
                                                             for="muebleDescripcion">Descripcion
                                                             Mueble:</label>
                                                         <input class="form-control" name="muebleDescripcion" type="text"
-                                                            placeholder="Ejem. Mesa de comedor"  required
+                                                            placeholder="Ejem. Mesa de comedor" required
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                             oninput="this.setCustomValidity('');Filtrar_Textos(this);">
                                                         <div id="error_letra_muebleDescripcion"
@@ -258,7 +267,7 @@
                                                         <label class="form-label mt-2" for="muebleImagen">Subir Imagen
                                                             Mueble:</label>
                                                         <input class="form-control" name="muebleImagen" type="file"
-                                                            id="imgMueble" placeholder="Subir foto del mueble" 
+                                                            id="imgMueble" placeholder="Subir foto del mueble"
                                                             value="Subir Imagen" accept="image/png, image/jpeg"
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                             oninput="this.setCustomValidity('');">
@@ -272,7 +281,7 @@
                                                     <div class="col-6">
                                                         <label class="form-label mt-1" for="ancho">Ancho:</label>
                                                         <input class="form-control w-30" name="ancho" type="number"
-                                                            placeholder="0"  required step="0.01"
+                                                            placeholder="0" required step="0.01"
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                             oninput="this.setCustomValidity(''); Filtrar_Textos(this);">
                                                         <div id="error_letra_ancho" class="d-none invalid-feedback">Solo
@@ -302,7 +311,7 @@
                                                     <div class="col-6">
                                                         <label class="form-label mt-1" for="largo">Fondo:</label>
                                                         <input class="form-control w-30" name="largo" type="number"
-                                                            placeholder="0"  required step="0.01"
+                                                            placeholder="0" required step="0.01"
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                             oninput="this.setCustomValidity('');Filtrar_Textos(this);">
                                                         <div id="error_letra_largo" class="d-none invalid-feedback">Solo
@@ -317,7 +326,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-6">
-                                                        <label class="form-label mt-1" for="largo" >Imagen
+                                                        <label class="form-label mt-1" for="largo">Imagen
                                                             Mueble:</label>
                                                         <div class="container">
                                                             <img src="" class="img-thumbnail d-none" alt="imagen_mueble"
@@ -326,8 +335,7 @@
                                                     </div>
                                                 </div>
                                                 <button class="btn btn-success mt-2" type="submit">Registrar</button>
-                                                <button class="btn btn-danger mt-2"
-                                                   >Limpiar</button>
+                                                <button class="btn btn-danger mt-2">Limpiar</button>
                                             </form>
                                         </div>
                                         <div class="table-responsive">

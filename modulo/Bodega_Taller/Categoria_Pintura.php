@@ -28,7 +28,7 @@
 <body>
     <div class="row" style="height: 100%;">
         <div class="col-3 p-0">
-        <div class="box-modulos ">
+            <div class="box-modulos ">
                 <div class="vertical-menu letra titulo">
                     <div class="border-bottom border-1 border-white">
                         <div class="d-flex justify-content-center">
@@ -77,11 +77,14 @@
 
                             <div class="collapse" id="bodega-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
+                                    <li><a href="Categoria_Maderas.php" class="link-white rounded"
+                                            id="btn-hilos">Categoria Maderas</a></li>
                                     <li><a href="Categoria_Hilos.php" class="link-white rounded"
                                             id="btn-hilos">Categoria Hilos</a></li>
                                     <li><a href="Categoria_Tapiceria.php" class="link-white rounded">Categoria
                                             Tapiceria</a></li>
-                                    <li><a href="Categoria_Trupper.php" class="link-white rounded">Categoria Ferretaria</a>
+                                    <li><a href="Categoria_Trupper.php" class="link-white rounded">Categoria
+                                            Ferretaria</a>
                                     </li>
                                     <li><a href="Categoria_Pintura.php" class="link-white rounded">Categoria Pintura</a>
                                     </li>
@@ -112,13 +115,15 @@
                             </button>
                             <div class="collapse" id="admin_nominas-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
-                                    <li><a href="../Admin_Nominas/Lista_Nominas.php" class="link-white rounded">Lista de nominas</a></li>
-                                    <li><a href="../Admin_Nominas/Gastos_Generales.php" class="link-white rounded">Gastos generales</a></li>
+                                    <li><a href="../Admin_Nominas/Lista_Nominas.php" class="link-white rounded">Lista de
+                                            nominas</a></li>
+                                    <li><a href="../Admin_Nominas/Gastos_Generales.php"
+                                            class="link-white rounded">Gastos generales</a></li>
 
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1"  id="inventarios">
+                        <li class="mb-1" id="inventarios">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#inventarios-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Inventarios</a>
@@ -132,8 +137,8 @@
                                         <a href="../inventario/materiales.php" class="link-white rounded">Materiales</a>
                                     </li>
                                     <li>
-                                        <a href="../inventario/muebles.php"
-                                            class="link-white rounded">Muebles ( En construccion )</a></button>
+                                        <a href="../inventario/muebles.php" class="link-white rounded">Muebles ( En
+                                            construccion )</a></button>
                                     </li>
                                 </ul>
                             </div>
@@ -200,7 +205,7 @@
                                             <div class="row">
                                                 <div class="col-6">
                                                     <label class="form-label mt-1" for="selec_material">Seleccione
-                                                        Hilos:</label>
+                                                        Pintura:</label>
                                                     <div class="input-group h-50 mb-1">
                                                         <select class="form-select w-100 mb-1" id="sel_material"
                                                             name="selec_material"
@@ -265,8 +270,7 @@
                                                 </div>
                                             </div>
                                             <button class="btn btn-success mt-2" type="submit">Guardar</button>
-                                            <a class="btn btn-danger mt-2"
-                                                onclick="Limpiar_Formulario();">Limpiar</a>
+                                            <a class="btn btn-danger mt-2" onclick="Limpiar_Formulario();">Limpiar</a>
                                         </form>
                                     </div>
 
@@ -309,6 +313,6 @@
     </div>
     </div>
 </body>
-<script src="../../js/categoria_pintura.js"></script>
+<script src="../../js/categoria_pinturaV1.js"></script>
 
 </html>

@@ -77,13 +77,20 @@
                                 </button>
 
                                 <div class="collapse" id="bodega-collapse">
-                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
-                                    <li><a href="./Bodega_Taller/Categoria_Hilos.php" class="link-white rounded" id="btn-hilos">Categoria Hilos</a></li>
-                                    <li><a href="./Bodega_Taller/Categoria_Tapiceria.php" class="link-white rounded">Categoria Tapiceria</a></li>
-                                    <li><a href="./Bodega_Taller/Categoria_Trupper.php" class="link-white rounded">Categoria Ferretaria</a></li>
-                                    <li><a href="./Bodega_Taller/Categoria_Pintura.php" class="link-white rounded">Categoria Pintura</a></li>
-                                    <li><a href="./Bodega_Taller/Categoria_Maquinas.php" class="link-white rounded">Categoria Maquinas</a></li>
-                                </ul>
+                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
+                                        <li><a href="./Bodega_Taller/Categoria_Maderas.php" class="link-white rounded"
+                                                id="btn-hilos">Categoria Maderas</a></li>
+                                        <li><a href="./Bodega_Taller/Categoria_Hilos.php" class="link-white rounded"
+                                                id="btn-hilos">Categoria Hilos</a></li>
+                                        <li><a href="./Bodega_Taller/Categoria_Tapiceria.php"
+                                                class="link-white rounded">Categoria Tapiceria</a></li>
+                                        <li><a href="./Bodega_Taller/Categoria_Trupper.php"
+                                                class="link-white rounded">Categoria Ferretaria</a></li>
+                                        <li><a href="./Bodega_Taller/Categoria_Pintura.php"
+                                                class="link-white rounded">Categoria Pintura</a></li>
+                                        <li><a href="./Bodega_Taller/Categoria_Maquinas.php"
+                                                class="link-white rounded">Categoria Maquinas</a></li>
+                                    </ul>
                                 </div>
                             </li>
                             <li class="mb-1" id="compras">
@@ -110,8 +117,10 @@
                                 </button>
                                 <div class="collapse" id="admin_nominas-collapse">
                                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
-                                        <li><a href="./Admin_Nominas/Lista_Nominas.php" class="link-white rounded">Lista de nominas</a></li>
-                                        <li><a href="./Admin_Nominas/Gastos_Generales.php" class="link-white rounded">Gastos generales</a></li>
+                                        <li><a href="./Admin_Nominas/Lista_Nominas.php" class="link-white rounded">Lista
+                                                de nominas</a></li>
+                                        <li><a href="./Admin_Nominas/Gastos_Generales.php"
+                                                class="link-white rounded">Gastos generales</a></li>
 
                                     </ul>
                                 </div>
@@ -128,11 +137,12 @@
                                             <a href="./inventario/madera.php" class="link-white rounded">Maderas</a>
                                         </li>
                                         <li>
-                                            <a href="./inventario/materiales.php" class="link-white rounded">Materiales</a>
+                                            <a href="./inventario/materiales.php"
+                                                class="link-white rounded">Materiales</a>
                                         </li>
                                         <li>
-                                            <a href="./inventario/muebles.php"
-                                                class="link-white rounded">Muebles ( En construccion )</a></button>
+                                            <a href="./inventario/muebles.php" class="link-white rounded">Muebles ( En
+                                                construccion )</a></button>
                                         </li>
                                     </ul>
                                 </div>
@@ -153,7 +163,7 @@
                     <div class="col-12 p-0">
                         <div class="box-nav letra titulo">
                             <span class="cargo-txt" id="nombre_empleado">Alberto</span>
-                            
+
                         </div>
                     </div>
                     <div class="col-12 p-2">
@@ -163,7 +173,7 @@
                                 <div class="container p-1" id="madera">
                                     <h3 class="letra titulo text-center">Panel de Control</h3>
                                     <div class="grid letra m-2">
-                                
+
                                         <div class="grid-item text-center p-3">
                                             <h3 class="letra border-bottom border-1 border-white w-100">Empleados</h3>
                                             <span id="empleado_total" class="mt-5">0</span>

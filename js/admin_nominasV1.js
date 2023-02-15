@@ -251,6 +251,9 @@ function Limpiar_Select() {
     let option_sel = document.createElement('option');
     option_sel.value = 100;
     option_sel.innerHTML = "Seleccionar";
+    let option_todos = document.createElement('option');
+    option_todos.value = "0";
+    option_todos.innerHTML = "Todos";
     while (ultimo_sel) {
         sel.removeChild(ultimo_sel);
         ultimo_sel = sel.lastElementChild;
@@ -305,7 +308,7 @@ function Actualizar_Nomina(json) {
 }
 
 
-// Gestio Nominas
+// Gestio Nominas -----------------------------------
 function Cargar_Gestion() {
     Limpiar_Tabla_Nominas_Registro_Gest();
     Consultar_Departamentos_Gestion();
@@ -460,13 +463,12 @@ function Modificar_Gest(id, nombres, cargo, prestamo, trabajadas, no_trabajadas,
         form[2].value = cargo;
         form[3].value = 0;
         form[4].value = 0;
-        form[5].value = 0;
-        form[6].value = salario;
-        form[7].value = horas;
-        form[8].value = pago;
-        form[9].value = descuento;
-        form[10].value = total;
-        form[11].value = coment;
+        form[5].value = salario;
+        form[6].value = horas;
+        form[7].value = pago;
+        form[8].value = descuento;
+        form[9].value = total;
+        form[10].value = coment;
 
         Guardar_Prestamo(prestamo);
         Guardar_Horas_Trabajadas(trabajadas);
@@ -525,14 +527,14 @@ function Limpiar_Formulario_Gest() {
 function Validar_Formulario_Gest() {
     const form = document.forms['formulario_gestion_nominas'];
     let Prestamo = form[3].value;
-    let Horas_Trab = form[4].value;
-    let Horas_No_Trab = form[5].value;
-    let Salario = form[6].value;
-    let Horas_Lab = form[7].value;
-    let Pago_Hora = form[8].value;
-    let Descuento = form[9].value;
-    let Total = form[10].value;
-    let Comentario = form[11].value;
+    //let Horas_Trab = form[4].value;
+    let Horas_No_Trab = form[4].value;
+    let Salario = form[5].value;
+    let Horas_Lab = form[6].value;
+    let Pago_Hora = form[7].value;
+    let Descuento = form[8].value;
+    let Total = form[9].value;
+    let Comentario = form[10].value;
     Prestamo = parseFloat(Obtener_Prestamo()) + parseFloat(Prestamo);
     Horas_Trab = parseFloat(Obtener_Horas_Trabajadas()) + parseFloat(Horas_Trab);
     Horas_No_Trab = parseFloat(Obtener_Horas_No_Trabajadas()) + parseFloat(Horas_No_Trab);
@@ -614,15 +616,15 @@ function Seleccion_Opcion_Gest(select) {
         form[4].setAttribute('disabled', true);
         form[5].setAttribute('disabled', true);
     }
-    else if (select.value == 3) {
+    /*else if (select.value == 3) {
         form[4].removeAttribute('disabled');
         form[3].setAttribute('disabled', true);
         form[5].setAttribute('disabled', true);
-    }
+    }*/
     else if (select.value == 4) {
-        form[5].removeAttribute('disabled');
+        form[4].removeAttribute('disabled');
         form[3].setAttribute('disabled', true);
-        form[4].setAttribute('disabled', true);
+        //form[4].setAttribute('disabled', true);
     } else if (select.value == 100) {
         form[3].setAttribute('disabled', true);
         form[4].setAttribute('disabled', true);
