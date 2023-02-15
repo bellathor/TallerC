@@ -295,6 +295,6 @@
             </div>
         </div>
 </body>
-<script src="../../js/gastos_generalesV1.0.js"></script>
+<script src="../../js/gastos_generalesV1.0011.js"></script>
 
 </html>

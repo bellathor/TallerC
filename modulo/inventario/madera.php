@@ -472,6 +472,6 @@
         </div>
     </div>
 </body>
-<script src="../../js/madera.js"></script>
+<script src="../../js/maderaV1.js"></script>
 
 </html>

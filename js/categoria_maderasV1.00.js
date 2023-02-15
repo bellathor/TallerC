@@ -74,7 +74,7 @@ function Fetch_GET(id, opcion) {
             })
             .catch(error => console.error("Error encontrado: ", error));
     }
-    if (opcion == 'consultar_reportes_materiales') { // GET
+    if (opcion == 'consultar_reportes_madera') { // GET
         var urlEnvio = url + '/?' + opcion;
         fetch(urlEnvio, {
             method: 'GET'
@@ -254,7 +254,7 @@ function Validar_Formulario_Stocks() {
                 'Cantidad': cantidad,
                 'Gasto_Entrada': 'Ninguno'
             };
-            Fetch_PUT(json, 'actualizar_salida_material');;
+            Fetch_PUT(json, 'actualizar_entrada_salida');;
         }
 
     } else {
@@ -265,8 +265,8 @@ function Validar_Formulario_Stocks() {
 }
 
 function Fetch_PUT(objeto, opcion) {
-    url = '../../php/scripts/apis/bodega_taller/api_hilos.php';
-    if (opcion == 'actualizar_salida_material') { // PUT
+    url = '../../php/scripts/apis/maderas/api_maderas.php';
+    if (opcion == 'actualizar_entrada_salida') { // PUT
         var urlEnvio = url + '/?' + opcion;
         fetch(urlEnvio, {
             method: 'PUT',
@@ -310,14 +310,14 @@ function Mostrar_Tabla_Reportes(btn, activar) {
 }
 
 function Cargar_Tabla_Reporte() {
-    Fetch_GET('', 'consultar_reportes_materiales');
+    Fetch_GET('', 'consultar_reportes_madera');
 }
 
 function DatosTablaReporte(datos, cantidad) {
     var json = {
         'ID': datos.ID_Madera,
         'Codigo': datos.Codigo,
-        'Nombre_Material': datos.Nombre_Material,
+        'Nombre_Material': datos.Nombre_Madera,
         'Salida': datos.Cantidad,
         'Stock': datos.Stock,
         'Gasto': datos.Gasto_Entrada,

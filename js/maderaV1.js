@@ -509,7 +509,7 @@ function Validar_Formulario_Stocks(opcion) { // formulario stock
             confirmar_entrada = confirm('¿Desea registrar de entrada ' + cantidad + ' al stock?');
             if (confirmar_entrada == true) {
                 var nuevo_stock = parseInt(stock.value) + parseInt(cantidad);
-                var total = cantidad * Precio.value;
+                var total = parseFloat(cantidad) * parseFloat(Precio.value);
                 json = {
                     'ID_Empleado': id_empleado,
                     'ID': id.value,
@@ -519,7 +519,7 @@ function Validar_Formulario_Stocks(opcion) { // formulario stock
                     'Hora_Registro': hora,
                     'Accion': 'Entrada',
                     'Cantidad': cantidad,
-                    'Gasto_Entrada': parseFloat(total),
+                    'Gasto_Entrada': total,
 
                 };
             }

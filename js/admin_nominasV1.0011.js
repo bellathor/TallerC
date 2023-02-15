@@ -150,7 +150,7 @@ function Cargar_Tabla_Nominas_Registro(em, cantidad) {
     if (json.Salario_Semanal === null || json.Horas_Laborales === null || json.Precio_Hora === null) {
         arreglo = [cantidad + 1, json.Nombres, json.Apellidos, json.Departamento, json.Puesto, "$0.00", "0", "$0.00", '<button class = "btn btn-primary" onclick = "Modificar(' + json.ID_Empleado + ",'" + json.Nombres + " " + json.Apellidos + "','" + json.Puesto + "'," + 0.00 + ',' + 0.00 + ',' + 0.00 + ')">Modificar</button>'];
     } else {
-        arreglo = [cantidad + 1, json.Nombres, json.Apellidos, json.Departamento, json.Puesto, "$" + json.Salario_Semanal, "$" + json.Horas_Laborales, "$" + json.Precio_Hora, '<button class="btn btn-primary"  onclick = "Modificar(' + json.ID_Empleado + ",'" + json.Nombres + " " + json.Apellidos + "','" + json.Puesto + "'," + json.Salario_Semanal + ',' + json.Horas_Laborales + ',' + json.Precio_Hora + ')">Modificar</button>'];
+        arreglo = [cantidad + 1, json.Nombres, json.Apellidos, json.Departamento, json.Puesto, "$" + json.Salario_Semanal, json.Horas_Laborales, "$" + json.Precio_Hora, '<button class="btn btn-primary"  onclick = "Modificar(' + json.ID_Empleado + ",'" + json.Nombres + " " + json.Apellidos + "','" + json.Puesto + "'," + json.Salario_Semanal + ',' + json.Horas_Laborales + ',' + json.Precio_Hora + ')">Modificar</button>'];
     }
     var tr = document.createElement('tr');
     if (json.ID_Empleado !== null) {
@@ -420,24 +420,47 @@ function Consultar_Empleados_Departamentos_Gest(dep) {
 }
 
 function Cargar_Tabla_Nominas_Registro_Gest(em, cantidad) {
-    let json = {
-        'ID_Empleado': em.ID_Empleado,
-        'ID_Puesto': em.ID_Puesto,
-        'ID_Departamento': em.ID_Departamento,
-        'Nombres': em.Nombres,
-        'Apellidos': em.Apellidos,
-        'Departamento': em.Departamento,
-        'Salario_Semanal': em.Salario_Semanal,
-        'Prestamos': em.Prestamos,
-        'Horas_Laborales': em.Horas_Laborales,
-        'Horas_Trabajadas': em.Horas_Trabajadas,
-        'Horas_No_Laborales': em.Horas_No_Trabajadas,
-        'Precio_Hora': em.Precio_Hora,
-        'Descuento': em.Descuento,
-        'Total': em.Total,
-        'Comentario': em.Comentarios,
-        'Puesto': em.Nombre_Puesto
+    var json;
+    if(em.Horas_Trabajadas == 0 && em.Prestamos == 0){
+        json = {
+            'ID_Empleado': em.ID_Empleado,
+            'ID_Puesto': em.ID_Puesto,
+            'ID_Departamento': em.ID_Departamento,
+            'Nombres': em.Nombres,
+            'Apellidos': em.Apellidos,
+            'Departamento': em.Departamento,
+            'Salario_Semanal': em.Salario_Semanal,
+            'Prestamos': em.Prestamos,
+            'Horas_Laborales': em.Horas_Laborales,
+            'Horas_Trabajadas': em.Horas_Trabajadas,
+            'Horas_No_Laborales': em.Horas_No_Trabajadas,
+            'Precio_Hora': em.Precio_Hora,
+            'Descuento': em.Descuento,
+            'Total': em.Salario_Semanal,
+            'Comentario': em.Comentarios,
+            'Puesto': em.Nombre_Puesto
+        }
+    }else{
+        json = {
+            'ID_Empleado': em.ID_Empleado,
+            'ID_Puesto': em.ID_Puesto,
+            'ID_Departamento': em.ID_Departamento,
+            'Nombres': em.Nombres,
+            'Apellidos': em.Apellidos,
+            'Departamento': em.Departamento,
+            'Salario_Semanal': em.Salario_Semanal,
+            'Prestamos': em.Prestamos,
+            'Horas_Laborales': em.Horas_Laborales,
+            'Horas_Trabajadas': em.Horas_Trabajadas,
+            'Horas_No_Laborales': em.Horas_No_Trabajadas,
+            'Precio_Hora': em.Precio_Hora,
+            'Descuento': em.Descuento,
+            'Total': em.Total,
+            'Comentario': em.Comentarios,
+            'Puesto': em.Nombre_Puesto
+        }
     }
+    
     var arreglo = [];
     arreglo = [cantidad + 1, json.Nombres, json.Apellidos, json.Departamento, json.Puesto, "$" + json.Salario_Semanal, "$" + json.Prestamos, json.Horas_Laborales, json.Horas_Trabajadas, json.Horas_No_Laborales, "$" + json.Precio_Hora, "$" + json.Descuento, "$" + json.Total, json.Comentario, '<button class="btn btn-primary"  onclick = "Modificar_Gest(' + json.ID_Empleado + ",'" + json.Nombres + " " + json.Apellidos + "','" + json.Puesto + "'," + json.Prestamos + ',' + json.Horas_Trabajadas + ',' + json.Horas_No_Laborales + ',' + json.Salario_Semanal + ',' + json.Horas_Laborales + ',' + json.Precio_Hora + ',' + json.Descuento + ',' + json.Total + ",'" + json.Comentario + "'" + ')">Modificar</button>'];
     var tr = document.createElement('tr');
@@ -537,12 +560,12 @@ function Validar_Formulario_Gest() {
     let Total = form[9].value;
     let Comentario = form[10].value;
     Prestamo = parseFloat(Obtener_Prestamo()) + parseFloat(Prestamo);
-    Horas_Trab = parseFloat(Obtener_Horas_Trabajadas()) + parseFloat(Horas_Trab);
+     var Horas_Trab = parseInt(Horas_Lab) - parseInt(Horas_No_Trab);
     Horas_No_Trab = parseFloat(Obtener_Horas_No_Trabajadas()) + parseFloat(Horas_No_Trab);
     Descuento = parseFloat(Obtener_Descuento()) + parseFloat(Descuento);
     Total = parseFloat(Obtener_Total()) + parseFloat(Total);
     Descuento = (parseFloat(Horas_No_Trab) * parseFloat(Pago_Hora));
-    if (parseInt(Horas_Lab) <= parseInt(Horas_Trab)) {
+    if (parseInt(Horas_Trab) < 0) {
         alert('El empleado ya alcanzo el maximo de horas trabajadas');
     }
     else {
