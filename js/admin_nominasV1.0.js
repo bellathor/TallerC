@@ -259,6 +259,7 @@ function Limpiar_Select() {
         ultimo_sel = sel.lastElementChild;
     }
     sel.appendChild(option_sel);
+    sel.appendChild(option_todos);
     Consultar_Departamentos();
 }
 function Validar_Formulario() {
