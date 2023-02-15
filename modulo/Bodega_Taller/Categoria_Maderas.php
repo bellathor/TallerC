@@ -313,7 +313,7 @@
     </div>
     </div>
 </body>
-<script src="../../js/categoria_maderasV1.00
+<script src="../../js/categoria_maderasV1.000
 .js"></script>
 
 </html>

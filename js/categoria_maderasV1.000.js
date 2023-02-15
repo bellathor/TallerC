@@ -277,7 +277,7 @@ function Fetch_PUT(objeto, opcion) {
         })
             .then(response => response.json())
             .then(datos => {
-                if (datos.error == "false") {
+                if (datos.maders !== null) {
                     Limpiar_Formulario();
                     LimpiarTablaReporte();
                     Cargar_Tabla_Reporte();
