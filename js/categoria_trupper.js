@@ -10,7 +10,7 @@ window.onload = () => {
     if (usuario !== null) {
         document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
         if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
-
+            setTimeout(Cargar_Hilos, 1000);
         }else if (usuario[0].ID_Puesto == 11) {
             em.remove();
             ti.remove();
