@@ -1,6 +1,6 @@
 function CargarDatos() {
     LimpiarFormulario();
-    LimpiarFormularioStock();
+    LimpiarTabla();
 }
 
 function Contador() {
@@ -166,7 +166,10 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
                 }
                 else {
                     alert('Se actualizaron los datos correctamente.!');
-                    CargarDatos();
+                    LimpiarTablaReporte();
+                    LimpiarFormularioStock();
+                    LimpiarSelect();
+                    EnviarDatos('', 'consultar_maderas');
                     EnviarDatos('', 'consultar_reportes_madera');
                 }
             })
@@ -342,8 +345,10 @@ function LimpiarTablaReporte() {
     }
 }
 function Cargar_Stock() {
-    LimpiarFormulario();
     LimpiarFormularioStock();
+    LimpiarTablaReporte();
+    LimpiarSelect();
+    EnviarDatos('', 'consultar_maderas');
 }
 function LimpiarSelect() {
     var select = document.getElementById('sel_maderas');
@@ -417,16 +422,19 @@ function Mostrar_Tabla(btn, activar) {
     if (btn.id == 'btn_mostrar') {
         var tabla = document.getElementById('tabla_madera');
         var btn = document.getElementById('btn_mostrar');
+        LimpiarTabla();
         if (activar === false) {
             tabla.classList.remove('d-none');
             btn.innerHTML = "Ocultar Tabla";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla(' + 'this' + ', true)');
+            EnviarDatos('', 'consultar_maderas');
         } else {
             tabla.classList.add('d-none')
             btn.innerHTML = "Mostrar Tabla";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla(' + 'this' + ', false)');
+            LimpiarTabla();
         }
     }
 }
@@ -434,17 +442,19 @@ function Mostrar_Tabla_Reportes(btn, activar) {
     if (btn.id == 'btn_mostrar_reporte') {
         var tabla = document.getElementById('tabla_reporte_madera_body');
         var btn = document.getElementById('btn_mostrar_reporte');
+        LimpiarTablaReporte();
         if (activar === false) {
             tabla.classList.remove('d-none');
             btn.innerHTML = "Ocultar Reportes";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', true)');
+            EnviarDatos('','consultar_reportes_madera');
         } else {
             tabla.classList.add('d-none');
             btn.innerHTML = "Mostrar Reportes";
             btn.removeAttribute('onclick');
-            LimpiarTablaReporte();
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', false)');
+            LimpiarTablaReporte();
         }
     }
 }
@@ -598,8 +608,6 @@ window.onload = () => {
         document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
         if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
             Contador();
-            setTimeout(EnviarDatos, 500, '', 'consultar_maderas');
-            setTimeout(EnviarDatos, 500, '', 'consultar_reportes_madera');
         } else {
             sessionStorage.clear();
             window.location.replace('../../login.php');

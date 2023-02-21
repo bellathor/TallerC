@@ -509,10 +509,10 @@ function Guardar_Prestamo(n) {
     pre = parseFloat(n);
 }
 function Guardar_Horas_Trabajadas(n) {
-    ht = parseFloat(n);
+    ht = parseInt(n);
 }
 function Guardar_Horas_No_Trabajadas(n) {
-    hnt = parseFloat(n);
+    hnt = parseInt(n);
 }
 function Guardar_Descuento(n) {
     d = parseFloat(n);
@@ -546,7 +546,7 @@ function Limpiar_Formulario_Gest() {
     form[4].setAttribute('disabled', true);
     form[5].setAttribute('disabled', true);
     form[11].setAttribute('disabled', true);
-    
+
     Borrar_ID();
 }
 
@@ -561,15 +561,21 @@ function Validar_Formulario_Gest() {
     let Descuento = form[8].value;
     let Total = form[9].value;
     let Comentario = form[10].value;
+    var Horas_Trab;
     Prestamo = parseFloat(Obtener_Prestamo()) + parseFloat(Prestamo);
-    var Horas_Trab = parseInt(Horas_Lab) - parseInt(Horas_No_Trab);
-    console.log(Horas_Trab);
+    if (parseInt(Obtener_Horas_Trabajadas()) == 0) {
+        Horas_Trab = parseInt(Horas_Lab) - parseInt(Horas_No_Trab);
+        ht = 0;
+    } else {
+        Horas_Trab = parseInt(Obtener_Horas_Trabajadas()) - parseInt(Horas_No_Trab);
+        ht = 0;
+    }
     Horas_No_Trab = parseFloat(Obtener_Horas_No_Trabajadas()) + parseFloat(Horas_No_Trab);
     Descuento = parseFloat(Obtener_Descuento()) + parseFloat(Descuento);
     Total = parseFloat(Obtener_Total()) + parseFloat(Total);
     Descuento = (parseFloat(Horas_No_Trab) * parseFloat(Pago_Hora));
-    if (parseInt(Horas_Trab) < 0) {
-        alert('El empleado ya alcanzo el maximo de horas trabajadas');
+    if (parseInt(Horas_No_Trab)>parseInt(Horas_Lab)) {
+        alert('El empleado ya alcanzo el maximo de horas no trabajadas');
     }
     else {
         if (parseFloat(Salario) >= parseFloat(Prestamo)) {
@@ -660,7 +666,7 @@ function Seleccion_Opcion_Gest(select) {
     }
 }
 function filtrarTextosGest(input) {
-    if (input.name == 'prestamo') {
+   /* if (input.name == 'prestamo') {
         input.value = "";
     } else if (input.name == 'horas_trabajo') {
         input.value = "";
@@ -669,7 +675,24 @@ function filtrarTextosGest(input) {
     }
     else if (input.name == 'coment') {
         input.value = "";
+    }*/
+}
+
+function DejarInput(input) {
+   /*if (input.name == 'prestamo') {
+        if (isNaN(input.value)) {
+            input.value == 0;
+        }
+    } else if (input.name == 'horas_no_trabajadas') {
+        if (input.value == "") {
+            input.value == 0;
+        }
     }
+    else if (input.name == 'coment') {
+        if (input.value == "") {
+            input.value = "Comentario";
+        }
+    }*/
 }
 
 function Realizar_Cierre() {

@@ -23,7 +23,7 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
-    <script src="../../js/materiales.js?2122023_03_35"></script>
+    <script src="../../js/materiales.js?2122023_05_46"></script>
     <link href="../../css/dashboard_estilo.css?v1.0.0.15" rel="stylesheet">
     <!--<link href="../css/admin.css?v1.0.0.1" rel="stylesheet">-->
 </head>
@@ -194,14 +194,14 @@
                                         <button class="nav-link active" id="inventario_materiales-tab"
                                             data-bs-toggle="tab" data-bs-target="#inventario_materiales" type="button"
                                             role="tab" aria-controls="inventario_materiales"
-                                            aria-selected="true">Inventario
+                                            aria-selected="true" onclick="Cargar_Datos();">Inventario
                                             Materiales</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="entrada_salida_materiales-tab" data-bs-toggle="tab"
                                             data-bs-target="#entrada_salida_materiales" type="button" role="tab"
                                             aria-controls="entrada_salida_materiales"
-                                            aria-selected="false">Entradas/Salidas</button>
+                                            aria-selected="false" onclick="Cargar_Stock();">Entradas/Salidas</button>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="myTabContent">

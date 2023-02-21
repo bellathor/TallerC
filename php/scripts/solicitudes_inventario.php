@@ -82,9 +82,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $columnas = 'r.ID_Reporte, mat.ID_Material, mat.Codigo, mat.Nombre_Material, 
                          r.Stock, r.Fecha, r.Hora, r.Cantidad, r.Gasto_Entrada, r.Accion,
                          em.Nombres, em.Apellidos, p.Nombre_Puesto, d.Departamento ';
-            $inner = ' LEFT JOIN reportes r on r.ID_Material = mat.ID_Material LEFT JOIN empleados em on r.ID_Empleado = em.ID_Empleado 
-                       LEFT JOIN puestos p on em.ID_Puesto = p.ID_Puesto LEFT JOIN departamentos d on p.ID_Departamento = d.ID_Departamento';
-            $reportes_materiales = $opcion->Select($columnas, 'materiales mat', $inner, null);
+            $inner = ' LEFT JOIN materiales mat on r.ID_Material = mat.ID_Material LEFT JOIN empleados em on r.ID_Empleado = em.ID_Empleado 
+                       LEFT JOIN puestos p on em.ID_Puesto = p.ID_Puesto LEFT JOIN departamentos d on p.ID_Departamento = d.ID_Departamento where mat.ID_Material = r.ID_Material order by(r.ID_Reporte)';
+            $reportes_materiales = $opcion->Select($columnas, 'reportes r', $inner, null);
             echo json_encode(['reportes' => $reportes_materiales]);
         } else if (isset($_GET['consultar_materiales'])) { // consulta maderas
             $materiales = $opcion->Select(null, 'materiales', null, null, null);

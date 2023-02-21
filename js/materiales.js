@@ -90,7 +90,8 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
                 if (datos.error == 'false') {
                     alert('Material registrada exitosamente.!');
                     LimpiarFormulario();
-                    CargarDatos();
+                    LimpiarTabla();
+                    EnviarDatos('', 'consultar_materiales');
                 } else {
                     alert('Ya existe un material registrada con este codigo.!');
                 }
@@ -142,7 +143,6 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
                 if (datos != null) {
                     var reportes = datos.reportes;
                     for (let i = 0; i < reportes.length; i++) {
-                        LimpiarTabla();
                         setTimeout(DatosTablaReporte, 100 * i, reportes[i], i);
                     }
                 } else {
@@ -170,6 +170,7 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
                     LimpiarFormulario();
                     LimpiarTabla();
                     EnviarDatos('', 'consultar_materiales');
+                    document.forms['formulario_material'].setAttribute('onsubmit', 'return Validar_Formulario(false)');
                 }
             })
             .catch(error => console.error("Error encontrado: ", error));
@@ -214,7 +215,9 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
                 }
                 else {
                     alert('Se actualizaron los datos correctamente.!');
-                    Cargar_Stock();
+                    LimpiarFormularioStock();
+                    LimpiarTablaReporte();
+                    EnviarDatos('', 'consultar_reportes_materiales');
                 }
             })
             .catch(error => console.error("Error encontrado: ", error));
@@ -234,7 +237,6 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
                 if (datos.error == 'false') {
                     LimpiarTabla();
                     EnviarDatos('', 'consultar_materiales');
-
                 }
             })
             .catch(error => console.error("Error encontrado: ", error));
@@ -301,21 +303,23 @@ function filtrarCantidad(opcion) {
         opcion.value = opcion.value.substring(0, opcion.value.length - 1);
     }
 }
-
 function Mostrar_Tabla(btn, activar) {
     if (btn.id == 'btn_mostrar') {
         var tabla = document.getElementById('tabla_material');
         var btn = document.getElementById('btn_mostrar');
+        LimpiarTabla();
         if (activar === false) {
             tabla.classList.remove('d-none');
             btn.innerHTML = "Ocultar Tabla";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla(' + 'this' + ', true)');
+            EnviarDatos('', 'consultar_materiales');
         } else {
             tabla.classList.add('d-none');
             btn.innerHTML = "Mostrar Tabla";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla(' + 'this' + ', false)');
+            LimpiarTabla();
         }
     }
 }
@@ -327,11 +331,7 @@ function LimpiarTabla() {
         ultimo_tabla = tabla.lastElementChild;
     }
 }
-function CargarDatos() {
-    LimpiarFormulario();
-    LimpiarFormularioStock();
-    document.forms['formulario_material'].setAttribute('onsubmit', 'return Validar_Formulario(false)');
-}
+
 function DatosTabla(datos, stock, cantidad) {
     var form = document.forms['formulario_materiales_stocks'];
     if (stock == false) {
@@ -343,12 +343,10 @@ function DatosTabla(datos, stock, cantidad) {
             'Categoria': datos.Categoria
 
         };
-
         var arreglojson = [cantidad + 1, json.Codigo, json.Material, json.Precio, json.Categoria];
         var arreglo = [arreglojson[0], arreglojson[1], arreglojson[2], arreglojson[3], arreglojson[4], "<a class='btn btn-primary' onclick='Modificar(" + JSON.stringify(json) + ")'>Modificar</a>", "<a class='btn btn-danger' onclick='Eliminar(" + json.ID + ")'>Eliminar</a>"];
         var tr = document.createElement('tr');
         var select = document.getElementById('sel_materiales');
-
         var opcion = document.createElement('option');
         for (let i = 0; i < arreglo.length; ++i) {
             var td = document.createElement('td');
@@ -434,14 +432,18 @@ function Seleccion_Opcion(opcion) {
         form.setAttribute('onsubmit', 'return Validar_Formulario_Stocks()');
     }
 }
-
+// registro
+function Cargar_Datos(){
+    LimpiarFormulario();
+    LimpiarTabla();
+}
 
 // stock
-
 function Cargar_Stock() {
     LimpiarSelectMaterial();
     LimpiarFormularioStock();
     LimpiarTablaReporte();
+    EnviarDatos('', 'consultar_materiales');
 }
 
 function LimpiarSelectMaterial() {
@@ -455,11 +457,10 @@ function LimpiarSelectMaterial() {
     var opcion = document.createElement('option');
     opcion.innerHTML = "Seleccionar";
     select.appendChild(opcion);
-    EnviarDatos('', 'consultar_materiales');
 }
 function Seleccion_Opcion_stock(opcion) {
     var form = document.forms['formulario_materiales_stocks'];
-    LimpiarSelectMaterial();
+    
     if (opcion.value == 1) {
         form[1].removeAttribute('disabled');
         form[2].removeAttribute('disabled');
@@ -481,6 +482,8 @@ function Seleccion_Opcion_stock(opcion) {
         form[2].value = "";
         form[3].value = "";
         form.setAttribute('onsubmit', 'return Validar_Formulario_Stocks()');
+        LimpiarSelectMaterial();
+        EnviarDatos('', 'consultar_materiales');
     }
 }
 function Seleccion_Materiales(seleccion) {
@@ -581,22 +584,26 @@ function Mostrar_Tabla_Reportes(btn, activar) {
     if (btn.id == 'btn_mostrar_reporte') {
         var btn = document.getElementById('btn_mostrar_reporte');
         var tabla = document.getElementById('tabla_reporte_material_body');
+        LimpiarTablaReporte();
         if (activar === false) {
             tabla.classList.remove('d-none');
             btn.innerHTML = "Ocultar Reportes";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', true)');
+            EnviarDatos('', 'consultar_reportes_materiales');
         } else {
             tabla.classList.add('d-none');
             btn.innerHTML = "Mostrar Reportes";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', false)');
+            LimpiarTablaReporte();
         }
     }
 }
 function DatosTablaReporte(datos, cantidad) {
+    console.log(datos);
     if (datos.Accion == 'Entrada') {
-        if (datos.ID_Material != null) {
+        if (datos.ID_Material != null && datos.Fecha_Registro !== "null") {
             var json = {
                 'ID': datos.ID_Material,
                 'Codigo': datos.Codigo,
@@ -614,7 +621,7 @@ function DatosTablaReporte(datos, cantidad) {
         }
     }
     else {
-        if (datos.ID_Material != null) {
+        if (datos.ID_Material != null && datos.Fecha_Registro !== "null") {
             var json = {
                 'ID': datos.ID_Material,
                 'Codigo': datos.Codigo,
@@ -705,8 +712,6 @@ window.onload = () => {
         document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
         if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
             Contador();
-            setTimeout(EnviarDatos, 500, '', 'consultar_materiales');
-            setTimeout(EnviarDatos, 500, '', 'consultar_reportes_materiales');
         } else {
             sessionStorage.clear();
             window.location.replace('../../login.php');

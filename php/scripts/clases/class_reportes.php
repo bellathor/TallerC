@@ -9,12 +9,12 @@ trait Reportes
             $columnas = 'r.ID_Reporte, mad.ID_Madera, mad.Codigo, mad.Nombre_Madera, 
                          r.Stock, r.Fecha, r.Hora, r.Cantidad, r.Gasto_Entrada, r.Accion,
                          em.Nombres, em.Apellidos, p.Nombre_Puesto, d.Departamento ';
-            $inner = ' mad LEFT JOIN reportes r on r.ID_Madera = mad.ID_Madera LEFT JOIN empleados em on r.ID_Empleado = em.ID_Empleado 
-            LEFT JOIN puestos p on em.ID_Puesto = p.ID_Puesto LEFT JOIN departamentos d on p.ID_Departamento = d.ID_Departamento';
+            $inner = ' r LEFT JOIN maderas mad on r.ID_Madera = mad.ID_Madera LEFT JOIN empleados em on r.ID_Empleado = em.ID_Empleado 
+            LEFT JOIN puestos p on em.ID_Puesto = p.ID_Puesto LEFT JOIN departamentos d on p.ID_Departamento = d.ID_Departamento where r.ID_Madera = mad.ID_Madera order by (r.ID_Reporte)';
             if ($opcion == null) {
 
             } else if ($opcion == 'r') {
-                $tabla = 'maderas';
+                $tabla = 'reportes';
                 $where = null;
                 if ($columnas != null and $inner == null and $where == null) {
                     $this->SQL = 'SELECT ' . $columnas . 'FROM ' . $tabla;

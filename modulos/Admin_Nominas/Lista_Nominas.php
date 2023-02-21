@@ -22,7 +22,7 @@
         </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
-    <script src="../../js/admin_nominas.js?2122023_03_35"></script>
+    <script src="../../js/admin_nominas.js?2122023_05_46"></script>
     <link href="../../css/dashboard_estilo.css?v1.0.0.15" rel="stylesheet">
     <!--<link href="../css/admin.css?v1.0.0.1" rel="stylesheet">-->
 </head>
@@ -387,10 +387,10 @@
                                                         <label class="form-label mt-2" for="prestamo">
                                                             Prestamo:</label>
                                                         <input class="form-control" name="prestamo" type="number"
-                                                            placeholder="0.00" required step="0.01" disabled
+                                                            placeholder="0.00"  step="0.01" disabled required
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
                                                             oninput="this.setCustomValidity('');"
-                                                            onclick="filtrarTextosGest(this);">
+                                                            onclick="filtrarTextosGest(this);" onblur="DejarInput(this);">
                                                         <div id="error_letra_apellidos" class="d-none invalid-feedback">
                                                             Solo se permiten letras y
                                                             sin espacios.</div>
@@ -405,10 +405,10 @@
                                                             no
                                                             Trabajadas:</label>
                                                         <input class="form-control" name="horas_no_trabajadas"
-                                                            type="number" placeholder="0.00" required step=0.01 disabled
+                                                            type="number" placeholder="0.00"  step=0.01 disabled required
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
                                                             oninput="this.setCustomValidity('');"
-                                                            onclick="filtrarTextosGest(this);">
+                                                            onclick="filtrarTextosGest(this);" onblur="DejarInput(this);">
                                                         <div id="error_letra_direccion" class="d-none invalid-feedback">
                                                             Solo se permiten letras y sin espacios.</div>
                                                         <div id="error_maxletras_direccion"
@@ -492,7 +492,7 @@
                                                             placeholder="Ingrese comentario" required disabled
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo no acepta numeros negativos.!')"
                                                             oninput="this.setCustomValidity('');"
-                                                            onclick="filtrarTextosGest(this)">
+                                                            onclick="filtrarTextosGest(this)" onblur="DejarInput(this);">
                                                         <div id="error_letra_direccion" class="d-none invalid-feedback">
                                                             Solo se permiten letras y sin espacios.</div>
                                                         <div id="error_maxletras_direccion"
@@ -500,7 +500,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-success mt-2" type="submit">Guardar</button>
+                                                <button class="btn btn-success mt-2" type="submit" disabled>Guardar</button>
                                                 <a class="btn btn-danger mt-2"
                                                     onclick="Limpiar_Formulario_Gest();">Limpiar</a>
                                             </form>
