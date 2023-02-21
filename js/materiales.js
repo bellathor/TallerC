@@ -132,26 +132,6 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
             })
             .catch(error => console.error("Error encontrado: ", error));
     }
-    else if (opcion == 'consultar_reportes_madera') { // GET
-        var urlEnvio = url + '/?' + opcion;
-        fetch(urlEnvio, {
-            method: 'GET'
-        })
-            .then(response => response.json())
-            .then(datos => {
-                if (datos != null) {
-
-                    var reportes = datos.reportes;
-                    for (let i = 0; i < reportes.length; i++) {
-                        LimpiarTabla();
-                        setTimeout(DatosTablaReporte, 100 * i, reportes[i], i);
-                    }
-                } else {
-                    alert('Ocurrio un error.!');
-                }
-            })
-            .catch(error => console.error("Error encontrado: ", error));
-    }
     else if (opcion == 'consultar_reportes_materiales') { // GET
         var urlEnvio = url + '/?' + opcion;
         fetch(urlEnvio, {
@@ -212,7 +192,7 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
                     alert('Se actualizaron los datos correctamente.!');
                     LimpiarFormularioStock();
                     LimpiarTablaReporte();
-                    Cargar_Tabla_Reporte();
+                    EnviarDatos('', 'consultar_reportes_materiales');
                 }
             })
             .catch(error => console.error("Error encontrado: ", error));
@@ -324,18 +304,18 @@ function filtrarCantidad(opcion) {
 
 function Mostrar_Tabla(btn, activar) {
     if (btn.id == 'btn_mostrar') {
-        var tabla = document.getElementById('tabla_material_');
+        var tabla = document.getElementById('tabla_material');
         var btn = document.getElementById('btn_mostrar');
         if (activar === false) {
+            tabla.classList.remove('d-none');
             btn.innerHTML = "Ocultar Tabla";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla(' + 'this' + ', true)');
-            CargarDatos();
         } else {
+            tabla.classList.add('d-none');
             btn.innerHTML = "Mostrar Tabla";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla(' + 'this' + ', false)');
-            LimpiarTabla();
         }
     }
 }
@@ -348,8 +328,8 @@ function LimpiarTabla() {
     }
 }
 function CargarDatos() {
-    LimpiarTabla();
-    EnviarDatos('', 'consultar_materiales');
+    LimpiarFormulario();
+    LimpiarFormularioStock();
     document.forms['formulario_material'].setAttribute('onsubmit', 'return Validar_Formulario(false)');
 }
 function DatosTabla(datos, stock, cantidad) {
@@ -462,7 +442,6 @@ function Cargar_Stock() {
     LimpiarSelectMaterial();
     LimpiarFormularioStock();
     LimpiarTablaReporte();
-    Cargar_Tabla_Reporte();
 }
 
 function LimpiarSelectMaterial() {
@@ -601,23 +580,22 @@ function LimpiarFormularioStock() {
 function Mostrar_Tabla_Reportes(btn, activar) {
     if (btn.id == 'btn_mostrar_reporte') {
         var btn = document.getElementById('btn_mostrar_reporte');
+        var tabla = document.getElementById('tabla_reporte_material_body');
         if (activar === false) {
+            tabla.classList.remove('d-none');
             btn.innerHTML = "Ocultar Reportes";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', true)');
-            Cargar_Tabla_Reporte();
         } else {
+            tabla.classList.add('d-none');
             btn.innerHTML = "Mostrar Reportes";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', false)');
-            LimpiarTablaReporte();
         }
     }
 }
-function Cargar_Tabla_Reporte() {
-    EnviarDatos('', 'consultar_reportes_materiales');
-}
 function DatosTablaReporte(datos, cantidad) {
+    console.log(datos);
     if (datos.Accion == 'Entrada') {
         if (datos.ID_Material != null) {
             var json = {
@@ -729,6 +707,8 @@ window.onload = () => {
         document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
         if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
             Contador();
+            setTimeout(EnviarDatos, 500, '', 'consultar_materiales');
+            setTimeout(EnviarDatos, 500, '', 'consultar_reportes_materiales');
         } else {
             sessionStorage.clear();
             window.location.replace('../../login.php');

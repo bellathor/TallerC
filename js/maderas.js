@@ -1,5 +1,6 @@
 function CargarDatos() {
     LimpiarFormulario();
+    LimpiarFormularioStock();
 }
 
 function Contador() {
@@ -165,7 +166,8 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
                 }
                 else {
                     alert('Se actualizaron los datos correctamente.!');
-                    Cargar_Stock();
+                    CargarDatos();
+                    EnviarDatos('', 'consultar_reportes_madera');
                 }
             })
             .catch(error => console.error("Error encontrado: ", error));
@@ -340,11 +342,8 @@ function LimpiarTablaReporte() {
     }
 }
 function Cargar_Stock() {
-     LimpiarSelect();
-     LimpiarTabla();
-     LimpiarTablaReporte();
-     LimpiarFormularioStock();
-     EnviarDatos('', 'consultar_maderas');
+    LimpiarFormulario();
+    LimpiarFormularioStock();
 }
 function LimpiarSelect() {
     var select = document.getElementById('sel_maderas');
@@ -423,25 +422,25 @@ function Mostrar_Tabla(btn, activar) {
             btn.innerHTML = "Ocultar Tabla";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla(' + 'this' + ', true)');
-            EnviarDatos('', 'consultar_maderas');
         } else {
             tabla.classList.add('d-none')
             btn.innerHTML = "Mostrar Tabla";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla(' + 'this' + ', false)');
-            LimpiarTabla();
         }
     }
 }
 function Mostrar_Tabla_Reportes(btn, activar) {
     if (btn.id == 'btn_mostrar_reporte') {
+        var tabla = document.getElementById('tabla_reporte_madera_body');
         var btn = document.getElementById('btn_mostrar_reporte');
         if (activar === false) {
+            tabla.classList.remove('d-none');
             btn.innerHTML = "Ocultar Reportes";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', true)');
-            EnviarDatos('', 'consultar_reportes_madera');
         } else {
+            tabla.classList.add('d-none');
             btn.innerHTML = "Mostrar Reportes";
             btn.removeAttribute('onclick');
             LimpiarTablaReporte();
@@ -599,6 +598,8 @@ window.onload = () => {
         document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
         if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
             Contador();
+            setTimeout(EnviarDatos, 500, '', 'consultar_maderas');
+            setTimeout(EnviarDatos, 500, '', 'consultar_reportes_madera');
         } else {
             sessionStorage.clear();
             window.location.replace('../../login.php');
