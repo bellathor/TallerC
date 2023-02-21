@@ -492,6 +492,7 @@ function Modificar_Gest(id, nombres, cargo, prestamo, trabajadas, no_trabajadas,
         form[8].value = descuento;
         form[9].value = total;
         form[10].value = coment;
+        form[10].removeAttribute('disabled');
 
         Guardar_Prestamo(prestamo);
         Guardar_Horas_Trabajadas(trabajadas);
