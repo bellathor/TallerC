@@ -342,6 +342,7 @@ function LimpiarTablaReporte() {
 function Cargar_Stock() {
      LimpiarSelect();
      LimpiarTabla();
+     LimpiarTablaReporte();
      LimpiarFormularioStock();
      EnviarDatos('', 'consultar_maderas');
 }
