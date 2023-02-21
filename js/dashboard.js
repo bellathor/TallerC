@@ -42,6 +42,7 @@ window.onload = () => {
 };
 
 function Cargar_Dashboard_Admin(){
+    CargarEmpleados();
     CargarMaderas();
     CargarMateriales();
 }
