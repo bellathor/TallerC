@@ -306,14 +306,14 @@ function filtrarCantidad(opcion) {
                 }
             }
         }
-        else if (opcion.name === 'precio') {
-            if (opcion.value < 0) {
-                opcion.value = opcion.value.substring(0, opcion.value.length - 1);
-                opcion.value = "";
-                alert('Solo numeros positivos');
-            }
+    } else if (opcion.name === 'precio') {
+        if (opcion.value < 0) {
+            opcion.value = opcion.value.substring(0, opcion.value.length - 1);
+            opcion.value = "";
+            alert('Solo numeros positivos');
         }
-    } else {
+    }
+    else {
         alert('Debe seleccionar una tipo de madera o registrar si no sale alguna.!');
         opcion.value = opcion.value.substring(0, opcion.value.length - 1);
     }

@@ -1,6 +1,5 @@
 function CargarDatos() {
     LimpiarTabla();
-    EnviarDatos('', 'consultar_maderas');
 }
 
 function Contador() {
@@ -287,8 +286,8 @@ function DatosTablaReporte(datos, cantidad) {
         td.setAttribute('scope', 'col');
         td.innerHTML = arreglo[i];
         tr.appendChild(td);
-        document.getElementById('tabla_reporte_madera_body').appendChild(tr);
     }
+    document.getElementById('tabla_reporte_madera_body').appendChild(tr);
 }
 function Modificar(datos) {
     var form = document.forms['formulario_madera'];
@@ -339,9 +338,10 @@ function LimpiarTablaReporte() {
     }
 }
 function Cargar_Stock() {
-    LimpiarSelect();
+    LimpiarTabla();
+   /* LimpiarSelect();
     LimpiarFormularioStock();
-    LimpiarTablaReporte();
+    LimpiarTablaReporte();*/
 }
 function LimpiarSelect() {
     var select = document.getElementById('sel_maderas');
@@ -421,32 +421,29 @@ function Mostrar_Tabla(btn, activar) {
             btn.innerHTML = "Ocultar Tabla";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla(' + 'this' + ', true)');
-            CargarDatos();
+            EnviarDatos('', 'consultar_maderas');
         } else {
             tabla.classList.add('d-none')
             btn.innerHTML = "Mostrar Tabla";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla(' + 'this' + ', false)');
-            LimpiarTablaReporte();
+            LimpiarTabla();
         }
     }
 }
 function Mostrar_Tabla_Reportes(btn, activar) {
-    // var filtrado = document.getElementById('seleccion_tabla_reporte');
     if (btn.id == 'btn_mostrar_reporte') {
         var btn = document.getElementById('btn_mostrar_reporte');
         if (activar === false) {
             btn.innerHTML = "Ocultar Reportes";
             btn.removeAttribute('onclick');
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', true)');
-            // filtrado.removeAttribute('disabled');
             EnviarDatos('', 'consultar_reportes_madera');
         } else {
             btn.innerHTML = "Mostrar Reportes";
             btn.removeAttribute('onclick');
             LimpiarTablaReporte();
             btn.setAttribute('onclick', 'Mostrar_Tabla_Reportes(' + 'this' + ', false)');
-            //  filtrado.setAttribute('disabled', true);
         }
     }
 }
