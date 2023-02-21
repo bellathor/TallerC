@@ -540,10 +540,12 @@ function Limpiar_Formulario_Gest() {
         form[i].value = "";
     }
     form[0].setAttribute('disabled', true);
+    form[0].value = "100";
     form[3].setAttribute('disabled', true);
     form[4].setAttribute('disabled', true);
     form[5].setAttribute('disabled', true);
     form[11].setAttribute('disabled', true);
+    
     Borrar_ID();
 }
 

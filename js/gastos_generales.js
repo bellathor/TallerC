@@ -19,7 +19,7 @@ window.onload = () => {
             co.remove();
             inv.remove();
             setTimeout(Cargar, 1000);
-        }else {
+        } else {
             sessionStorage.clear();
             window.location.replace('../../login.php');
         }
@@ -29,18 +29,21 @@ window.onload = () => {
         window.location.replace('../../login.php');
     }
 };
-function Cargar(){
+function Cargar() {
     Eliminar_Tabla();
     let form = document.forms['formulario_gastos_generales'];
     var date = new Date();
     var year = date.getFullYear();
     var mes = date.getMonth() + 1;
     var dia = date.getDate();
+    var hora = date.getHours();
+    var min = date.getMinutes();
+    var seg = date.getSeconds();
     var fecha;
     if (mes.toString().length < 2) {
         mes = '0' + mes;
     }
-    fecha = year + '-' + mes + '-' + dia;
+    fecha = year + '-' + mes + '-' + dia + ',' + hora + ':' + min + ':' + seg;
     form[0].value = fecha;
 }
 function Salir() {
@@ -131,8 +134,6 @@ function Realizar_Cierre() {
                 preserveColors: true
             });
             setTimeout(Eliminar_Gastos_Generales, 4000);
-        } else {
-            alert('Debe seleccionar un empleado para poder guardar.!');
         }
     } else {
         alert('No se puede descargar una tabla vacia.!');
@@ -193,6 +194,19 @@ function Limpiar_Formulario() {
     for (x = 0; x < form.length; x++) {
         form[x].value = "";
     }
+    var date = new Date();
+    var year = date.getFullYear();
+    var mes = date.getMonth() + 1;
+    var dia = date.getDate();
+    var fecha;
+    var hora = date.getHours();
+    var min = date.getMinutes();
+    var seg = date.getSeconds();
+    if (mes.toString().length < 2) {
+        mes = '0' + mes;
+    }
+    fecha = year + '-' + mes + '-' + dia + ',' + hora + ':' + min + ':' + seg;
+    form[0].value = fecha;
 }
 function Mostrar_Tabla(esto, boolean) {
     let btn = document.getElementById('btn_cierre');

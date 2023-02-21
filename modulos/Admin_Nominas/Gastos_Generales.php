@@ -21,7 +21,7 @@
         </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
-    <script src="../../js/gastos_generales.js?2022023_20_49"></script>
+    <script src="../../js/gastos_generales.js?2122023_00_30"></script>
     <link href="../../css/dashboard_estilo.css?v1.0.0.15" rel="stylesheet">
     <!--<link href="../css/admin.css?v1.0.0.1" rel="stylesheet">-->
 </head>
@@ -274,7 +274,7 @@
                                                 <thead style="position: sticky; top:0">
                                                     <tr class="color_tienda text-white">
                                                         <th scope="col">#</th>
-                                                        <th scope="col">Fecha</th>
+                                                        <th scope="col">Fecha / Hora</th>
                                                         <th scope="col">Descripcion</th>
                                                         <th scope="col">Monto</th>
                                                         <th scope="col">Comentario</th>

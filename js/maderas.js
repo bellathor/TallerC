@@ -76,7 +76,6 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
                     if (madera !== 'Sin registro') {
                         for (let i = 0; i < madera.length; i++) {
                             setTimeout(DatosTabla, 100 * i, madera[i], false, i);
-                            LimpiarFormularioStock();
                         }
                         Contador();
                     } else {
@@ -245,10 +244,10 @@ function DatosTabla(datos, stock, cantidad) {
     }
 }
 function DatosTablaReporte(datos, cantidad) {
-
+    var json;
     if (datos.Accion == 'Entrada') {
         if (datos.ID_Madera != null) {
-            var json = {
+            json = {
                 'ID': datos.ID_Madera,
                 'Codigo': datos.Codigo,
                 'Nombre_Madera': datos.Nombre_Madera,
@@ -265,7 +264,7 @@ function DatosTablaReporte(datos, cantidad) {
         }
     } else {
         if (datos.ID_Madera != null) {
-            var json = {
+            json = {
                 'ID': datos.ID_Madera,
                 'Codigo': datos.Codigo,
                 'Nombre_Madera': datos.Nombre_Madera,
@@ -312,7 +311,6 @@ function LimpiarFormulario() {
 }
 function LimpiarFormularioStock() {
     var form = document.forms['formulario_madera_stocks'];
-
     document.getElementById('btn_submit').innerHTML = 'Registrar';
     document.getElementById('btn_submit').classList.replace('btn-primary', 'btn-success');
     form.setAttribute('onsubmit', "return Validar_Formulario();");
@@ -322,6 +320,7 @@ function LimpiarFormularioStock() {
     form[2].setAttribute('disabled', '');
     form[3].setAttribute('disabled', '');
     document.getElementById('sel_maderas').setAttribute('disabled', '');
+    LimpiarSelect();
 }
 function LimpiarTabla() {
     var tabla = document.getElementById('tabla_madera');
@@ -339,6 +338,11 @@ function LimpiarTablaReporte() {
         ultimo_tabla = tabla.lastElementChild;
     }
 }
+function Cargar_Stock() {
+    LimpiarSelect();
+    LimpiarFormularioStock();
+    LimpiarTablaReporte();
+}
 function LimpiarSelect() {
     var select = document.getElementById('sel_maderas');
     var ultima_opcion = select.lastElementChild;
@@ -351,10 +355,6 @@ function LimpiarSelect() {
     opcion.innerHTML = "Seleccionar";
     select.appendChild(opcion);
     EnviarDatos('', 'consultar_maderas');
-}
-function Cargar_Stock() {
-    LimpiarSelect();
-    LimpiarFormularioStock();
 }
 function Eliminar(id) {
     if (confirm('¿Seguro quiere eliminar esta madera?') == true) {
@@ -453,26 +453,24 @@ function Mostrar_Tabla_Reportes(btn, activar) {
 
 function Seleccion_Opcion(opcion) {
     var form = document.forms['formulario_madera_stocks'];
-    if(opcion.value == ""){
-        alert('seleccionar una madera antes de guardar.!');
-    }
-    else if (opcion.value == 1) {
-        document.getElementById('sel_maderas').removeAttribute('disabled');
+    LimpiarSelect();
+    if (opcion.value == 1) {
+        form[1].removeAttribute('disabled');
         form[2].removeAttribute('disabled');
         form[3].setAttribute('disabled', '');
         form[3].value = "";
         form.setAttribute('onsubmit', 'return Validar_Formulario_Stocks(' + '"' + 'entrada' + '"' + ')');
-
     } else if (opcion.value == 2) {
-        document.getElementById('sel_maderas').removeAttribute('disabled');
-        form[3].removeAttribute('disabled');
+        form[1].removeAttribute('disabled');
         form[2].setAttribute('disabled', '');
         form[2].value = "";
+        form[3].removeAttribute('disabled');
         form.setAttribute('onsubmit', 'return Validar_Formulario_Stocks(' + '"' + 'salida' + '"' + ')');
     } else {
         document.getElementById('sel_maderas').value = "";
         document.getElementById('sel_maderas').setAttribute('disabled', true);
-        form[1].removeAttribute('disabled');
+        form[0].removeAttribute('disabled');
+        form[1].setAttribute('disabled', '');
         form[2].setAttribute('disabled', '');
         form[3].setAttribute('disabled', '');
         form[2].value = "";
@@ -518,80 +516,80 @@ function Validar_Formulario_Stocks(opcion) { // formulario stock
     }
 
     hora = hora + ":" + min + ":" + seg;
-    if (id != "") {
-        if (opcion == 'entrada') {
-            cantidad = form[2].value;
-            confirmar_entrada = confirm('¿Desea registrar de entrada ' + cantidad + ' al stock?');
-            if (confirmar_entrada == true) {
-                var nuevo_stock = parseInt(stock.value) + parseInt(cantidad);
-                var total = parseFloat(cantidad) * parseFloat(Precio.value);
-                json = {
-                    'ID_Empleado': id_empleado,
-                    'ID': id.value,
-                    'Entrada': cantidad,
-                    'Stock': parseInt(nuevo_stock),
-                    'Fecha_Registro': fecha,
-                    'Hora_Registro': hora,
-                    'Accion': 'Entrada',
-                    'Cantidad': cantidad,
-                    'Gasto_Entrada': total,
+    if (opcion == 'entrada') {
+        cantidad = form[2].value;
+        confirmar_entrada = confirm('¿Desea registrar de entrada ' + cantidad + ' al stock?');
+        if (confirmar_entrada == true) {
+            var nuevo_stock = parseInt(stock.value) + parseInt(cantidad);
+            var total = parseFloat(cantidad) * parseFloat(Precio.value);
+            json = {
+                'ID_Empleado': id_empleado,
+                'ID': id.value,
+                'Entrada': cantidad,
+                'Stock': parseInt(nuevo_stock),
+                'Fecha_Registro': fecha,
+                'Hora_Registro': hora,
+                'Accion': 'Entrada',
+                'Cantidad': cantidad,
+                'Gasto_Entrada': total,
 
-                };
-            }
-        } else if (opcion == 'salida') {
-            cantidad = form[3].value;
-            confirmar_entrada = confirm('¿Desea registrar de salida ' + cantidad + ' al stock?');
-            if (confirmar_entrada == true) {
-                var nuevo_stock = parseInt(stock.value) - parseInt(cantidad);
-                json = {
-                    'ID_Empleado': id_empleado,
-                    'ID': id.value,
-                    'Salida': cantidad,
-                    'Stock': nuevo_stock,
-                    'Fecha_Registro': fecha,
-                    'Hora_Registro': hora,
-                    'Accion': 'Salida',
-                    'Cantidad': cantidad,
-                    'Gasto_Entrada': 'Ninguno'
-                };
-
-            }
+            };
+            EnviarDatos(json, 'actualizar_entrada_salida');
         }
-        EnviarDatos(json, 'actualizar_entrada_salida');
-    } else {
-        alert('Debe seleccionar un tipo de madera primero.!');
+    } else if (opcion == 'salida') {
+        cantidad = form[3].value;
+        confirmar_entrada = confirm('¿Desea registrar de salida ' + cantidad + ' al stock?');
+        if (confirmar_entrada == true) {
+            var nuevo_stock = parseInt(stock.value) - parseInt(cantidad);
+            json = {
+                'ID_Empleado': id_empleado,
+                'ID': id.value,
+                'Salida': cantidad,
+                'Stock': nuevo_stock,
+                'Fecha_Registro': fecha,
+                'Hora_Registro': hora,
+                'Accion': 'Salida',
+                'Cantidad': cantidad,
+                'Gasto_Entrada': 'Ninguno'
+            };
+            EnviarDatos(json, 'actualizar_entrada_salida');
+
+        }
     }
-
-
     return false;
 }
 function filtrarCantidad(opcion) {
     var form = document.forms['formulario_madera_stocks'];
     var stock = form[5];
-    if (opcion.name === 'entradaMadera') {
-        if (opcion.value < 0) {
-            opcion.value = opcion.value.substring(0, opcion.value.length - 1);
-            opcion.value = "";
-            alert('Solo numeros positivos');
-        }
-    } else if (opcion.name === 'salidaMadera') {
-        if (opcion.value < 0) {
-            opcion.value = opcion.value.substring(0, opcion.value.length - 1);
-            opcion.value = "";
-            alert('Solo numeros positivos');
-        } else {
-            if (parseInt(opcion.value) > parseInt(stock.value)) {
+    if (form[1].value !== "Seleccionar") {
+        if (opcion.name === 'entradaMadera') {
+            if (opcion.value < 0) {
                 opcion.value = opcion.value.substring(0, opcion.value.length - 1);
-                alert('La cantidad de salida sobrepasa el stock.');
+                opcion.value = "";
+                alert('Solo numeros positivos');
+            }
+        } else if (opcion.name === 'salidaMadera') {
+            if (opcion.value < 0) {
+                opcion.value = opcion.value.substring(0, opcion.value.length - 1);
+                opcion.value = "";
+                alert('Solo numeros positivos');
+            } else {
+                if (parseInt(opcion.value) > parseInt(stock.value)) {
+                    opcion.value = opcion.value.substring(0, opcion.value.length - 1);
+                    alert('La cantidad de salida sobrepasa el stock.');
+                }
             }
         }
-    }
-    else if (opcion.name === 'precio') {
-        if (opcion.value < 0) {
-            opcion.value = opcion.value.substring(0, opcion.value.length - 1);
-            opcion.value = "";
-            alert('Solo numeros positivos');
+        else if (opcion.name === 'precio') {
+            if (opcion.value < 0) {
+                opcion.value = opcion.value.substring(0, opcion.value.length - 1);
+                opcion.value = "";
+                alert('Solo numeros positivos');
+            }
         }
+    } else {
+        alert('Debe seleccionar una tipo de madera o registrar si no sale alguna.!');
+        opcion.value = opcion.value.substring(0, opcion.value.length - 1);
     }
 }
 
