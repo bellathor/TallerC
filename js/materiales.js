@@ -141,7 +141,7 @@ function EnviarDatos(objeto, opcion, stock_opcion) {
             .then(datos => {
                 if (datos != null) {
                     var reportes = datos.reportes;
-                    for (let i = 0; i < reportes.length; ++i) {
+                    for (let i = 0; i < reportes.length; i++) {
                         LimpiarTabla();
                         setTimeout(DatosTablaReporte, 100 * i, reportes[i], i);
                     }
@@ -595,7 +595,6 @@ function Mostrar_Tabla_Reportes(btn, activar) {
     }
 }
 function DatosTablaReporte(datos, cantidad) {
-    console.log(datos);
     if (datos.Accion == 'Entrada') {
         if (datos.ID_Material != null) {
             var json = {
@@ -614,7 +613,7 @@ function DatosTablaReporte(datos, cantidad) {
             };
         }
     }
-    else if (datos.Accion == "Salida") {
+    else {
         if (datos.ID_Material != null) {
             var json = {
                 'ID': datos.ID_Material,
@@ -638,10 +637,9 @@ function DatosTablaReporte(datos, cantidad) {
         var td = document.createElement('td');
         td.setAttribute('scope', 'col');
         td.innerHTML = arreglo[i];
-
         tr.appendChild(td);
-        document.getElementById('tabla_reporte_material_body').appendChild(tr);
     }
+    document.getElementById('tabla_reporte_material_body').appendChild(tr);
 }
 
 function LimpiarTablaReporte() {
