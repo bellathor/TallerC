@@ -82,11 +82,9 @@ function Cargar_Select_Dep(dep) {
 }
 function Mostrar_Empleados_Dep(option) {
     if (option.value == 0) {
-        console.log('0h');
         Consultar_Empleados_Departamentos_Todos();
-
     }
-    else if (option.value === "") {
+    else if (option.value == 100) {
         Limpiar_Tabla_Nominas_Registro()
     } else {
         Consultar_Empleados_Departamentos(option.value);
@@ -200,8 +198,10 @@ function Limpiar_Formulario() {
 }
 function Limpiar_Tabla_Nominas_Registro() {
     let tabla = document.getElementById('tabla_empleados');
-    while (tabla.lastElementChild) {
-        tabla.removeChild(tabla.lastElementChild);
+    let ultimo = tabla.lastElementChild;
+    while (ultimo) {
+        tabla.removeChild(ultimo);
+        ultimo = tabla.lastElementChild;
     }
 }
 var id;

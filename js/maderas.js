@@ -1,5 +1,5 @@
 function CargarDatos() {
-    LimpiarTabla();
+    LimpiarFormulario();
 }
 
 function Contador() {
@@ -322,7 +322,6 @@ function LimpiarFormularioStock() {
     form[2].setAttribute('disabled', '');
     form[3].setAttribute('disabled', '');
     document.getElementById('sel_maderas').setAttribute('disabled', '');
-    LimpiarSelect();
 }
 function LimpiarTabla() {
     var tabla = document.getElementById('tabla_madera');
@@ -341,10 +340,10 @@ function LimpiarTablaReporte() {
     }
 }
 function Cargar_Stock() {
-    LimpiarTabla();
-    /* LimpiarSelect();
+     LimpiarSelect();
+     LimpiarTabla();
      LimpiarFormularioStock();
-     LimpiarTablaReporte();*/
+     EnviarDatos('', 'consultar_maderas');
 }
 function LimpiarSelect() {
     var select = document.getElementById('sel_maderas');
@@ -357,7 +356,6 @@ function LimpiarSelect() {
     var opcion = document.createElement('option');
     opcion.innerHTML = "Seleccionar";
     select.appendChild(opcion);
-    EnviarDatos('', 'consultar_maderas');
 }
 function Eliminar(id) {
     if (confirm('¿Seguro quiere eliminar esta madera?') == true) {
@@ -453,7 +451,6 @@ function Mostrar_Tabla_Reportes(btn, activar) {
 
 function Seleccion_Opcion(opcion) {
     var form = document.forms['formulario_madera_stocks'];
-    LimpiarSelect();
     if (opcion.value == 1) {
         form[1].removeAttribute('disabled');
         form[2].removeAttribute('disabled');
@@ -476,6 +473,8 @@ function Seleccion_Opcion(opcion) {
         form[2].value = "";
         form[3].value = "";
         form.setAttribute('onsubmit', 'return Validar_Formulario_Stocks()');
+        LimpiarSelect();
+        EnviarDatos('', 'consultar_maderas');
     }
 }
 function Seleccion_Madera(seleccion) {
