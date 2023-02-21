@@ -1,6 +1,5 @@
 function Validar_Formulario(id) {
     //var paswd = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
-
     let form = document.forms.namedItem('formulario_empleados');
     let seld = form[0];
     let selp = form[1];
@@ -215,7 +214,7 @@ function Consultar_Empleados() { // todos los empleados
                     Eliminar_Tabla();
                     setTimeout(Crear_Tabla_Empleados, 100 * i, empleados[i], i);
                 }
-                document.getElementById('empleado_total').innerHTML = empleados.length;
+                
             } else {
                 alert('No hay empleados registrados.!');
             }
@@ -224,6 +223,19 @@ function Consultar_Empleados() { // todos los empleados
         .catch(error => console.error("Error encontrado: ", error));
 }
 
+function Contador() {
+    url = "../php/scripts/apis/empleados/api_empleados.php?consultar_empleados";
+    fetch(url, {
+        method: 'GET'
+    })
+        .then(response => response.json())
+        .then(datos => {
+            var empleados = datos.empleados;
+            document.getElementById('empleado_total').innerHTML = empleados.length;
+        })
+        .catch(error => console.error("Error encontrado: ", error));
+
+}
 function Crear_Tabla_Empleados(em, cantidad) {
     const empleado = {
         'ID': cantidad,
@@ -599,18 +611,12 @@ function Mostrar_Tabla(btn, activar) {
 //+ ".xlsx"
 
 window.onload = () => {
-    let em = document.getElementById('empleados');
-    let ti = document.getElementById('tiendas');
-    let pr = document.getElementById('produccion');
-    let bo = document.getElementById('bodegas');
-    let co = document.getElementById('compras');
-    let ad = document.getElementById('administracion');
-    let inv = document.getElementById('inventarios');
     let usuario = JSON.parse(sessionStorage.getItem('Sesion'));
     if (usuario !== null) {
         document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
         if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
             setTimeout(Consultar_Departamentos, 1000);
+            Contador();
         }else {
             sessionStorage.clear();
             window.location.replace('../login.php');
