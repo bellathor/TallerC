@@ -1,9 +1,11 @@
 <?php
 require(dirname(__DIR__) . '/config/conexion.php');
+require(dirname(__DIR__) . '/scripts/clases/class_reportes.php');
 
 class BaseDatos
 {
     private $conexion;
+    use Reportes;
 
     private $insertParams_empleados = ':us, :n, :ap, :d, :ce, :t, :pss, :idp, :idpre, :idas, :ides';
 
@@ -31,25 +33,25 @@ class BaseDatos
                 } else if ($columns != null and $inner != null) {
                     $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' ' . $inner . ' WHERE Codigo = :cod;';
                 }
-            } else if ( $where == 'WHERE Categoria = ' . '"' . 'Hilos' . '"') {
+            } else if ($where == 'WHERE Categoria = ' . '"' . 'Hilos' . '"') {
                 if ($columns == null and $inner == null) {
-                    $SQL = 'SELECT * FROM ' . $tabla . " " .  $where ;
+                    $SQL = 'SELECT * FROM ' . $tabla . " " . $where;
                 }
-            } else if ( $where  == 'WHERE Categoria = ' . '"' . 'Tapiceria' . '"') {
+            } else if ($where == 'WHERE Categoria = ' . '"' . 'Tapiceria' . '"') {
                 if ($columns == null and $inner == null) {
-                    $SQL = 'SELECT * FROM ' . $tabla . " " .  $where ;
+                    $SQL = 'SELECT * FROM ' . $tabla . " " . $where;
                 }
-            } else if ( $where  == 'WHERE Categoria = ' . '"' . 'Ferreteria' . '"') {
+            } else if ($where == 'WHERE Categoria = ' . '"' . 'Ferreteria' . '"') {
                 if ($columns == null and $inner == null) {
-                    $SQL = 'SELECT * FROM ' . $tabla . " " .  $where ;
+                    $SQL = 'SELECT * FROM ' . $tabla . " " . $where;
                 }
-            } else if ( $where  == 'WHERE Categoria = ' . '"' . 'Pintura' . '"') {
+            } else if ($where == 'WHERE Categoria = ' . '"' . 'Pintura' . '"') {
                 if ($columns == null and $inner == null) {
-                    $SQL = 'SELECT * FROM ' . $tabla . " " .  $where ;
+                    $SQL = 'SELECT * FROM ' . $tabla . " " . $where;
                 }
-            } else if ( $where  == 'WHERE Categoria = ' . '"' . 'Maquinas' . '"') {
+            } else if ($where == 'WHERE Categoria = ' . '"' . 'Maquinas' . '"') {
                 if ($columns == null and $inner == null) {
-                    $SQL = 'SELECT * FROM ' . $tabla . " " .  $where ;
+                    $SQL = 'SELECT * FROM ' . $tabla . " " . $where;
                 }
             } else {
                 if ($columns == null and $inner == null) {
@@ -220,7 +222,7 @@ class BaseDatos
                     $query->bindParam(':cant', $values['Cantidad'], PDO::PARAM_INT);
                     $query->bindParam(':stoc', $values['Stock'], PDO::PARAM_INT);
                     $query->bindParam(':gasto', $values['Gasto_Entrada'], PDO::PARAM_STR);
-                    
+
                 }
             }
             $query->execute();
@@ -372,12 +374,9 @@ class BaseDatos
 
     public function Delete($tabla, $id)
     {
-        if ($tabla == "empleados") {
-            $SQL = 'DELETE FROM ' . $tabla . ' WHERE ID_Empleado = :id';
-        } else if ($tabla == 'maderas') {
-            $SQL = 'DELETE FROM ' . $tabla . ' WHERE ID_Madera = :id';
-        } else if ($tabla == 'materiales') {
+        if ($tabla == 'materiales') {
             $SQL = 'DELETE FROM ' . $tabla . ' WHERE ID_Material = :id';
+            self::Eliminar_Reporte_Material('reportes', $id);
         }
         try {
             $this->conexion = new Conexion();

@@ -21,7 +21,9 @@
         </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
+    <script src="../../js/categoria_maderas.js?2022023_20_49"></script>
     <link href="../../css/dashboard_estilo.css?v1.0.0.15" rel="stylesheet">
+    
     <!--<link href="../css/admin.css?v1.0.0.1" rel="stylesheet">-->
 </head>
 
@@ -158,8 +160,7 @@
             <div class="row">
                 <div class="col-12 p-0">
                     <div class="box-nav letra titulo">
-                        <span class="cargo-txt" id='nombre_empleado'>Alberto - Administrador</span>
-
+                        <span class="cargo-txt" id='nombre_empleado'></span>
                     </div>
                 </div>
                 <div class="col-12 p-2">
@@ -201,11 +202,11 @@
                                     <div class="form-hilos p-1 m-2 border border-1">
                                         <form method="POST" name="formulario_stocks"
                                             onsubmit="return  Validar_Formulario_Stocks();">
-                                            <h3 class="letra titulo text-center">Salida Hilos</h3>
+                                            <h3 class="letra titulo text-center">Salida Maderas</h3>
                                             <div class="row">
                                                 <div class="col-6">
                                                     <label class="form-label mt-1" for="selec_material">Seleccione
-                                                        Hilos:</label>
+                                                        Maderas:</label>
                                                     <div class="input-group h-50 mb-1">
                                                         <select class="form-select w-100 mb-1" id="sel_material"
                                                             name="selec_material"
@@ -275,8 +276,8 @@
                                     </div>
 
                                     <h3 class="letra text-center mt-3" style="position: sticky; top:0">Reporte
-                                        Hilos</h3>
-
+                                        Maderas</h3>
+                                        <p class="text-danger">Aviso: Esta tabla solo muestra salidas.</p>
                                     <a class="btn btn-primary mb-1" style="position: sticky; top:0"
                                         id="btn_mostrar_reporte" onclick="Mostrar_Tabla_Reportes(this, false)">Mostrar
                                         Reportes</a>
@@ -289,7 +290,7 @@
                                                 <tr class="color_tienda text-white">
                                                     <th scope="col">N°</th>
                                                     <th scope="col">Código</th>
-                                                    <th scope="col">Material</th>
+                                                    <th scope="col">Madera</th>
                                                     <th scope="col">Salidas</th>
                                                     <th scope="col">Stock</th>
                                                     <th scope="col">Fecha Registro</th>
@@ -309,10 +310,5 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
-    </div>
 </body>
-<script src="../../js/categoria_hilosV1.js"></script>
-
 </html>

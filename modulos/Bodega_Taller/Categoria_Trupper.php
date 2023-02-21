@@ -3,14 +3,14 @@
 
 <head>
     <title>TALLERC</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
     <meta charset="UTF-8">
+
     <meta http-equiv="Expires" content="0">
     <meta http-equiv="Last-Modified" content="0">
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
     <meta http-equiv="Pragma" content="no-cache">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../img/logo_tallerc.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../bootstrap-/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -21,6 +21,7 @@
         </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
+    <script src="../../js/categoria_trupper.js?2022023_20_49"></script>
     <link href="../../css/dashboard_estilo.css?v1.0.0.15" rel="stylesheet">
     <!--<link href="../css/admin.css?v1.0.0.1" rel="stylesheet">-->
 </head>
@@ -77,22 +78,18 @@
 
                             <div class="collapse" id="bodega-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
-                                    <li><a href="../Bodega_Taller/Categoria_Maderas.php" class="link-white rounded"
+                                    <li><a href="Categoria_Maderas.php" class="link-white rounded"
                                             id="btn-hilos">Categoria Maderas</a></li>
-                                    <li><a href="../Bodega_Taller/Categoria_Hilos.php" class="link-white rounded"
+                                    <li><a href="Categoria_Hilos.php" class="link-white rounded"
                                             id="btn-hilos">Categoria Hilos</a></li>
-                                    <li><a href="../Bodega_Taller/Categoria_Tapiceria.php"
-                                            class="link-white rounded">Categoria
+                                    <li><a href="Categoria_Tapiceria.php" class="link-white rounded">Categoria
                                             Tapiceria</a></li>
-                                    <li><a href="../Bodega_Taller/Categoria_Trupper.php"
-                                            class="link-white rounded">Categoria
+                                    <li><a href="Categoria_Trupper.php" class="link-white rounded">Categoria
                                             Ferretaria</a>
                                     </li>
-                                    <li><a href="../Bodega_Taller/Categoria_Pintura.php"
-                                            class="link-white rounded">Categoria Pintura</a>
+                                    <li><a href="Categoria_Pintura.php" class="link-white rounded">Categoria Pintura</a>
                                     </li>
-                                    <li><a href="../Bodega_Taller/Categoria_Maquinas.php"
-                                            class="link-white rounded">Categoria
+                                    <li><a href="Categoria_Maquinas.php" class="link-white rounded">Categoria
                                             Maquinas</a></li>
                                 </ul>
                             </div>
@@ -162,130 +159,147 @@
             <div class="row">
                 <div class="col-12 p-0">
                     <div class="box-nav letra titulo">
-                        <span class="cargo-txt" id="nombre_empleado">Alberto - Administrador</span>
-                        <span class="config-txt">Editar Perfil</span>
+                        <span class="cargo-txt" id='nombre_empleado'></span>
                     </div>
                 </div>
                 <div class="col-12 p-2">
                     <div class="container" id="maderas">
                         <div class="tab-pane fade show active" id="admin" role="tabpanel" aria-labelledby="admin-tab">
-                            <div class="container p-1">
-                                <h3 class="letra titulo text-center">Gastos Generales</h3>
+                            <div class="container p-1" id="madera">
+                                <h3 class="letra titulo text-center">Categoria Ferretaria</h3>
                                 <!--<div class="grid letra m-2">
-                                    <div class="grid-item text-center p-3">
-                                        <h3 class="letra border-bottom border-1 border-white w-100">Empleados</h3>
-                                        <span id="empleados_total" class="mt-5">0</span>
+                                    <div class="grid-item color_tienda">
+                                        <h3 class="letra border-bottom border-1 border-white w-100">Tapiceria</h3>
+                                        <ul class="entrada">
+                                            <li>
+                                                <p class="text-center">Total</p>
+                                                <p class="text-center" id="conteo_materiales"> 0</p>
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <div class="grid-item text-center p-3">
-                                        <h3 class="letra border-bottom border-1 border-white w-100">Empleados sin
-                                            Nominas</h3>
-                                        <span id="empleados_sin_nomina" class="mt-5">0</span>
-                                    </div>
-                                    <div class="grid-item text-center p-3">
-                                        <h3 class="letra border-bottom border-1 border-white w-100">Empledos con Nominas
-                                        </h3>
-                                        <span id="empleados_nominas" class="mt-5">0</span>
+                                    <div class="grid-item jabin">
+                                        <h3 class="letra border-bottom border-1 border-white w-100">Proveedores</h3>
+                                        <ul class="entrada">
+                                            <li>
+                                                <span>Total:</span>
+                                                <spanp class="text-center"> 0</span>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>-->
                                 <ul class="nav nav-tabs p-1" id="myTab" role="tablist">
+
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="gastos_generales-tab" data-bs-toggle="tab"
-                                            data-bs-target="#gastos_generales" type="button" role="tab"
-                                            aria-controls="gastos_generales" aria-selected="true"
-                                            onclick="Cargar_Nominas();">Registro Gastos Generales</button>
+                                        <button class="nav-link active" id="cat_hilos-tab" data-bs-toggle="tab"
+                                            data-bs-target="#cat_hilos" type="button" role="tab"
+                                            aria-controls="cat_hilos" aria-selected="true">Entradas/Salidas</button>
                                     </li>
                                 </ul>
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="gastos_generales" role="tabpanel"
-                                        aria-labelledby="gastos_generales-tab">
-                                        <div class="form-hilos p-1 m-2 border border-1">
-                                            <form method="POST" name="formulario_gastos_generales"
-                                                onsubmit="return Validar_Formulario();">
-                                                <h3 class="letra titulo text-center">Formulario Gastos</h3>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <label class="form-label mt-2" for="fecha">Fecha-Hora</label>
-                                                        <input class="form-control" name="fecha" type="text"
-                                                            placeholder="00-00-00 00:00:00" required disabled
+
+                                <div class="tab-pane fade show active" id="cat_hilos" role="tabpanel"
+                                    aria-labelledby="cat_hilos-tab">
+                                    <div class="form-hilos p-1 m-2 border border-1">
+                                        <form method="POST" name="formulario_stocks"
+                                            onsubmit="return  Validar_Formulario_Stocks();">
+                                            <h3 class="letra titulo text-center">Salida Ferreteria</h3>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label class="form-label mt-1" for="selec_material">Seleccione
+                                                        Herramientas:</label>
+                                                    <div class="input-group h-50 mb-1">
+                                                        <select class="form-select w-100 mb-1" id="sel_material"
+                                                            name="selec_material"
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity(''); filtrarTextos(this);">
-                                                        <div id="error_letra_nombre" class="d-none invalid-feedback">
-                                                            Solo se permiten letras y
-                                                            sin espacios.</div>
-                                                        <div id="error_maxletras_nombre"
-                                                            class="d-none invalid-feedback">Llegaste maximo de letras.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label class="form-label mt-2"
-                                                            for="descrip">Descripcion:</label>
-                                                        <input class="form-control" name="descrip" type="text"
-                                                            placeholder="Escriba la descripcion del gasto" required
-                                                            oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity('');filtrarTextos(this);">
-                                                        <div id="error_letra_nombres" class="d-none invalid-feedback">
-                                                            Solo se permiten letras y
-                                                            sin espacios.</div>
-                                                        <div id="error_maxletras_nombres"
-                                                            class="d-none invalid-feedback">Llegaste maximo de letras.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label class="form-label mt-2" for="monto">Monto:</label>
-                                                        <input class="form-control" name="monto" type="number" min="0"
-                                                            placeholder="$00.00" required step="0.01"
-                                                            oninvalid="this.setCustomValidity('Debe llenar este campo con numeros positivos.!')"
-                                                            oninput="this.setCustomValidity('');filtrarTextos(this);">
-                                                        <div id="error_letra_nombres" class="d-none invalid-feedback">
-                                                            Solo se permiten letras y
-                                                            sin espacios.</div>
-                                                        <div id="error_maxletras_nombres"
-                                                            class="d-none invalid-feedback">Llegaste maximo de letras.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label class="form-label mt-2" for="coment">Comentario:</label>
-                                                        <input class="form-control" name="coment" type="text"
-                                                            placeholder="Escriba una observacion" required
-                                                            oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity('');filtrarTextos(this);">
-                                                        <div id="error_letra_nombres" class="d-none invalid-feedback">
-                                                            Solo se permiten letras y
-                                                            sin espacios.</div>
-                                                        <div id="error_maxletras_nombres"
-                                                            class="d-none invalid-feedback">Llegaste maximo de letras.
-                                                        </div>
+                                                            oninput="this.setCustomValidity(''); Seleccion_Materiales(this);"
+                                                            required>
+                                                            <option>Seleccionar</option>
+                                                        </select>
+
+                                                        <div id="error_letra_selec_material"
+                                                            class="d-none invalid-feedback">Solo se permiten letras
+                                                            y sin espacios.</div>
+                                                        <div id="error_maxletras_selec_material"
+                                                            class="d-none invalid-feedback">Llegaste maximo de
+                                                            letras.</div>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-success mt-2" type="submit">Guardar</button>
-                                                <a class="btn btn-danger mt-2"
-                                                    onclick="Limpiar_Formulario()">Limpiar</a>
-                                            </form>
+                                                <div class="col-6">
+                                                    <label class="form-label mt-1" for="salidaMadera">Salida:</label>
+                                                    <input class="form-control w-30" name="salida" type="number"
+                                                        placeholder="0" disabled required step="0.01" min="0"
+                                                        oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
+                                                        oninput="this.setCustomValidity('');filtrarCantidad(this);">
+                                                    <div id="error_letra_salidaMadera" class="d-none invalid-feedback">
+                                                        Solo se permiten numeros.
+                                                    </div>
+                                                    <div id="error_maxletras_salidaMadera"
+                                                        class="d-none invalid-feedback">Llegaste maximo de letras.
+                                                    </div>
+                                                    <div id="error_cantidad_salidaMadera"
+                                                        class="d-none invalid-feedback">No tienes esa cantidad en
+                                                        stock.
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label class="form-label mt-0" for="Precio">Precio
+                                                        Unidad:</label>
+                                                    <input class="form-control w-30" name="precio" type="number"
+                                                        placeholder="0" disabled required
+                                                        oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
+                                                        oninput="this.setCustomValidity('');">
 
-                                        </div>
-                                        <h3 class="letra text-center mt-3">Tabla Gastos Generales</h3>
-                                        <a class="btn btn-success m-3" id='btn_cierre' onclick="Realizar_Cierre();"
-                                            disabled>Realizar Cierre de Gastos</a>
-                                        <a class="btn btn-primary" onclick="Mostrar_Tabla(this,false);">Mostrar
-                                            gastos</a>
-                                        <div class="table-responsive">
-                                            <table id="tabla_gastos_generales_"
-                                                class="table table-bordered table-wrapper-scroll-y my-custom-scrollbar">
-                                                <thead style="position: sticky; top:0">
-                                                    <tr class="color_tienda text-white">
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">Fecha</th>
-                                                        <th scope="col">Descripcion</th>
-                                                        <th scope="col">Monto</th>
-                                                        <th scope="col">Comentario</th>
-                                                        <th scope="col">Accion</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="tabla_gastos_generales">
+                                                    <div id="error_letra_entradaMadera" class="d-none invalid-feedback">
+                                                        Solo se permiten numeros.
+                                                    </div>
+                                                    <div id="error_maxletras_entradaMadera"
+                                                        class="d-none invalid-feedback">Llegaste maximo de letras.
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label class="form-label mt-1" for="stock_madera">Stock:</label>
+                                                    <input class="form-control w-30" name="stockMadera" type="number"
+                                                        placeholder="0" disabled required
+                                                        oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
+                                                        oninput="this.setCustomValidity('');">
+                                                    <div id="error_letra_stockMadera" class="d-none invalid-feedback">
+                                                        Solo se permiten letras y
+                                                        sin espacios.</div>
+                                                    <div id="error_maxletras_stockMadera"
+                                                        class="d-none invalid-feedback">Llegaste maximo de letras.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-success mt-2" type="submit">Guardar</button>
+                                            <a class="btn btn-danger mt-2" onclick="Limpiar_Formulario();">Limpiar</a>
+                                        </form>
+                                    </div>
 
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                    <h3 class="letra text-center mt-3" style="position: sticky; top:0">Reporte
+                                        Ferreteria</h3>
+                                        <p class="text-danger">Aviso: Esta tabla solo muestra salidas.</p>
+                                    <a class="btn btn-primary mb-1" style="position: sticky; top:0"
+                                        id="btn_mostrar_reporte" onclick="Mostrar_Tabla_Reportes(this, false)">Mostrar
+                                        Reportes</a>
+                                    <a class="btn btn-secondary mb-1" style="position: sticky; top:0"
+                                        id="exporttable_mat1">Exportar Excel</a>
+                                    <div class="table-responsive table-custom">
+                                        <table id="tabla_reporte_material"
+                                            class="table table-striped table-bordered table-sm my-custom-scrollbar">
+                                            <thead style="position: sticky; top:0">
+                                                <tr class="color_tienda text-white">
+                                                    <th scope="col">N°</th>
+                                                    <th scope="col">Código</th>
+                                                    <th scope="col">Material</th>
+                                                    <th scope="col">Salidas</th>
+                                                    <th scope="col">Stock</th>
+                                                    <th scope="col">Fecha Registro</th>
+                                                    <th scope="col">Hora Registro</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tabla_reporte_material_body">
+
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -294,7 +308,6 @@
                 </div>
             </div>
         </div>
+    </div>
 </body>
-<script src="../../js/gastos_generalesV1.0000.js"></script>
-
 </html>

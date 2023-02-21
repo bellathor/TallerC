@@ -19,7 +19,7 @@
     <script src="../bootstrap-/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
         </script>
-
+    <script src="../js/dashboard.js?2022023_20_49"></script>
     <link href="../css/dashboard_estilo.css?v1.0.0.15" rel="stylesheet">
     <!--<link href="../css/admin.css?v1.0.0.1" rel="stylesheet">-->
 </head>
@@ -162,8 +162,7 @@
                 <div class="row">
                     <div class="col-12 p-0">
                         <div class="box-nav letra titulo">
-                            <span class="cargo-txt" id="nombre_empleado">Alberto</span>
-
+                            <span class="cargo-txt" id="nombre_empleado"></span>
                         </div>
                     </div>
                     <div class="col-12 p-2">
@@ -171,22 +170,22 @@
                             <div class="tab-pane fade show active" id="admin" role="tabpanel"
                                 aria-labelledby="admin-tab">
                                 <div class="container p-1" id="madera">
-                                    <h3 class="letra titulo text-center">Panel de Control</h3>
+                                    <h3 class="letra titulo text-center">Dashboard</h3>
                                     <div class="grid letra m-2">
 
-                                        <div class="grid-item text-center p-3">
+                                        <div class="grid-item text-center p-3" id="dash_empleados">
                                             <h3 class="letra border-bottom border-1 border-white w-100">Empleados</h3>
                                             <span id="empleado_total" class="mt-5">0</span>
                                         </div>
-                                        <div class="grid-item text-center p-3">
+                                        <div class="grid-item text-center p-3" id="dash_maderas">
                                             <h3 class="letra border-bottom border-1 border-white w-100">Maderas</h3>
                                             <span id="maderas_total" class="mt-5">0</span>
                                         </div>
-                                        <div class="grid-item text-center p-3">
+                                        <div class="grid-item text-center p-3" id="dash_materiales">
                                             <h3 class="letra border-bottom border-1 border-white w-100">Materiales</h3>
                                             <span id="materiales_total" class="mt-5">0</span>
                                         </div>
-                                        <div class="grid-item text-center p-3">
+                                        <div class="grid-item text-center p-3" id="dash_muebles">
                                             <h3 class="letra border-bottom border-1 border-white w-100">Muebles</h3>
                                             <span id="muebles_total" class="mt-5">0</span>
                                         </div>
@@ -200,6 +199,5 @@
         </div>
     </div>
 </body>
-<script src="../js/dashboard.js"></script>
 
 </html>

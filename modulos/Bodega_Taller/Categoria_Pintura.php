@@ -19,9 +19,9 @@
     <script src="../../bootstrap-/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
         </script>
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
+    <script src="../../js/categoria_pintura.js?2022023_20_49"></script>
     <link href="../../css/dashboard_estilo.css?v1.0.0.15" rel="stylesheet">
     <!--<link href="../css/admin.css?v1.0.0.1" rel="stylesheet">-->
 </head>
@@ -159,15 +159,14 @@
             <div class="row">
                 <div class="col-12 p-0">
                     <div class="box-nav letra titulo">
-                        <span class="cargo-txt" id='nombre_empleado'>Alberto - Administrador</span>
-                        <span class="config-txt">Editar Perfil</span>
+                        <span class="cargo-txt" id='nombre_empleado'></span>
                     </div>
                 </div>
                 <div class="col-12 p-2">
                     <div class="container" id="maderas">
                         <div class="tab-pane fade show active" id="admin" role="tabpanel" aria-labelledby="admin-tab">
                             <div class="container p-1" id="madera">
-                                <h3 class="letra titulo text-center">Categoria Maquinas</h3>
+                                <h3 class="letra titulo text-center">Categoria Pinturas</h3>
                                 <!--<div class="grid letra m-2">
                                     <div class="grid-item color_tienda">
                                         <h3 class="letra border-bottom border-1 border-white w-100">Tapiceria</h3>
@@ -202,11 +201,11 @@
                                     <div class="form-hilos p-1 m-2 border border-1">
                                         <form method="POST" name="formulario_stocks"
                                             onsubmit="return  Validar_Formulario_Stocks();">
-                                            <h3 class="letra titulo text-center">Salida Maquinas</h3>
+                                            <h3 class="letra titulo text-center">Salida Pintura</h3>
                                             <div class="row">
                                                 <div class="col-6">
                                                     <label class="form-label mt-1" for="selec_material">Seleccione
-                                                        Maquinas:</label>
+                                                        Pintura:</label>
                                                     <div class="input-group h-50 mb-1">
                                                         <select class="form-select w-100 mb-1" id="sel_material"
                                                             name="selec_material"
@@ -276,8 +275,8 @@
                                     </div>
 
                                     <h3 class="letra text-center mt-3" style="position: sticky; top:0">Reporte
-                                        Maquinas</h3>
-
+                                        Pintura</h3>
+                                        <p class="text-danger">Aviso: Esta tabla solo muestra salidas.</p>
                                     <a class="btn btn-primary mb-1" style="position: sticky; top:0"
                                         id="btn_mostrar_reporte" onclick="Mostrar_Tabla_Reportes(this, false)">Mostrar
                                         Reportes</a>
@@ -310,10 +309,5 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
-    </div>
 </body>
-<script src="../../js/categoria_maquinasV1.js"></script>
-
 </html>

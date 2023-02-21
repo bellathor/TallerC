@@ -1,5 +1,5 @@
 <?php
-header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: null');
 require(dirname(__DIR__) . '/scripts/bd.php');
 $opcion = new BaseDatos();
 

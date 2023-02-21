@@ -8,7 +8,7 @@
     <meta http-equiv="Expires" content="0">
     <meta http-equiv="Last-Modified" content="0">
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
-    <link rel="shortcut icon" href="./img/logo_tallerc.ico">
+    <link rel="shortcut icon" href="../../img/logo_tallerc.ico">
     <meta http-equiv="Pragma" content="no-cache">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +21,9 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
         </script>
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
+    <script src="../../js/materiales.js?2022023_20_49"></script>
     <link href="../../css/dashboard_estilo.css?v1.0.0.15" rel="stylesheet">
     <!--<link href="../css/admin.css?v1.0.0.1" rel="stylesheet">-->
 </head>
@@ -114,8 +117,9 @@
                             </button>
                             <div class="collapse" id="admin_nominas-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 p-4 small">
-                                    <li><a href="../Admin y Nominas./Admin y Nominas/Lista_Nominas.php"
-                                            class="link-white rounded">Lista de nominas</a></li>
+                                    <li><a href="../Admin_Nominas/Lista_Nominas.php" class="link-white rounded">Lista de
+                                            nominas</a>
+                                    </li>
                                     <li><a href="../Admin_Nominas/Gastos_Generales.php"
                                             class="link-white rounded">Gastos generales</a></li>
 
@@ -136,7 +140,7 @@
                                         <a href="materiales.php" class="link-white rounded">Materiales</a>
                                     </li>
                                     <li>
-                                        <a href="muebles.php" class="link-white rounded">Muebles ( En construccion
+                                        <a href="/muebles.php" class="link-white rounded">Muebles ( En construccion
                                             )</a></button>
                                     </li>
                                 </ul>
@@ -157,22 +161,21 @@
             <div class="row">
                 <div class="col-12 p-0">
                     <div class="box-nav letra titulo">
-                        <span class="cargo-txt" id="nombre_empleado">Alberto - Administrador</span>
-                        <span class="config-txt">Editar Perfil</span>
+                        <span class="cargo-txt" id="nombre_empleado"></span>
                     </div>
                 </div>
                 <div class="col-12 p-2">
-                    <div class="container" id="muebles">
+                    <div class="container" id="maderas">
                         <div class="tab-pane fade show active" id="admin" role="tabpanel" aria-labelledby="admin-tab">
-                            <div class="container p-1" id="muebles">
-                                <h3 class="letra titulo text-center">Inventario de Muebles</h3>
+                            <div class="container p-1" id="madera">
+                                <h3 class="letra titulo text-center">Inventario de Materiales</h3>
                                 <div class="grid letra m-2">
                                     <div class="grid-item color_tienda">
-                                        <h3 class="letra border-bottom border-1 border-white w-100">Muebles</h3>
+                                        <h3 class="letra border-bottom border-1 border-white w-100">Materiales</h3>
                                         <ul class="entrada">
                                             <li>
                                                 <p class="text-center">Total</p>
-                                                <p class="text-center" id="muebles_total"> 0</p>
+                                                <p class="text-center" id="conteo_materiales"> 0</p>
                                             </li>
                                         </ul>
                                     </div>
@@ -188,47 +191,85 @@
                                 </div>
                                 <ul class="nav nav-tabs p-1" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="inventario_muebles-tab" data-bs-toggle="tab"
-                                            data-bs-target="#inventario_muebles" type="button" role="tab"
-                                            aria-controls="inventario_muebles" aria-selected="true">Inventario
-                                            muebles</button>
+                                        <button class="nav-link active" id="inventario_materiales-tab"
+                                            data-bs-toggle="tab" data-bs-target="#inventario_materiales" type="button"
+                                            role="tab" aria-controls="inventario_materiales"
+                                            aria-selected="true">Inventario
+                                            Materiales</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="entrada_salida-tab" data-bs-toggle="tab"
-                                            data-bs-target="#entrada_salida" type="button" role="tab"
-                                            aria-controls="entrada_salida" aria-selected="false">Entrada/Salida</button>
+                                        <button class="nav-link" id="entrada_salida_materiales-tab" data-bs-toggle="tab"
+                                            data-bs-target="#entrada_salida_materiales" type="button" role="tab"
+                                            aria-controls="entrada_salida_materiales"
+                                            aria-selected="false">Entradas/Salidas</button>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="inventario_muebles" role="tabpanel"
-                                        aria-labelledby="inventario_muebles-tab">
+                                    <div class="tab-pane fade show active" id="inventario_materiales" role="tabpanel"
+                                        aria-labelledby="inventario_materiales-tab">
                                         <div class="form-hilos p-1 m-2 border border-1">
-                                            <form method="POST" name="formulario_muebles"
-                                                onsubmit="return Validar_Formulario();" enctype="multipart/form-data">
-                                                <h3 class="letra titulo text-center">Formulario de Muebles</h3>
+                                            <form method="POST" name="formulario_material"
+                                                onsubmit="return Validar_Formulario(false);">
+                                                <h3 class="letra titulo text-center">Formulario de Materiales</h3>
                                                 <div class="row">
-
+                                                    <div class="col-6">
+                                                        <label class="form-label mt-3" for="categ">Seleccion
+                                                            Categoria:</label>
+                                                        <div class="input-group h-50 mb-3">
+                                                            <select class="form-select w-100 mb-3"
+                                                                id="seleccion_categoria" name="categ"
+                                                                oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
+                                                                oninput="this.setCustomValidity('');Seleccion_Categoria_Materiales(this);"
+                                                                ; required>
+                                                                <option selected value="">Seleccionar</option>
+                                                                <option value="1">Hilos</option>
+                                                                <option value="2">Tapiceria</option>
+                                                                <option value="3">Ferreteria</option>
+                                                                <option value="4">Pintura</option>
+                                                                <option value="5">Maquinas</option>
+                                                            </select>
+                                                            <div id="error_letra_categoria"
+                                                                class="d-none invalid-feedback">Solo se permiten letras
+                                                                y sin espacios.</div>
+                                                            <div id="error_maxletras_categoria"
+                                                                class="d-none invalid-feedback">Llegaste maximo de
+                                                                letras.</div>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-6">
                                                         <label class="form-label mt-2" for="cod">Código:</label>
                                                         <input class="form-control" name="cod" type="text"
-                                                            placeholder="Ejem. MELIZ4" required
+                                                            placeholder="Ejem. PP1" required disabled
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity('');Filtrar_Textos(this);">
+                                                            oninput="this.setCustomValidity('');Formato_Texto(this);">
                                                         <div id="error_letra_cod" class="d-none invalid-feedback">Solo
                                                             se permiten letras en mayusculas y numeros.</div>
                                                         <div id="error_maxletras_cod" class="d-none invalid-feedback">
                                                             Llegaste maximo de letras.</div>
                                                     </div>
                                                     <div class="col-6">
-                                                        <label class="form-label mt-2" for="mueble">Nombre
-                                                            Mueble:</label>
-                                                        <input class="form-control" name="mueble" type="text"
-                                                            placeholder="Ejem. Mesa Liz" required
+                                                        <label class="form-label mt-2" for="material">Material:</label>
+                                                        <input class="form-control" name="material" type="text"
+                                                            placeholder="Piola Plana" required disabled
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                             oninput="this.setCustomValidity('');Filtrar_Textos(this);">
-                                                        <div id="error_letra_mueble" class="d-none invalid-feedback">
+                                                        <div id="error_letra_material" class="d-none invalid-feedback">
                                                             Solo se permiten letras y sin espacios.</div>
-                                                        <div id="error_maxletras_mueble"
+                                                        <div id="error_maxletras_material"
+                                                            class="d-none invalid-feedback">Llegaste maximo de letras.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label class="form-label mt-2" for="precio">Precio
+                                                            Unidad:</label>
+                                                        <input class="form-control" name="precio" type="number"
+                                                            step="0.001" required min='0' placeholder="0"
+                                                            oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
+                                                            oninput="this.setCustomValidity('');filtrarCantidad(this);"
+                                                            disabled>
+                                                        <div id="error_letra_madera" class="d-none invalid-feedback">
+                                                            Solo se permiten letras y sin espacios.</div>
+                                                        <div id="error_maxletras_madera"
                                                             class="d-none invalid-feedback">Llegaste maximo de letras.
                                                         </div>
                                                     </div>
@@ -248,127 +289,49 @@
                                                                 letras.</div>
                                                         </div>
                                                     </div>-->
-                                                    <div class="col-6">
-                                                        <label class="form-label mt-2"
-                                                            for="muebleDescripcion">Descripcion
-                                                            Mueble:</label>
-                                                        <input class="form-control" name="muebleDescripcion" type="text"
-                                                            placeholder="Ejem. Mesa de comedor" required
-                                                            oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity('');Filtrar_Textos(this);">
-                                                        <div id="error_letra_muebleDescripcion"
-                                                            class="d-none invalid-feedback">
-                                                            Solo se permiten letras y sin espacios.</div>
-                                                        <div id="error_maxletras_muebleDescripcion"
-                                                            class="d-none invalid-feedback">Llegaste maximo de letras.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label class="form-label mt-2" for="muebleImagen">Subir Imagen
-                                                            Mueble:</label>
-                                                        <input class="form-control" name="muebleImagen" type="file"
-                                                            id="imgMueble" placeholder="Subir foto del mueble"
-                                                            value="Subir Imagen" accept="image/png, image/jpeg"
-                                                            oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity('');">
-                                                        <div id="error_letra_muebleImagen"
-                                                            class="d-none invalid-feedback">
-                                                            Solo se permiten letras y sin espacios.</div>
-                                                        <div id="error_maxletras_muebleImagen"
-                                                            class="d-none invalid-feedback">Llegaste maximo de letras.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label class="form-label mt-1" for="ancho">Ancho:</label>
-                                                        <input class="form-control w-30" name="ancho" type="number"
-                                                            placeholder="0" required step="0.01"
-                                                            oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity(''); Filtrar_Textos(this);">
-                                                        <div id="error_letra_ancho" class="d-none invalid-feedback">Solo
-                                                            se permiten numeros.
-                                                        </div>
-                                                        <div id="error_maxletras_ancho" class="d-none invalid-feedback">
-                                                            Llegaste maximo de letras.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label class="form-label mt-1" for="alto">Alto:</label>
-                                                        <input class="form-control w-30" name="alto" type="number"
-                                                            placeholder="0" required step="0.01"
-                                                            oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity('');Filtrar_Textos(this);">
-                                                        <div id="error_letra_alto" class="d-none invalid-feedback">Solo
-                                                            se permiten numeros.
-                                                        </div>
-                                                        <div id="error_maxletras_alto" class="d-none invalid-feedback">
-                                                            Llegaste maximo de letras.
-                                                        </div>
-                                                        <div id="error_cantidad_alto" class="d-none invalid-feedback">No
-                                                            tienes esa cantidad en
-                                                            stock.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label class="form-label mt-1" for="largo">Fondo:</label>
-                                                        <input class="form-control w-30" name="largo" type="number"
-                                                            placeholder="0" required step="0.01"
-                                                            oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity('');Filtrar_Textos(this);">
-                                                        <div id="error_letra_largo" class="d-none invalid-feedback">Solo
-                                                            se permiten letras y
-                                                            sin espacios.</div>
-                                                        <div id="error_maxletras_largo" class="d-none invalid-feedback">
-                                                            Llegaste maximo de letras.
-                                                        </div>
-                                                        <div id="error_cantidad_alto" class="d-none invalid-feedback">No
-                                                            tienes esa cantidad en
-                                                            stock.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label class="form-label mt-1" for="largo">Imagen
-                                                            Mueble:</label>
-                                                        <div class="container">
-                                                            <img src="" class="img-thumbnail d-none" alt="imagen_mueble"
-                                                                id="imagen_mueble">
-                                                        </div>
-                                                    </div>
                                                 </div>
-                                                <button class="btn btn-success mt-2" type="submit">Registrar</button>
-                                                <button class="btn btn-danger mt-2">Limpiar</button>
+                                                <button class="btn btn-success mt-2" type="submit"
+                                                    id="btn_submit">Registrar</button>
+                                                <a class="btn btn-danger mt-2" type="reset"
+                                                    onclick="LimpiarFormulario()">Limpiar</a>
                                             </form>
                                         </div>
-                                        <div class="table-responsive">
-                                            <h3 class="letra text-center mt-3">Tabla Muebles</h3>
-                                            <a class="btn btn-secondary m-1">Exportar Excel</a>
-                                            <table id="tabla_empleados_"
+
+                                        <h3 class="letra text-center mt-3" style="position: sticky; top:0">Materiales
+                                            Registradas</h3>
+                                        <a class="btn btn-primary mb-1" style="position: sticky; top:0" id="btn_mostrar"
+                                            onclick="Mostrar_Tabla(this, false)">Mostrar Tabla</a>
+                                        <a class="btn btn-secondary m-3" style="position: sticky; top:0"
+                                            id="exporttable_mat1">Exportar Excel</a>
+                                        <div class="table-responsive table-custom">
+
+                                            <table id="tabla_material_"
                                                 class="table table-striped table-bordered table-sm my-custom-scrollbar">
                                                 <thead style="position: sticky; top:0">
                                                     <tr class="color_tienda text-white">
-                                                        <th scope="col">#</th>
+                                                        <th scope="col">N°</th>
                                                         <th scope="col">Código</th>
-                                                        <th scope="col">Concepto</th>
-                                                        <th scope="col">Descripcion</th>
-                                                        <th scope="col">Imagen</th>
-                                                        <th scope="col">Ancho</th>
-                                                        <th scope="col">Alto</th>
-                                                        <th scope="col">Fondo</th>
-                                                        <!--<th scope="col">Proveedor</th>
-                                                        <th scope="col">Tel Proveedor</th>-->
-                                                        <th scope="col">Eliminar</th>
+                                                        <th scope="col">Material</th>
+                                                        <th scope="col">Precio Unidad</th>
+                                                        <th scope="col">Categoria</th>
+                                                        <th scope="col">Opcion</th>
+                                                        <th scope="col">Opcion</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="tabla_muebles">
+                                                <tbody id="tabla_material">
+
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="entrada_salida" role="tabpanel"
-                                        aria-labelledby="entrada_salida-tab">
-                                        <div class="form-hilos p-2 m-2 border border-1">
 
-                                            <form method="POST" name="formulario_madera_stocks"
-                                                onsubmit="return Validar_Formulario_Stock();">
+                                    </div>
+
+
+                                    <div class="tab-pane fade" id="entrada_salida_materiales" role="tabpanel"
+                                        aria-labelledby="entrada_salida_materiales-tab">
+                                        <div class="form-hilos p-1 m-2 border border-1">
+                                            <form method="POST" name="formulario_materiales_stocks"
+                                                onsubmit="return Validar_Formulario_Stocks();">
                                                 <h3 class="letra titulo text-center">Modificacion Stock</h3>
                                                 <div class="row">
                                                     <div class="col-6">
@@ -379,7 +342,7 @@
                                                                 name="opcionMadera"
                                                                 oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                                 oninput="this.setCustomValidity('')"
-                                                                onchange="Seleccion_Opcion(this)" required>
+                                                                onchange="Seleccion_Opcion_stock(this)" required>
                                                                 <option selected value="">Seleccionar</option>
                                                                 <option value="1">Entradas</option>
                                                                 <option value="2">Salidas</option>
@@ -393,13 +356,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-6">
-                                                        <label class="form-label mt-3" for="maderas">Seleccion
-                                                            Madera:</label>
+                                                        <label class="form-label mt-3" for="selec_materiales">Seleccion
+                                                            Material:</label>
                                                         <div class="input-group h-50 mb-3">
-                                                            <select class="form-select w-100 mb-3" id="sel_maderas"
-                                                                name="selec_madera" disabled
+                                                            <select class="form-select w-100 mb-3" id="sel_materiales"
+                                                                name="selec_materiales" disabled
                                                                 oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                                oninput="this.setCustomValidity(''); Seleccion_Madera(this);"
+                                                                oninput="this.setCustomValidity(''); Seleccion_Materiales(this);"
                                                                 required disabled>
                                                                 <option value="">Seleccionar</option>
                                                             </select>
@@ -415,8 +378,8 @@
                                                     <div class="col-6">
                                                         <label class="form-label mt-1"
                                                             for="entradaMadera">Entrada:</label>
-                                                        <input class="form-control w-30" name="entradaMadera"
-                                                            type="number" placeholder="0" disabled required
+                                                        <input class="form-control w-30" name="entrada" type="number"
+                                                            placeholder="0" disabled required
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                             oninput="this.setCustomValidity('');filtrarCantidad(this);">
 
@@ -430,8 +393,8 @@
                                                     <div class="col-6">
                                                         <label class="form-label mt-1"
                                                             for="salidaMadera">Salida:</label>
-                                                        <input class="form-control w-30" name="salidaMadera"
-                                                            type="number" placeholder="0" disabled required step="1"
+                                                        <input class="form-control w-30" name="salida" type="number"
+                                                            placeholder="0" disabled required step="0.01" min="0"
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                             oninput="this.setCustomValidity('');filtrarCantidad(this);">
                                                         <div id="error_letra_salidaMadera"
@@ -448,7 +411,7 @@
                                                     <div class="col-6">
                                                         <label class="form-label mt-1" for="Precio">Precio
                                                             Unidad:</label>
-                                                        <input class="form-control w-30" name="Precion" type="number"
+                                                        <input class="form-control w-30" name="precio" type="number"
                                                             placeholder="0" disabled required
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                             oninput="this.setCustomValidity('');">
@@ -475,29 +438,44 @@
                                                     </div>
                                                 </div>
                                                 <button class="btn btn-success mt-2" type="submit">Guardar</button>
-                                                <button class="btn btn-danger mt-2"
-                                                    onclick="LimpiarFormularioStock();">Limpiar</button>
+                                                <a class="btn btn-danger mt-2"
+                                                    onclick="LimpiarFormularioStock();">Limpiar</a>
                                             </form>
                                         </div>
-                                        <a class="btn btn-secondary m-3 float-end">Exportar Excel</a>
-                                        <table class="table table-bordered table-wrapper-scroll-y my-custom-scrollbar">
-                                            <thead style="position: sticky; top:0">
-                                                <tr class="color_tienda text-white">
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Nombre Empresa</th>
-                                                    <th scope="col">Direccion</th>
-                                                    <th scope="col">Telefono</th>
-                                                    <th scope="col">Correo Electronico</th>
-                                                    <th scope="col">Descripcion</th>
-                                                    <th scope="col">Ciudad</th>
-                                                    <th scope="col">Opcion</th>
-                                                    <th scope="col">Opcion</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tabla_proveedores">
 
-                                            </tbody>
-                                        </table>
+                                        <h3 class="letra text-center mt-3" style="position: sticky; top:0">Reporte
+                                            Materiales</h3>
+                                        <a class="btn btn-primary mb-1" style="position: sticky; top:0"
+                                            id="btn_mostrar_reporte"
+                                            onclick="Mostrar_Tabla_Reportes(this, false)">Mostrar
+                                            Reportes</a>
+                                        <a class="btn btn-secondary mb-1" style="position: sticky; top:0"
+                                            id="exporttable_mat2">Exportar Excel</a>
+
+                                        <div class="table-responsive table-custom">
+                                            <table id="tabla_reporte_material"
+                                                class="table table-striped table-bordered table-sm my-custom-scrollbar">
+                                                <thead style="position: sticky; top:0">
+                                                    <tr class="color_tienda text-white">
+                                                        <th scope="col">N°</th>
+                                                        <th scope="col">Código</th>
+                                                        <th scope="col">Material</th>
+                                                        <th scope="col">Empleado</th>
+                                                        <th scope="col">Dep</th>
+                                                        <th scope="col">Puesto</th>
+                                                        <th scope="col">Entradas</th>
+                                                        <th scope="col">Salidas</th>
+                                                        <th scope="col">Stock</th>
+                                                        <th scope="col">Gasto Entrada$</th>
+                                                        <th scope="col">Fecha Registro</th>
+                                                        <th scope="col">Hora Registro</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tabla_reporte_material_body">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -507,8 +485,6 @@
             </div>
         </div>
     </div>
-
 </body>
-<script src="../../js/muebles.js"></script>
 
 </html>

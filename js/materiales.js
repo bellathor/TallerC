@@ -26,6 +26,20 @@ function Formato_Texto(input) {
         }
     }
 }
+
+function Contador() {
+    url = "../../php/scripts/solicitudes_inventario.php";
+    var urlEnvio = url + '/?' + opcion;
+    fetch(urlEnvio, {
+        method: 'GET'
+    })
+        .then(response => response.json())
+        .then(datos => {
+            var materiales = datos.materiales;
+            document.getElementById('conteo_materiales').innerText = materiales.length;
+        })
+        .catch(error => console.error("Error encontrado: ", error));
+}
 function Validar_Formulario(opcion, id, entrada_salida, cantidad) { // formulario madera
     const form = document.forms['formulario_material'];
     var select = document.getElementById('seleccion_categoria');
@@ -345,7 +359,7 @@ function DatosTabla(datos, stock, cantidad) {
             'Material': datos.Nombre_Material,
             'Precio': datos.Precio_Unitario,
             'Categoria': datos.Categoria
-            
+
         };
 
         var arreglojson = [cantidad + 1, json.Codigo, json.Material, json.Precio, json.Categoria];
@@ -720,18 +734,18 @@ window.onload = () => {
     if (usuario !== null) {
         document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
         if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
-            setTimeout(Consultar_Departamentos, 1000);
-        }else {
+            Contador();
+        } else {
             sessionStorage.clear();
-            window.location.replace('../..login.php');
+            window.location.replace('../../login.php');
         }
     }
     else {
         sessionStorage.clear();
-        window.location.replace('../..login.php');
+        window.location.replace('../../login.php');
     }
 };
 function Salir() {
     sessionStorage.clear();
-    window.location.replace('../..login.php');
+    window.location.replace('../../login.php');
 }

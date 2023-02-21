@@ -144,7 +144,9 @@ class Maderas
 
     private function Delete($id)
     {
+        
         $tabla = "maderas";
+        self::Eliminar_Reporte_Madera('reportes', $id);
         $this->SQL = 'DELETE FROM ' . $tabla . ' WHERE ID_Madera = :id';
         try {
             $this->conexion = new Conexion();

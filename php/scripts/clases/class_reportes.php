@@ -100,5 +100,37 @@ trait Reportes
             }
         }
     }
+
+    function Eliminar_Reporte_Madera($tabla, $id){
+        $this->SQL = 'DELETE FROM ' . $tabla . ' WHERE ID_Madera = :id';
+        try {
+            $this->conexion = new Conexion();
+            $cx = $this->conexion->conectar();
+            $query = $cx->prepare($this->SQL);
+            $query->bindParam(':id', $id, PDO::PARAM_INT);
+            $query->execute();
+            $cx = null;
+            $this->conexion->desconectar();
+        } catch (PDOException $err) {
+            echo "¡Ocurrió un error! - Código: " . $err->getCode() . " chequear log de errores.!";
+            self::error_($err->getCode(), $err->getMessage(), $err->getFile(), $err->getLine()); //$err->getCode(), $err->getMessage(), $err->getFile(), $err->getLine()
+        }
+    }
+
+    function Eliminar_Reporte_Material($tabla, $id){
+        $this->SQL = 'DELETE FROM ' . $tabla . ' WHERE ID_Material = :id';
+        try {
+            $this->conexion = new Conexion();
+            $cx = $this->conexion->conectar();
+            $query = $cx->prepare($this->SQL);
+            $query->bindParam(':id', $id, PDO::PARAM_INT);
+            $query->execute();
+            $cx = null;
+            $this->conexion->desconectar();
+        } catch (PDOException $err) {
+            echo "¡Ocurrió un error! - Código: " . $err->getCode() . " chequear log de errores.!";
+            self::error_($err->getCode(), $err->getMessage(), $err->getFile(), $err->getLine()); //$err->getCode(), $err->getMessage(), $err->getFile(), $err->getLine()
+        }
+    }
 }
 ?>

@@ -22,6 +22,7 @@
         </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
+    <script src="../js/empleados.js?2022023_20_49"></script>
     <link href="../css/dashboard_estilo.css?v1.0.0.15" rel="stylesheet">
     <!--<link href="../css/admin.css?v1.0.0.1" rel="stylesheet">-->
 </head>
@@ -160,7 +161,6 @@
                 <div class="col-12 p-0">
                     <div class="box-nav letra titulo">
                         <span class="cargo-txt" id="nombre_empleado">Alberto - Administrador</span>
-                        <span class="config-txt">Editar Perfil</span>
                     </div>
                 </div>
                 <div class="col-12 p-2">
@@ -375,6 +375,5 @@
         </div>
     </div>
 </body>
-<script src="../js/empleados.js"></script>
 
 </html>
