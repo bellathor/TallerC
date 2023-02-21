@@ -453,8 +453,10 @@ function Mostrar_Tabla_Reportes(btn, activar) {
 
 function Seleccion_Opcion(opcion) {
     var form = document.forms['formulario_madera_stocks'];
-
-    if (opcion.value == 1) {
+    if(opcion.value == ""){
+        alert('seleccionar una madera antes de guardar.!');
+    }
+    else if (opcion.value == 1) {
         document.getElementById('sel_maderas').removeAttribute('disabled');
         form[2].removeAttribute('disabled');
         form[3].setAttribute('disabled', '');

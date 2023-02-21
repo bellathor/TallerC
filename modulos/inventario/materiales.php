@@ -23,7 +23,7 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
-    <script src="../../js/materiales.js?2022023_20_49"></script>
+    <script src="../../js/materiales.js?2022023_22_38"></script>
     <link href="../../css/dashboard_estilo.css?v1.0.0.15" rel="stylesheet">
     <!--<link href="../css/admin.css?v1.0.0.1" rel="stylesheet">-->
 </head>
@@ -364,7 +364,7 @@
                                                                 oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
                                                                 oninput="this.setCustomValidity(''); Seleccion_Materiales(this);"
                                                                 required disabled>
-                                                                <option value="">Seleccionar</option>
+                                                                <option value="" selected>Seleccionar</option>
                                                             </select>
 
                                                             <div id="error_letra_selec_madera"
