@@ -29,10 +29,13 @@ function Validar_Formulario(opcion, id, entrada_salida, cantidad) { // formulari
         'Precio': precio.value
     };
     if (opcion == false) {
-        EnviarDatos(json, 'insertar_maderas');
-
+        if (confirm('¿Desea registrar esta madera?') == true) {
+            EnviarDatos(json, 'insertar_maderas');
+        }
     } else if (opcion == 'modificar') {
-        EnviarDatos(json, 'actualizar_madera');
+        if (confirm('¿Desea actualizar esta madera?') == true) {
+            EnviarDatos(json, 'actualizar_madera');
+        }
     }
     return false;
 }
@@ -339,9 +342,9 @@ function LimpiarTablaReporte() {
 }
 function Cargar_Stock() {
     LimpiarTabla();
-   /* LimpiarSelect();
-    LimpiarFormularioStock();
-    LimpiarTablaReporte();*/
+    /* LimpiarSelect();
+     LimpiarFormularioStock();
+     LimpiarTablaReporte();*/
 }
 function LimpiarSelect() {
     var select = document.getElementById('sel_maderas');

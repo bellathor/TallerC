@@ -56,10 +56,13 @@ function Validar_Formulario(opcion, id, entrada_salida, cantidad) { // formulari
         'Stock': 0
     };
     if (opcion == false) {
-        EnviarDatos(json, 'insertar_material');
-
+        if (confirm('¿Desea registrar este material?') == true) {
+            EnviarDatos(json, 'insertar_material');
+        }
     } else if (opcion == 'modificar') {
-        EnviarDatos(json, 'actualizar_materiales');
+        if (confirm('¿Desea actualizar este material?') == true) {
+            EnviarDatos(json, 'actualizar_materiales');
+        }
     }
     return false;
 }
