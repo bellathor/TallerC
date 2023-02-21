@@ -10,10 +10,8 @@ window.onload = () => {
     if (usuario !== null) {
         document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
         if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
-            CargarEmpleados();
-            CargarMaderas();
-            CargarMateriales();
             document.getElementById('dash_muebles').remove();
+            setTimeout(Cargar_Dashboard_Admin, 500);
         } else if (usuario[0].ID_Puesto == 10) {
             em.remove();
             ti.remove();
@@ -30,8 +28,7 @@ window.onload = () => {
             co.remove();
             inv.remove();
             Remover_Dash_Bodega();
-            CargarMaderas();
-            CargarMateriales();
+            
         } else {
             sessionStorage.clear();
             window.location.replace('../login.php');
@@ -44,9 +41,16 @@ window.onload = () => {
     }
 };
 
+function Cargar_Dashboard_Admin(){
+    CargarMaderas();
+    CargarMateriales();
+}
+
 function Remover_Dash_Bodega() {
     document.getElementById('dash_empleados').remove();
     document.getElementById('dash_muebles').remove();
+    CargarMaderas();
+    CargarMateriales();
 }
 
 
@@ -54,6 +58,7 @@ function Remover_Dash_Nomina() {
     document.getElementById('dash_maderas').remove();
     document.getElementById('dash_materiales').remove();
     document.getElementById('dash_muebles').remove();
+    CargarEmpleados();
 }
 
 function CargarEmpleados() {
