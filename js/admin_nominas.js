@@ -700,7 +700,6 @@ function Realizar_Cierre() {
             });
             alert('Presione ok y espere se reinicie las nominas.!');
             setTimeout(Actualizar_Nomina_Gest_Cierre, 3000, json);
-            alert('Nominas reiniciadas, puede iniciar de nuevo.!');
         } else {
             alert('Debe seleccionar un empleado para poder guardar.!');
         }
