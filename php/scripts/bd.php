@@ -85,7 +85,20 @@ class BaseDatos
                     $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' ' . $inner;
                 }
             }
-        } else {
+        }else if ($tabla == 'materiales mat') {
+            if ($id != null) {
+
+            } else {
+                if ($columns == null and $inner == null) {
+                    $SQL = 'SELECT * FROM ' . $tabla;
+                } else if ($columns != null and $inner == null) {
+                    $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla;
+                } else if ($columns != null and $inner != null) {
+                    $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ' ' . $inner;
+                }
+            }
+        }  
+        else {
             if ($columns != null and $inner == null and $id == null) {
                 $SQL = 'SELECT ' . $columns . ' FROM ' . $tabla . ';';
 
