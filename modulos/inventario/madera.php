@@ -22,7 +22,7 @@
         </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
-    <script src="../../js/maderas.js?2122023_05_46"></script>
+    <script src="../../js/maderas.js?0732023_11_10"></script>
     <link href="../../css/dashboard_estilo.css?v1.0.0.15" rel="stylesheet">
     <!--<link href="../css/admin.css?v1.0.0.1" rel="stylesheet">-->
 </head>
@@ -40,12 +40,12 @@
                     </div>
                     <ul class="list-unstyled ps-0 p-0">
                         <li class="p-1"><a href="../dashboard.php" class="link-white rounded">Dashboard</a></li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="empleados">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras">
                                 <a href="../empleados.php" class="link-white rounded">Empleados</a>
                             </button>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="tiendas">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#tiendas-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Tiendas</a>
@@ -58,7 +58,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="produccion">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#produccion-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Produccion</a>
@@ -71,7 +71,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="bodegas">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#bodega-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded" id="btn-bodega">Bodega Taller</a>
@@ -94,7 +94,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="compras">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#compras-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Compras</a>
@@ -109,7 +109,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="administracion">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#admin_nominas-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Admin y Nominas</a>
@@ -125,7 +125,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="mb-1">
+                        <li class="mb-1" id="inventarios">
                             <button class="btn btn-toggle align-items-center rounded text-white botones_letras"
                                 data-bs-toggle="collapse" data-bs-target="#inventarios-collapse" aria-expanded="true">
                                 <a href="#" class="link-white rounded">Inventarios</a>
@@ -139,7 +139,7 @@
                                         <a href="materiales.php" class="link-white rounded">Materiales</a>
                                     </li>
                                     <li>
-                                        <a href="muebles.php" class="link-white rounded">Muebles ( En construccion
+                                        <a href="#" class="link-white rounded">Muebles ( En construccion
                                             )</a></button>
                                     </li>
                                 </ul>
@@ -242,7 +242,7 @@
                                                         <input class="form-control" name="precio" type="number"
                                                             step="0.001" required min='0' placeholder="0"
                                                             oninvalid="this.setCustomValidity('Debe llenar este campo.!')"
-                                                            oninput="this.setCustomValidity('');filtrarCantidad(this);">
+                                                            oninput="this.setCustomValidity('');">
                                                         <div id="error_letra_madera" class="d-none invalid-feedback">
                                                             Solo se permiten letras y sin espacios.</div>
                                                         <div id="error_maxletras_madera"

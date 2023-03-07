@@ -26,7 +26,7 @@ window.onload = () => {
             pr.remove();
             ad.remove();
             co.remove();
-            inv.remove();
+            //inv.remove();
             Remover_Dash_Bodega();
             
         } else {
@@ -61,6 +61,8 @@ function Remover_Dash_Nomina() {
     document.getElementById('dash_muebles').remove();
     CargarEmpleados();
 }
+
+
 
 function CargarEmpleados() {
     const url = '../php/scripts/apis/empleados/api_empleados.php?consultar_empleados';

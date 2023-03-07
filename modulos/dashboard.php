@@ -19,7 +19,7 @@
     <script src="../bootstrap-/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
         </script>
-    <script src="../js/dashboard.js?2122023_05_46"></script>
+    <script src="../js/dashboard.js?0732023_11_10"></script>
     <link href="../css/dashboard_estilo.css?v1.0.0.15" rel="stylesheet">
     <!--<link href="../css/admin.css?v1.0.0.1" rel="stylesheet">-->
 </head>

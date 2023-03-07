@@ -17,7 +17,7 @@ window.onload = () => {
             pr.remove();
             ad.remove();
             co.remove();
-            inv.remove();
+            //inv.remove();
             setTimeout(Cargar_Hilos, 1000);
         }else {
             sessionStorage.clear();

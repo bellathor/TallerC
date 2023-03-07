@@ -433,7 +433,7 @@ function Seleccion_Opcion(opcion) {
     }
 }
 // registro
-function Cargar_Datos(){
+function Cargar_Datos() {
     LimpiarFormulario();
     LimpiarTabla();
 }
@@ -460,7 +460,7 @@ function LimpiarSelectMaterial() {
 }
 function Seleccion_Opcion_stock(opcion) {
     var form = document.forms['formulario_materiales_stocks'];
-    
+
     if (opcion.value == 1) {
         form[1].removeAttribute('disabled');
         form[2].removeAttribute('disabled');
@@ -707,12 +707,27 @@ $(function () {
 });
 
 window.onload = () => {
+    let em = document.getElementById('empleados');
+            let ti = document.getElementById('tiendas');
+            let pr = document.getElementById('produccion');
+            //let bo = document.getElementById('bodegas');
+            let co = document.getElementById('compras');
+            let ad = document.getElementById('administracion');
+            //let inv = document.getElementById('inventarios');
     let usuario = JSON.parse(sessionStorage.getItem('Sesion'));
     if (usuario !== null) {
         document.getElementById('nombre_empleado').innerText = usuario[0].Nombres + " " + usuario[0].Apellidos;
         if (usuario[0].ID_Puesto == 1 || usuario[0].ID_Puesto == 9) {
             Contador();
-        } else {
+        }
+        else if (usuario[0].ID_Puesto == 11) {
+            em.remove();
+            ti.remove();
+            pr.remove();
+            ad.remove();
+            co.remove();
+        }
+        else {
             sessionStorage.clear();
             window.location.replace('../../login.php');
         }

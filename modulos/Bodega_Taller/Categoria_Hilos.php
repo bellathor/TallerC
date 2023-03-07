@@ -22,7 +22,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
     <link href="../../css/dashboard_estilo.css?v1.0.0.15" rel="stylesheet">
-    <script src="../../js/categoria_hilos.js?2122023_05_46"></script>
+    <script src="../../js/categoria_hilos.js?0732023_11_10"></script>
     <!--<link href="../css/admin.css?v1.0.0.1" rel="stylesheet">-->
 </head>
 

@@ -19,7 +19,7 @@
     <script src="./bootstrap-/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
         </script>
-    <script src="./js/login.js?2022023_20_49">
+    <script src="./js/login.js?0732023_11_11">
     </script>
     <link href="./css/login_estilo.css?v1.0.0.11" rel="stylesheet">
 </head>
@@ -58,7 +58,9 @@
             </form>
         </div>
     </div>
-
+    <footer>
+        <h4 class="text-center">V1.0.0.12<h4>
+    </footer>
 </body>
 
 </html>
